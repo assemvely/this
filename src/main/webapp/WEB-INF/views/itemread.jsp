@@ -91,11 +91,23 @@ body {
 <body>
 	
 	 <%@ include file="css.jinc" %>
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <li><img src="/resources/itemimg/${READ.imgname}" alt="이미지가 없습니다"></li>
+
 <li>name:${READ.name}</li>
 <li>Price:${READ.price}</li>
 <li>mileage:${READ.mileage}</li>
+<li>color
+<c:forEach items="${COLOR}" var="info">
+<li> ${info.color}</li>
+</c:forEach>
 
 
 <br/>

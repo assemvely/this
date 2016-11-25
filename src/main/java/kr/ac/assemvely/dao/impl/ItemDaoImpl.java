@@ -6,7 +6,9 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
 import kr.ac.assemvely.dao.ItemDao;
+import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 
 @Repository
@@ -34,5 +36,22 @@ public class ItemDaoImpl implements ItemDao {
 		 
 		return  SqlSession.selectOne(namespace+".selectone",clothcode);
 	}
+	@Override
+	public ItemVo clothcode(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return SqlSession.selectOne(namespace+".select",name);
+		
+	}
 
+	@Override
+	public void insertinfo(ItemInfoVo info) throws Exception {
+		
+		SqlSession.insert(namespace+".insertinfo",info);
+		
+	}
+	
+	@Override
+	public List<ItemInfoVo> readinfo(String clothcode)throws Exception{
+		return SqlSession.selectList(namespace+".read",clothcode);
+	}
 }

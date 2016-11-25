@@ -40,6 +40,39 @@
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
+		$("#save").click(function() {
+
+			alert("save!");
+
+			oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
+			$("#frm").submit();
+		})
+
+		counter = 1;
+
+		$("#addButton").click(function() {
+			a();
+
+		});
+
+		//alert("?");
+
+		$("#removeButton").click(function() {
+			if (counter == 1) {
+				alert("No more textbox to remove");
+				return false;
+			}
+
+			counter--;
+
+			$("#TextBoxDiv" + counter).remove();
+
+		});
+
+		a();
+		 
+		
+		
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
 			elPlaceHolder :"smarteditor",
@@ -69,6 +102,27 @@
 		})
 
 	});
+	
+	
+
+	function a() {
+		if (counter > 10) {
+			alert("최대10개까지 가능");
+			return false;
+		}
+
+		var newTextBoxDiv = $(document.createElement('div')).attr("id",
+				'TextBoxDiv' + counter);
+
+		newTextBoxDiv.after().html(
+				'<label>Textbox #' + counter + ' : </label>'
+						+ '<input type="text" name="a"  id="color'+ counter+ '" placeholder="(색상)" style="font-size:8pt;">'
+						+ '<label>Textbox #' + counter + ' : </label>'+ '<input type="text" name="a"  id="amount'+ counter+ '"  placeholder="(수량)" style="font-size:8pt;">');
+
+		newTextBoxDiv.appendTo("#TextBoxesGroup");
+
+		counter++;
+	}
 </script>
 </head>
 <body>
@@ -175,6 +229,22 @@
 										<option>8</option>
 									</select>
 								</div>
+								
+											
+								
+								<div id="detail">
+						<label>Detailed color&amount</label>
+						<div id='TextBoxesGroup'>
+							<div id="TextBoxDiv1"></div>
+
+						</div>
+					</div>
+					<input type='button' value='+' id='addButton'> <input
+						type='button' value='-' id='removeButton'>
+								
+								
+								
+								
 								<div class="form-group">
 									<label>File input</label> <input type="file" name="imgfile">
 
