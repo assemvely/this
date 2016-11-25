@@ -23,7 +23,7 @@ public class ItemDaoImpl implements ItemDao {
 	public void insertitem(ItemVo itemvo) {
 
 		SqlSession.insert(namespace + ".insertitem", itemvo);
-		System.out.println("여기는 디에이오!"+itemvo.toString());
+		 
 	}
 
 	@Override
@@ -53,5 +53,35 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List<ItemInfoVo> readinfo(String clothcode)throws Exception{
 		return SqlSession.selectList(namespace+".read",clothcode);
+	}
+	 
+	@Override
+	public List<ItemVo> newitem() {
+		return SqlSession.selectList(namespace+ ".newitem");
+	}
+
+	@Override
+	//YG//public List<ItemVo> selectlittlecategory() {
+	public List<ItemVo> selectlittlecategory(String selectlittlecategory) {
+				
+		//YG//return SqlSession.selectList(namespace+".selectlittlecategory");
+		return SqlSession.selectList(namespace+".selectlittlecategory", selectlittlecategory);
+	}
+
+	@Override
+	public List<ItemVo> selectcategory(String selectcategory) {
+		return SqlSession.selectList(namespace+".selectcategory",selectcategory);
+	}
+
+	@Override
+	public List<ItemVo> selectuser(String id){
+		return SqlSession.selectList(namespace+".selectuser",id);
+		
+		
+	}
+	
+	@Override
+	public List<ItemVo> branditem(ItemVo vo){
+		return SqlSession.selectList(namespace+".branditem",vo);
 	}
 }

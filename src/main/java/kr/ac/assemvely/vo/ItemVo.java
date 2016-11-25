@@ -10,13 +10,7 @@ public class ItemVo {
 	private int tempcode;
 	private String name;
 	private int mileage;
-	public int getMileage() {
-		return mileage;
-	}
 
-	public void setMileage(int mileage) {
-		this.mileage = mileage;
-	}
 
 	private String imgname;
 	private String categorycode;
@@ -24,7 +18,13 @@ public class ItemVo {
 	
 	
 	 
-	 
+	public int getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+	}
 
 	public String getContent() {
 		return content;

@@ -157,11 +157,11 @@
 
         </div>
         <div class="card-info"> <span class="card-title">${user.id}</span>
-		 <div class="userinfo">	 
-	 
-			<h4>±¸¸ÅÀÚ</h4>
-		 
+		 <div class="userinfo"> 
  
+			<h4>ÆÇ¸ÅÀÚ</h4>
+		 
+       
          	
    <c:choose>
    <c:when test="${followercounter==0}">
@@ -200,11 +200,21 @@
         
     </div>
     
-    
-
-    
-   
- 
+    <br/>
+    <br/>
+    <br/>
+    <form action="/user/mypage">
+    	<fieldset data-role="controlgroup" data-type="horizontal">
+  	<INPUT TYPE=RADIO NAME=categorycode VALUE=OUTER > OUTER
+	<INPUT TYPE=RADIO NAME=categorycode VALUE=TOP> TOP
+	<INPUT TYPE=RADIO NAME=categorycode VALUE=BOTTOM> BOTTOM
+	<INPUT TYPE=RADIO NAME=categorycode VALUE=SKIRT> SKIRT
+	<INPUT TYPE=RADIO NAME=categorycode VALUE=DRESS> DRESS
+	<INPUT TYPE=RADIO NAME=categorycode VALUE=ACC>ACC
+	<input type=hidden name=id value="${user.id}">
+	</fieldset>
+<input type=submit value=submit>
+  </form>
 	<hr/>
 	<c:choose>
 	
@@ -235,7 +245,7 @@
 					</c:when>
 					</c:choose>
 	
-	
+		
 	<br/>
 	<br/>
     <button onclick="btn_delete();" id="bye">Å»Åð</button>

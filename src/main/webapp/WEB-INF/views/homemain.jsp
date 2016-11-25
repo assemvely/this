@@ -22,9 +22,7 @@
 body {
    padding-top: 40px;
 }
-@font-face {
-   font-family: 'Nanum Gothic Coding', monospace;
-}
+ 
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -91,11 +89,10 @@ body {
 <body>
 	
 	 <%@ include file="css.jinc" %>
-			<div>
+		<div>
 				<div>
 					<div>
 						<div>
-					
 							<!-- 이벤트 창 만들기 시작 -->
 							<div class="col-md-12">
 								<div class="jumbotron" style="margin-top: 120px; text-align: center;">
@@ -105,14 +102,14 @@ body {
 										<a class="btnbtn-primary btn-large" href="#">Learn more</a>
 									</div>
 								</div>
- 
+
 								<br />
 								<hr />
 								<br />
 
 								<h3>Event</h3>
- 
-								
+
+
 								<div id="carousel-example-generic" class="carousel slide"
 									data-ride="carousel">
 
@@ -150,7 +147,7 @@ body {
 
 										</div>
 									</div>
-	
+
 
 									<!-- Controls 화살표 표시 창 -->
 									<a class="left carousel-control"
@@ -168,7 +165,7 @@ body {
 									</a>
 									<!-- 끝 Controls 화살표 표시 창 끝-->
 								</div>
- <h1>세션:${login.id}</h1>
+
 								<!-- 끝 Wrapper for slides 끝 -->
 
 								<br /> <br />
@@ -295,9 +292,18 @@ body {
 
 
 								<!-- 인기 스타일 버전 1끝 -->
+								
+								<h3>최신 아이템</h3>
+								
+								<div class="row">
+								<!-- < c : f orEach items="${DRESS}" var="dressvo">-->
+								
+								
+								</div>
+								
 
 								<!-- 인기 스타일 버전 2 -->
-								<div class="row">
+								<!-- <div class="row">
 
 									<div class="col-lg-3 text-center">
 										<div class="thumbnail">
@@ -355,8 +361,35 @@ body {
 										</div>
 									</div>
 
-								</div>
+								</div> -->
 								<!-- 인기 스타일 버전 2 끝 -->
+								
+								<!-- newitem뿌리기 -->
+								
+								<div class="row">
+
+				<c:forEach items="${NEWITEM}" var="newitem">
+					<div class="col-lg-3 text-center">
+
+
+						<div class="thumbnail">
+						<img src="/resources/itemimg/${newitem.imgname} "
+												alt="No Image">
+											<div class="caption">
+												<h3>${newitem.id}</h3>
+												<p>${newitem.name}</p>
+												<p>${newitem.price}원</p>
+												<p>
+													<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
+														href="#" class="btn btn-default" role="button">싫어요</a>
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</c:forEach>
+
+							</div>
 
 
 								<br />
@@ -367,7 +400,7 @@ body {
 						</div>
 					</div>
 				</div>
-
+<!-- newitem뿌리기 끝-->
 
 
 				<footer id="main_footer">

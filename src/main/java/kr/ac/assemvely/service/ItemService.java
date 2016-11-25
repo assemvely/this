@@ -13,4 +13,17 @@ public interface ItemService {
 	public ItemVo clothcode(String name) throws Exception;
 	public void insertinfo(ItemInfoVo info) throws Exception;
 	public List<ItemInfoVo> readinfo(String clothcode)throws Exception;
+	  
+	
+	//YG//public List<ItemVo> selectlittlecategory() throws Exception;
+	public List<ItemVo> selectlittlecategory(String selectlittlecategory) throws Exception;
+	public List<ItemVo> selectcategory(String selectcategory) throws Exception;
+	
+ 
+	
+	public List<ItemVo> newitem() throws Exception;
+	public List<ItemVo> selectuser(String id) throws Exception;
+	public List<ItemVo> branditem(ItemVo vo) throws Exception;
+	
 }
+

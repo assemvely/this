@@ -34,8 +34,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	select  * from ITEMINFOTB where CLOTHCODE=#{clothcode}
  	</select>
+ 	<select id="selectcategory" resultType="kr.ac.assemvely.vo.ItemVo">
+		SELECT * FROM ITEMTB WHERE CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{selectcategory})
+	</select>
+	
+	<select id="selectlittlecategory" resultType="kr.ac.assemvely.vo.ItemVo">
+		SELECT * FROM ITEMTB WHERE CATEGORYCODE=#{selectlittlecategory}
+	</select>
+	
+
+	<select id="newitem" resultType="kr.ac.assemvely.vo.ItemVo">
+		 SELECT * FROM ITEMTB ORDER BY CLOTHCODE DESC
+	</select>
+ 	<select  id="selectuser" resultType="kr.ac.assemvely.vo.ItemVo">
+ 		SELECT * FROM ITEMTB WHERE ID=#{id}
  	
- 	
+ 	</select>
+ 	<select id="branditem" resultType="kr.ac.assemvely.vo.ItemVo">
+ 	 SELECT * FROM ITEMTB WHERE ID=#{id} and CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{categorycode})
+ 	</select>
 </mapper>
  
  

@@ -50,4 +50,33 @@ public class ItemServiceImpl implements ItemService {
 	
 		return dao.readinfo(clothcode);
 	}
+	
+
+
+	@Override
+	public List<ItemVo> newitem() throws Exception {
+		return dao.newitem();
+	}
+
+	@Override
+	//YG//public List<ItemVo> selectlittlecategory() throws Exception {
+	public List<ItemVo> selectlittlecategory(String selectlittlecategory) throws Exception {
+		return dao.selectlittlecategory(selectlittlecategory);
+		//return dao.selectlittlecategory();
+	}
+
+	@Override
+	public List<ItemVo> selectcategory(String selectcategory) throws Exception {
+		return dao.selectcategory(selectcategory);
+	}
+	@Override
+	public List<ItemVo> selectuser(String id) throws Exception{
+		return dao.selectuser(id);
+	}
+
+	@Override
+	public List<ItemVo> branditem(ItemVo vo) throws Exception {
+		 
+		return dao.branditem(vo);
+	}
 }

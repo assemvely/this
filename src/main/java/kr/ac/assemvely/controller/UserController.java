@@ -1,7 +1,6 @@
 package kr.ac.assemvely.controller;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -22,6 +21,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.ac.assemvely.service.UserService;
+import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.RelationVo;
 import kr.ac.assemvely.vo.TempUserVo;
 import kr.ac.assemvely.vo.UserDto;
@@ -236,39 +236,61 @@ public class UserController
 				
 	}
 	
+	@RequestMapping(value="/mypage")
+	public String mypage(ItemVo itemvo,HttpSession session) throws Exception{
+		UserVo vo=service.user(itemvo.getId());//유저 정보받아우기
 	
-	@RequestMapping(value="/mypage" )
-	public String listAll(@RequestParam("id")String id,Model model, HttpSession session,
+		System.out.println("유저의 컨트롤러"+itemvo.getCategorycode());//여기왜안옴??
+		session.setAttribute("fromuser",itemvo);
+		String path=null;
+	
+		if(vo.getBsm().equals("s")){
+			path="redirect:/item/sellerpage?";
+		}else if(vo.getBsm().equals("b")){
+			path="redirect:/item/userpage?";
+		}
+		return path+itemvo;
+	}
+	
+	@RequestMapping(value="/selectuser" )
+	public String listAll(ItemVo itemvo,Model model, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response
 			) throws Exception
-	{
+	{	
 		
-		UserVo vo =service.user(id);
+		UserVo vo =service.user(itemvo.getId());
 		UserVo sessionvo=(UserVo) session.getAttribute("login");
 		String followingid=vo.getId();
 		String followerid=vo.getId();
+		String path=null;
 		
 		if(vo.getId()==sessionvo.getId()){//아이디가 세션하고일치하면
 			model.addAttribute("ALREADY",2);//이다
 		}else{//아이디랑 세션이 불일치= 타인 계정
 		RelationVo relation=new RelationVo();
 		relation.setFollowerid(sessionvo.getId());
-		relation.setFollowingid(id);
+		relation.setFollowingid(itemvo.getId());
 		 //팔로워에 나 팔로잉에 너를 넣어놓고
 		if(service.already(relation)==0){//없으면 0
 			model.addAttribute("ALREADY",0);
 		}else if(service.already(relation)==1){//있으면 1
 			model.addAttribute("ALREADY",1);
+		}  
 		}
+ 
 		
-		}
-	
 		model.addAttribute("user",vo);
 		model.addAttribute("followingcounter", service.followercounter(followerid));
 		
 		model.addAttribute("followercounter", service.followingcounter(followingid));
-				
-		return "/user/mypage";
+		System.out.println("여기 유저컨트롤러 마이페이지"+vo.getBsm());
+		
+		if(vo.getBsm().equals("b")){
+			path="/user/mypage";
+		}else if(vo.getBsm().equals("s")){
+			path="sellermypage";
+		}
+		return path;
 	}
 	@RequestMapping(value="/follower" ) 
 	public String follow(@RequestParam("id") String id,Model model)throws Exception{
