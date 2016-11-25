@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.assemvely.mapper.ItemMapper">
+	<select id="selectitem" resultType="kr.ac.assemvely.vo.ItemVo">
+		  SELECT * FROM ITEMTB ORDER BY WRITEDATE DESC
+	</select>
+	<select id="insertitem">
+		insert into ITEMTB (CLOTHCODE,ID,COLORCODE,PRICE,TEMPCODE,NAME,IMGNAME,CATEGORYCODE,CONTENT) values (CLOTHCODE_SEQ.NEXTVAL,#{id},#{colorcode},#{price},#{tempcode},#{name},#{imgname},#{categorycode},#{content})
+	</select>
+ 	<select id="selectone" resultType="kr.ac.assemvely.vo.ItemVo">
+ 	select * from ITEMTB WHERE CLOTHCODE=#{clothcode}
+ 	</select>
+<<<<<<< HEAD
+=======
+ 	
+	<select  id="select" resultType="kr.ac.assemvely.vo.ItemVo">
+	
+	<![CDATA[
+	select clothcode from itemtb where name=#{name}
+	]]>
+	</select>
+
+
+	<insert id="insertinfo">
+	
+	<![CDATA[
+	insert into iteminfotb values(#{clothcode},#{color},#{amount})
+	]]>
+	</insert>
+
+ 	
+ 	
+ 	
+>>>>>>> parent of 5bc2657... mapper에서to_numnber()라는 애를 이용해서 amount를 숫자로 저장함!!!
+</mapper>

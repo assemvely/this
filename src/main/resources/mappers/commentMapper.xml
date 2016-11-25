@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.assemvely.comment">
+
+
+<select id="c_list" resultType="kr.ac.assemvely.vo.CommentVo">
+<![CDATA[
+select * from commenttb where bno=#{bno} and boardcode=#{boardcode}
+]]>
+
+</select>
+
+<select id="c_list_img" resultType="kr.ac.assemvely.vo.UserVo">
+<![CDATA[
+select imgname from usertb where id in(select id from commenttb where bno=#{bno} and boardcode=#{boardcode})
+]]>
+
+</select>
+
+<insert id="c_insert">
+
+<![CDATA[
+
+
+insert into commenttb(id,boardcode,bno,reply,c_bno) values(#{id},#{boardcode},#{bno},#{reply},seq_c_bno.nextval)
+]]>
+</insert>
+
+
+<delete id="c_delete">
+
+<![CDATA[
+delete from commenttb where c_bno=#{c_bno}
+
+]]>
+</delete>
+
+
+</mapper>
