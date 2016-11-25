@@ -16,8 +16,9 @@
 	 
 	</h2><br/>
 	
-	<img src="/resources/img/${tempuser.imgname}" alt="이미지가 없습니다."><br/>	
-	<img src="/resources/img/${tempuser.filename}" alt="이미지가 없습니다."><br/>
-	
+	<img src="/resources/userimg/${tempuser.imgname}" alt="이미지가 없습니다."><br/>	
+	<img src="/resources/userimg/${tempuser.filename}" alt="이미지가 없습니다."><br/>
+	<button onclick="location.href='/user/deletetempuser?id=${userVO.id}'">삭제</button>
+	<button onclick="location.href='/user/approve?id=${userVO.id}'">승인</button>
 </body>
 </html>

@@ -137,7 +137,7 @@
 </head>
 
 <body>
- 
+ 	 
     <div class="card hovercard">
         <div class="card-background">
             <img class="card-bkimg" alt="" src="/resources/image/8367cb771db775d39f09b8a5b547242a.jpg">

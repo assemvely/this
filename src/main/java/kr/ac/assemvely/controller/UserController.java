@@ -103,7 +103,7 @@ public class UserController
 	public String toJoin(Model model) throws Exception
 	{
 		
-		return "/join";
+		return "/user/join";
 		
 	}
 	
@@ -182,9 +182,8 @@ public class UserController
 		service.join(vo);
 		
 		service.deletetempuser(id);
-		
-		
-		return "redirect:/user/mypage";
+	 
+		return "redirect:/user/tomanaginguser";
 		
 	}
 	
@@ -240,16 +239,16 @@ public class UserController
 	public String mypage(ItemVo itemvo,HttpSession session) throws Exception{
 		UserVo vo=service.user(itemvo.getId());//유저 정보받아우기
 	
-		System.out.println("유저의 컨트롤러"+itemvo.getCategorycode());//여기왜안옴??
+		 
 		session.setAttribute("fromuser",itemvo);
 		String path=null;
 	
 		if(vo.getBsm().equals("s")){
-			path="redirect:/item/sellerpage?";
+			path="redirect:/item/sellerpage";
 		}else if(vo.getBsm().equals("b")){
-			path="redirect:/item/userpage?";
+			path="redirect:/item/userpage";
 		}
-		return path+itemvo;
+		return path;
 	}
 	
 	@RequestMapping(value="/selectuser" )

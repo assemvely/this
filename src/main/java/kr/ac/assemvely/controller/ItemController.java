@@ -138,28 +138,31 @@ public class ItemController {
 		return "outer";
 	}
 	@RequestMapping(value="userpage")
-	public String userpage(@RequestParam("id")String id,HttpSession session)throws Exception{
+	public String userpage(HttpSession session)throws Exception{
 		
-		 
- 		
-		List<ItemVo> vo=itemservice.selectuser(id);
+		//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		 session.removeAttribute("USERITEM");
+		 ItemVo itemvo=(ItemVo) session.getAttribute("fromuser");
+		  
+		List<ItemVo> vo=itemservice.selectuser(itemvo.getId());
 		session.removeAttribute("USERITEM");
 		session.setAttribute("USERITEM", vo);
  		
- 		 
+ 		 //나중에 코디게시판에서 불러와야함!
+		//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 		
-		return "redirect:/user/selectuser?id="+id;
+		return "redirect:/user/selectuser?id="+itemvo.getId();
 	}
 	
  @RequestMapping(value="sellerpage")
- public String sellerpage( HttpSession session)throws Exception{
+ public String sellerpage(HttpSession session)throws Exception{
 
 	 session.removeAttribute("USERITEM");
 	 ItemVo itemvo=(ItemVo) session.getAttribute("fromuser");
 	 
 	 List<ItemVo> vo=null;
 	 
-	 System.out.println("아이템 셀러페이지 컨트로러"+itemvo.getCategorycode());
+
 	 if(itemvo.getCategorycode()!=null){
 		 
 		vo =itemservice.branditem(itemvo);

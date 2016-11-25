@@ -22,7 +22,9 @@
 body {
    padding-top: 40px;
 }
- 
+ @font-face {
+	font-family: 'Nanum Gothic Coding', monospace;
+}
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -76,14 +78,20 @@ body {
 <link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
+<!-- Bootstrap Core CSS 깔기 -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- owl carousel깔기 -->
 <link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
+
+<!-- css admin깔기 -->
+<link href="css/sb-admin.css" rel="stylesheet">
+
 <!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
 <script src="/resources/jquery/jquery-1.12.4.min.js"></script>
 <script src="/resources/owl.carousel/owl.carousel.min.js"></script>
 <!-- <script src="/resources/owl.carousel/owl.carousel.js"></script> -->
 <script type="text/javascript">
-	 
+	
 </script>
 </head>
 <body>
@@ -109,7 +117,7 @@ body {
 
 								<h3>Event</h3>
 
-
+								 
 								<div id="carousel-example-generic" class="carousel slide"
 									data-ride="carousel">
 
@@ -148,22 +156,18 @@ body {
 										</div>
 									</div>
 
-
-									<!-- Controls 화살표 표시 창 -->
-									<a class="left carousel-control"
-										href="#carousel-example-generic" role="button"
-										data-slide="prev"> <span
-										class="glyphicon glyphicon-triangle-left" aria-hidden="true"
-										style="margin-top: 120;"></span> <span align="center"
-										class="sr-only">Previous</span>
-									</a> <a class="right carousel-control"
-										href="#carousel-example-generic" role="button"
-										data-slide="next"> <span
-										class="glyphicon glyphicon-triangle-right" aria-hidden="true"
-										style="margin-top: 120px;"></span> <span align="center"
-										class="sr-only">Next</span>
-									</a>
-									<!-- 끝 Controls 화살표 표시 창 끝-->
+	<!-- Controls 화살표 표시 창 -->
+							<a class="left carousel-control" href="#carousel-example-generic"
+								role="button" data-slide="prev"> <span
+								class="glyphicon glyphicon-triangle-left" aria-hidden="true"
+								style="margin-top: 120;"></span> <span class="sr-only">Previous</span>
+							</a> <a class="right carousel-control"
+								href="#carousel-example-generic" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-triangle-right"
+								aria-hidden="true" style="margin-top: 120px;"></span> <span
+								class="sr-only">Next</span>
+							</a>
+							<!-- 끝 Controls 화살표 표시 창 끝-->
 								</div>
 
 								<!-- 끝 Wrapper for slides 끝 -->
@@ -253,162 +257,128 @@ body {
 
 								<h3>인기 스타일</h3>
 
-								<!-- 인기 스타일 버전 1 -->
-								<div class="row">
+							
+						<!-- 인기 스타일 버전 1 -->
+						<div class="row">
 
-									<div class="col-lg-3 text-center">
-										<div class="panel panel-default">
-											<div class="panel-body">.col-lg-3</div>
-											<img class="img-thumbnail" src="http://placehold.it/400x400"
-												alt="no image">
-										</div>
-									</div>
-
-									<div class="col-lg-3 text-center">
-										<div class="panel panel-default">
-											<div class="panel-body">.col-lg-3</div>
-											<img class="img-thumbnail" src="http://placehold.it/400x400"
-												alt="no image">
-										</div>
-									</div>
-
-									<div class="col-lg-3 text-center">
-										<div class="panel panel-default">
-											<div class="panel-body">.col-lg-3</div>
-											<img class="img-thumbnail" src="http://placehold.it/400x400"
-												alt="no image">
-										</div>
-									</div>
-
-									<div class="col-lg-3 text-center">
-										<div class="panel panel-default">
-											<div class="panel-body">.col-lg-3</div>
-											<img class="img-thumbnail" src="http://placehold.it/400x400"
-												alt="no image">
-										</div>
-									</div>
-
+							<div class="col-lg-3 text-center">
+								<div class="panel panel-default">
+									<div class="panel-body">.col-lg-3</div>
+									<img class="img-thumbnail" src="http://placehold.it/400x400"
+										alt="no image">
 								</div>
-
-
-								<!-- 인기 스타일 버전 1끝 -->
-								
-								<h3>최신 아이템</h3>
-								
-								<div class="row">
-								<!-- < c : f orEach items="${DRESS}" var="dressvo">-->
-								
-								
-								</div>
-								
-
-								<!-- 인기 스타일 버전 2 -->
-								<!-- <div class="row">
-
-									<div class="col-lg-3 text-center">
-										<div class="thumbnail">
-											<img src="/resources/image/coldplay1.jpg" alt="no image">
-											<div class="caption">
-												<h3>JuyoungLove</h3>
-												<p>이주영주영</p>
-												<p>
-													<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
-														href="#" class="btn btn-default" role="button">싫어요</a>
-												</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-lg-3 text-center">
-										<div class="thumbnail">
-											<img src="/resources/image/coldplay1.jpg" alt="no image">
-											<div class="caption">
-												<h3>SeounghyeonLove</h3>
-												<p>안성현성현</p>
-												<p>
-													<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
-														href="#" class="btn btn-default" role="button">싫어요</a>
-												</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-lg-3 text-center">
-										<div class="thumbnail">
-											<img src="/resources/image/coldplay1.jpg" alt="no image">
-											<div class="caption">
-												<h3>JiyeonLove</h3>
-												<p>하지연지연</p>
-												<p>
-													<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
-														href="#" class="btn btn-default" role="button">싫어요</a>
-												</p>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-lg-3 text-center">
-										<div class="thumbnail">
-											<img src="/resources/image/coldplay1.jpg" alt="no image">
-											<div class="caption">
-												<h3>SuhyeonLove</h3>
-												<p>김수현수현</p>
-												<p>
-													<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
-														href="#" class="btn btn-default" role="button">싫어요</a>
-												</p>
-											</div>
-										</div>
-									</div>
-
-								</div> -->
-								<!-- 인기 스타일 버전 2 끝 -->
-								
-								<!-- newitem뿌리기 -->
-								
-								<div class="row">
-
-				<c:forEach items="${NEWITEM}" var="newitem">
-					<div class="col-lg-3 text-center">
-
-
-						<div class="thumbnail">
-						<img src="/resources/itemimg/${newitem.imgname} "
-												alt="No Image">
-											<div class="caption">
-												<h3>${newitem.id}</h3>
-												<p>${newitem.name}</p>
-												<p>${newitem.price}원</p>
-												<p>
-													<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
-														href="#" class="btn btn-default" role="button">싫어요</a>
-												</p>
-											</div>
-
-										</div>
-									</div>
-								</c:forEach>
-
 							</div>
 
-
-								<br />
-								<hr />
-								<br />
-
+							<div class="col-lg-3 text-center">
+								<div class="panel panel-default">
+									<div class="panel-body">.col-lg-3</div>
+									<img class="img-thumbnail" src="http://placehold.it/400x400"
+										alt="no image">
+								</div>
 							</div>
+
+							<div class="col-lg-3 text-center">
+								<div class="panel panel-default">
+									<div class="panel-body">.col-lg-3</div>
+									<img class="img-thumbnail" src="http://placehold.it/400x400"
+										alt="no image">
+								</div>
+							</div>
+
+							<div class="col-lg-3 text-center">
+								<div class="panel panel-default">
+									<div class="panel-body">.col-lg-3</div>
+									<img class="img-thumbnail" src="http://placehold.it/400x400"
+										alt="no image">
+								</div>
+							</div>
+
 						</div>
+
+
+						<!-- 인기 스타일 버전 1끝 -->
+
+						<!-- 인기 스타일 버전 2 -->
+						<div class="row">
+
+							<div class="col-lg-3 text-center">
+								<div class="thumbnail">
+									<img src="/resources/image/coldplay1.jpg" alt="no image">
+									<div class="caption">
+										<h3>JuyoungLove</h3>
+										<p>이주영주영</p>
+										<p>
+											<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
+												href="#" class="btn btn-default" role="button">싫어요</a>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-3 text-center">
+								<div class="thumbnail">
+									<img src="/resources/image/coldplay1.jpg" alt="no image">
+									<div class="caption">
+										<h3>SeounghyeonLove</h3>
+										<p>안성현성현</p>
+										<p>
+											<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
+												href="#" class="btn btn-default" role="button">싫어요</a>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-3 text-center">
+								<div class="thumbnail">
+									<img src="/resources/image/coldplay1.jpg" alt="no image">
+									<div class="caption">
+										<h3>JiyeonLove</h3>
+										<p>하지연지연</p>
+										<p>
+											<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
+												href="#" class="btn btn-default" role="button">싫어요</a>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-3 text-center">
+								<div class="thumbnail">
+									<img src="/resources/image/coldplay1.jpg" alt="no image">
+									<div class="caption">
+										<h3>SuhyeonLove</h3>
+										<p>김수현수현</p>
+										<p>
+											<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
+												href="#" class="btn btn-default" role="button">싫어요</a>
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- 인기 스타일 버전 2 끝 -->
+
+
+						<br />
+						<hr />
+						<br />
+
 					</div>
 				</div>
-<!-- newitem뿌리기 끝-->
+			</div>
+		</div>
 
 
-				<footer id="main_footer">
+
+		<footer id="main_footer">
 
 
-					<h3>Shop Info</h3>
-					<address>상호명: (주)ASSEMVELY 대표자: 안성현, 이주영, 하지연, 김수현</address>
-				</footer>
+			<h3>Shop Info</h3>
+			<address>상호명: (주)ASSEMVELY 대표자: 안성현, 이주영, 하지연, 김수현</address>
+		</footer>
+	</div>
 </body>
 
 </html>
