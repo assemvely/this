@@ -99,7 +99,7 @@ body {
 		if (selected != "0") {
 			var selectedUppercase = selected.toUpperCase();
 
-			document.getElementById("Form3").submit();
+			document.getElementById("Form6").submit();
 			form.Form3.submit();
 
 		}
@@ -113,7 +113,7 @@ body {
 
 
 </head>
-<body>
+<body style="margin-left:400px; margin-right:400px;">
 	
 	 <%@ include file="css.jinc" %>
 
@@ -150,12 +150,18 @@ body {
 			<form name="Form6" id="Form6" action="/item/acc" method="GET">
 				<div class="dropdown">
 					<select id="selectlittlecategory" name="acc"
-						onchange="onChangeSelect()">
-						<option name="acc" value="0">Category</option>
-						<option name="acc" value="dress"
-							<%if ("ACC".equals(request.getAttribute("SELECTLITTLECATEGORY"))) {%>
-							SELECTED="SELECTED" <%}%>>Acc</option>
-					</select>
+                  onchange="onChangeSelect()">
+                  <option name="acc" value="0">Category</option>
+                  <option name="acc" value="bag"
+                     <%if ("BAG".equals(request.getAttribute("SELECTLITTLECATEGORY"))) {%>
+                     SELECTED="SELECTED" <%}%>>Bag</option>
+                  <option name="acc" value="jewelry"
+                     <%if ("JEWELRY".equals(request.getAttribute("SELECTLITTLECATEGORY"))) {%>
+                     SELECTED="SELECTED" <%}%>>Jewelry</option>
+                  <option name="acc" value="shoes"
+                     <%if ("SHOES".equals(request.getAttribute("SELECTLITTLECATEGORY"))) {%>
+                     SELECTED="SELECTED" <%}%>>Shoes</option>
+               </select>
 				</div>
 
 				<!-- 정렬하는 부분 끝 !-->

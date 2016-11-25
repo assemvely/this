@@ -22,9 +22,6 @@
 body {
    padding-top: 40px;
 }
- @font-face {
-	font-family: 'Nanum Gothic Coding', monospace;
-}
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -98,7 +95,7 @@ body {
 	
 	 <%@ include file="css.jinc" %>
 		<div>
-				<div>
+				<div style="margin-left:400px; margin-right:400px;">
 					<div>
 						<div>
 							<!-- 이벤트 창 만들기 시작 -->

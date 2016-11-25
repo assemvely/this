@@ -99,7 +99,7 @@ body {
 		if (selected != "0") {
 			var selectedUppercase = selected.toUpperCase();
 
-			document.getElementById("Form3").submit();
+			document.getElementById("Form1").submit();
 			form.Form3.submit();
 
 		}
@@ -112,7 +112,7 @@ body {
 </script>
 </head>
 
-<body>
+<body style="margin-left:400px; margin-right:400px;">
  	 <%@ include file="css.jinc" %>
 
 		<div class="col-md-12">

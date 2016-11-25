@@ -112,7 +112,7 @@ body {
 </script>
 </head>
 
-<body>
+<body style="margin-left:400px; margin-right:400px;">
  	 <%@ include file="css.jinc" %>
 		<div class="col-md-12">
 			<div class="jumbotron" style="margin-top: 140px; text-align: center;">

@@ -231,7 +231,7 @@
 								<a href="/item/readposting?clothcode=${itemvo.clothcode}"><img src="/resources/itemimg/${itemvo.imgname} " alt="No Image"></a>
 									
 								<div class="caption">
-										<h3>${newitem.name}</h3>
+										<h3>${itemvo.name}</h3>
 								 <p>
 										<a href="#" class="btn btn-primary" role="button">좋아요</a> <a
 											href="#" class="btn btn-default" role="button">싫어요</a>
