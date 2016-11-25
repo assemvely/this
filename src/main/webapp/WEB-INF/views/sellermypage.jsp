@@ -49,7 +49,7 @@
 }
 .card.hovercard .card-background {
     height: 200px;
-    width:500px;
+    
 }
 .card-background img {
     -webkit-filter: blur(25px);
@@ -109,10 +109,7 @@
 .btn-pref .btn {
     -webkit-border-radius:0 !important;
 } 
-.userinfo{
-	font-size:12px;
-	right:150;
-}
+ 
  
 
 
@@ -134,6 +131,18 @@
 	
 	
 </script>
+
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<!-- owl carousel±ò±â -->
+<link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
+<!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
+<script src="/resources/jquery/jquery-1.12.4.min.js"></script>
+<script src="/resources/owl.carousel/owl.carousel.min.js"></script>
+
 </head>
 
 <body>
