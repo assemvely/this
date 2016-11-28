@@ -1,18 +1,21 @@
 package kr.ac.assemvely.controller;
 
-
-
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.assemvely.service.CommentService;
 import kr.ac.assemvely.vo.CommentVo;
@@ -21,87 +24,87 @@ import kr.ac.assemvely.vo.UserVo;
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
-
 	
 	@Inject
 	CommentService service;
 	
 	
-	//sns ?Œ“ê¸?
-	@RequestMapping("/c_list")
-	public String c_list(Model model,@ModelAttribute("bno")Integer bno,CommentVo commentvo) throws Exception{
-	
-		commentvo.setBno(bno);
+	@RequestMapping("/list")
+	public String list(@ModelAttribute("clothcode") Integer clothcode,Model model) throws Exception{
+		model.addAttribute("clothcode",clothcode);
 		
-		String boardcode="s";
-		commentvo.setBoardcode("s");
-		
-		
-		List<CommentVo> comment=service.c_list(commentvo);
-		List<UserVo> userimg=service.c_list_img(commentvo);
-		
-		
-		model.addAttribute("img",userimg);
-		
-		model.addAttribute("comment",comment);
-		model.addAttribute("bno",bno);
-		model.addAttribute("boardcode",boardcode);
 		return "comment";
-		
 	}
 	
 	
-	@RequestMapping(value="c_insert", method=RequestMethod.POST)
-	public String c_insert(HttpSession session,CommentVo commentvo,Model model,@ModelAttribute("bno")Integer bno,@ModelAttribute("boardcode") String boardcode) throws Exception{
+	@RequestMapping(value="/b_insert",method=RequestMethod.POST)
+	public ResponseEntity<String> insert(@RequestBody CommentVo commentvo){
 		
-		UserVo vo=(UserVo) session.getAttribute("login");
-		String id=vo.getId();
+		ResponseEntity<String> entity=null;
+		try {
+			service.c_insert(commentvo);
+			entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity=new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		
+				
+		return entity;
+	}
+	
+	@RequestMapping(value="/b_list",method=RequestMethod.GET)
+	//public @ResponseBody List<CommentVo> list(Model model,@PathVariable Integer bno) throws Exception{
+	public @ResponseBody List<CommentVo> list(Model model,@RequestParam(value="bno") Integer bno, @RequestParam(value="boardcode") String boardcode,CommentVo commentvo) throws Exception{
+		
+	
+		
 		commentvo.setBno(bno);
-		commentvo.setId(id);
 		commentvo.setBoardcode(boardcode);
-		service.c_insert(commentvo);
+		
+	return service.c_list(commentvo);
 		
 		
-		return "redirect:/comment/c_list";
+		
 		
 		
 		
 		
 	}
-	@RequestMapping(value="c_delete")
-	public String c_delete(@ModelAttribute("c_bno") Integer c_bno,@ModelAttribute("bno")Integer bno,RedirectAttributes rttr) throws Exception{
-		
-		
-		service.c_delete(c_bno);
-		rttr.addFlashAttribute("bno",bno);
-		System.out.println(bno);
-		return "redirect:/comment/c_list";
 	
+	
+	//@RequestMapping(value="c_delete/{c_bno}",method=RequestMethod.GET)
+	//public ResponseEntity<String> c_delete(@PathVariable Integer c_bno) throws Exception{
+	@RequestMapping(value="c_delete",method=RequestMethod.GET)
+	public ResponseEntity<String> c_delete(@RequestParam(value="c_bno") Integer c_bno,@RequestParam(value="id") String id,HttpSession session) throws Exception{
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!################");
+		ResponseEntity<String> entity=null;
+		
+		UserVo uservo=(UserVo) session.getAttribute("login");
+		String loginid=uservo.getId();
+		System.out.println(id);
+	
+		System.out.println(c_bno);
+		//if(loginid.equals("id")){
+			try {
+				service.c_delete(c_bno);
+				entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			
+			} catch(Exception e) { }
+
+			//		rttr.addFlashAttribute("bno",bno);
+			
+		
+		
+		
+		
+	
+		return entity;
+		
 	}
 	
-	//seller board ?›„ê¸? ?Œ“ê¸?
-	@RequestMapping("/b_list")
-	public String b_list(Model model,@ModelAttribute("bno")Integer bno,CommentVo commentvo) throws Exception{
 	
-		commentvo.setBno(bno);
-		
-		String boardcode="b";
-		commentvo.setBoardcode("b");
-		
-		
-		List<CommentVo> comment=service.c_list(commentvo);
-		List<UserVo> userimg=service.c_list_img(commentvo);
-		
-		
-		model.addAttribute("img",userimg);
-		
-		model.addAttribute("comment",comment);
-		model.addAttribute("bno",bno);
-		model.addAttribute("boardcode",boardcode);
-		return "comment";
-		
-	}
-	
-	
-	
+  
 }

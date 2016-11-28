@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.assemvely.mapper.ItemMapper">
+	<select id="selectitem" resultType="kr.ac.assemvely.vo.ItemVo">
+		  SELECT * FROM ITEMTB ORDER BY WRITEDATE DESC
+	</select>
+	<select id="insertitem">
+		insert into ITEMTB (CLOTHCODE,ID,COLORCODE,PRICE,TEMPCODE,NAME,IMGNAME,CATEGORYCODE,CONTENT) values (CLOTHCODE_SEQ.NEXTVAL,#{id},#{colorcode},#{price},#{tempcode},#{name},#{imgname},#{categorycode},#{content})
+	</select>
+ 	<select id="selectone" resultType="kr.ac.assemvely.vo.ItemVo">
+ 	select * from ITEMTB WHERE CLOTHCODE=#{clothcode}
+ 	</select>
+ 
+ 	
+	<select  id="select" resultType="kr.ac.assemvely.vo.ItemVo">
+	
+	<![CDATA[
+	select clothcode from itemtb where name=#{name}
+	]]>
+	</select>
+
+
+	<insert id="insertinfo">
+	
+	<![CDATA[
+	insert into iteminfotb values(#{clothcode},#{color},to_number(#{amount}))
+	]]>
+	</insert>
+
+ 	<select  id="read" resultType="kr.ac.assemvely.vo.ItemInfoVo">
+ 	
+ 	select  * from ITEMINFOTB where CLOTHCODE=#{clothcode}
+ 	</select>
+ 	<select id="selectcategory" resultType="kr.ac.assemvely.vo.ItemVo">
+		SELECT * FROM ITEMTB WHERE CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{selectcategory})
+	</select>
+	
+	<select id="selectlittlecategory" resultType="kr.ac.assemvely.vo.ItemVo">
+		SELECT * FROM ITEMTB WHERE CATEGORYCODE=#{selectlittlecategory}
+	</select>
+	
+
+	<select id="newitem" resultType="kr.ac.assemvely.vo.ItemVo">
+		 SELECT * FROM ITEMTB ORDER BY CLOTHCODE DESC
+	</select>
+ 	<select  id="selectuser" resultType="kr.ac.assemvely.vo.ItemVo">
+ 		SELECT * FROM ITEMTB WHERE ID=#{id}
+ 	
+ 	</select>
+ 	<select id="branditem" resultType="kr.ac.assemvely.vo.ItemVo">
+ 	 SELECT * FROM ITEMTB WHERE ID=#{id} and CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{categorycode})
+ 	</select>
+</mapper>
+ 
+ 

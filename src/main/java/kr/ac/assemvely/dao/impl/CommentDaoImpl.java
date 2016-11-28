@@ -12,7 +12,7 @@ import kr.ac.assemvely.vo.CommentVo;
 import kr.ac.assemvely.vo.UserVo;
 
 @Repository
-public class CommnetDaoImpl implements CommentDao {
+public class CommentDaoImpl implements CommentDao {
 
 	public final String namespace="kr.ac.assemvely.comment";
 	
@@ -37,11 +37,6 @@ public class CommnetDaoImpl implements CommentDao {
 		return session.delete(namespace+".c_delete",c_bno);
 	}
 
-	@Override
-	public List<UserVo> c_list_img(CommentVo commentvo) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectList(namespace+".c_list_img",commentvo);
-	}
-	
+
 
 }

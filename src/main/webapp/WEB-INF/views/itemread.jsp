@@ -118,6 +118,8 @@ body {
 <li>${READ.content}
 
 
+<a href="/comment/list?clothcode=${READ.clothcode}">댓글보기</a>
+
 
 </body>
 </html>

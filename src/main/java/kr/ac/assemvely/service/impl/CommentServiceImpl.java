@@ -36,12 +36,6 @@ public class CommentServiceImpl implements CommentService {
 		return dao.c_delete(c_bno);
 	}
 
-	@Override
-	public List<UserVo> c_list_img(CommentVo commentvo) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.c_list_img(commentvo);
-	}
-		
 	
 
 
