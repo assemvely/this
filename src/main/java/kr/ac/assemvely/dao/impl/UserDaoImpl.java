@@ -2,14 +2,15 @@ package kr.ac.assemvely.dao.impl;
 
 import java.util.List;
 
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-
 import kr.ac.assemvely.dao.UserDao;
+import kr.ac.assemvely.vo.AddressVo;
+import kr.ac.assemvely.vo.CartVo;
+import kr.ac.assemvely.vo.MileageVo;
 import kr.ac.assemvely.vo.RelationVo;
 import kr.ac.assemvely.vo.TempUserVo;
 import kr.ac.assemvely.vo.UserDto;
@@ -145,6 +146,27 @@ public class UserDaoImpl implements UserDao
 	}
 
 
+	@Override
+	public void updateaddress(AddressVo avo) throws Exception 
+	{
+		session.update(namespace+".updateaddress", avo);
+		
+	}
 
+	@Override
+	public List<UserVo> searchuser(String id) throws Exception 
+	{
+		
+		return session.selectList(namespace+".searchuser", id);
+	}
+
+	@Override
+	public void updatemileage(MileageVo mvo) throws Exception {
+		
+		session.update(namespace+".updatemileage", mvo);
+		
+	}
+
+	
 
 }

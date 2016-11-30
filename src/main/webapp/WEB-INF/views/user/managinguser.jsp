@@ -20,8 +20,9 @@
 	
 		<c:forEach items= "${userlist}" var="userVO" >
 		<tr>
-		<td>${userVO.id}</td>
-		<td>${userVO.bsm}</td>
+		<td> <img src="/resources/userimg/${userVO.imgname} " alt="이미지가 없습니다">
+		<a href="/user/mypage?id=${userVO.id}">${userVO.id}</a></td>
+		<td> {userVO.bsm}</td>
 		<td>${userVO.email}</td>
 		</tr>
 		</c:forEach>

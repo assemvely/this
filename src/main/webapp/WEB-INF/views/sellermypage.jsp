@@ -194,14 +194,15 @@
 		 <br/>
 		 <c:choose>
 		 <c:when test="${ALREADY==0}">
-		
-		 <a href="/user/following?id=${user.id}">following</a>
+		 
+		<a href="/user/following?id=${user.id}">following</a>
+		<!--  <a href="/user/following?id=${user.id}">following</a> -->
 		 </c:when>
 		 <c:when test="${ALREADY==1}">
 		<a href="/user/unfollowed?id=${user.id}">unfollow</a>
 		 </c:when>
 		 <c:when test="${ALREADY==2}">
-		 <h3>¤¾¤¾</h3>
+		 <h3>my page</h3>
 		 </c:when>
 		 </c:choose>
 		 </div>

@@ -8,8 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.ac.assemvely.dao.ItemDao;
+import kr.ac.assemvely.vo.CartVo;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.PayVo;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
@@ -32,7 +34,7 @@ public class ItemDaoImpl implements ItemDao {
 	}
 
 	@Override
-	public ItemVo readposting(String clothcode) {
+	public ItemVo readposting(int clothcode) {
 		 
 		return  SqlSession.selectOne(namespace+".selectone",clothcode);
 	}
@@ -51,7 +53,7 @@ public class ItemDaoImpl implements ItemDao {
 	}
 	
 	@Override
-	public List<ItemInfoVo> readinfo(String clothcode)throws Exception{
+	public List<ItemInfoVo> readinfo(int clothcode)throws Exception{
 		return SqlSession.selectList(namespace+".read",clothcode);
 	}
 	 
@@ -83,5 +85,73 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List<ItemVo> branditem(ItemVo vo){
 		return SqlSession.selectList(namespace+".branditem",vo);
+	}
+	
+
+	@Override
+	public ItemVo shoppeditem(Integer clothcode) throws Exception 
+	{
+		
+		return SqlSession.selectOne(namespace+".shoppeditem", clothcode);
+	}
+
+	@Override
+	public List<ItemVo> selectcompanyitem(String id) 
+	{
+		
+		return SqlSession.selectList(namespace+".selectcompanyitem", id);
+	}
+
+	@Override
+	public List<ItemVo> searchitem(String name) throws Exception {
+		
+		return SqlSession.selectList(namespace+".searchitem", name);
+	}
+
+	@Override
+	public List<CartVo> selectitemfromcart(String id) 
+	{
+		
+		return SqlSession.selectList(namespace+".selectitemfromcart", id);
+	}
+
+	@Override
+	public void deletefromcart(int clothcode) throws Exception {
+		SqlSession.delete(namespace+".deletefromcart", clothcode);
+		
+	}
+
+	@Override
+	public void insertintopaytb(PayVo pvo) throws Exception {
+		SqlSession.insert(namespace+".insertintopaytb", pvo);
+		
+	}
+
+	@Override
+	public List<ItemVo> selectitemfrompaytb(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return SqlSession.selectList(namespace+".selectitemfrompaytb", id);
+	}
+
+	@Override
+	public void deletefrompay(String id) throws Exception {
+		SqlSession.delete(namespace+".deletefrompay", id);
+		
+	}
+	@Override
+	public void incart(CartVo vo)throws Exception{
+		SqlSession.insert(namespace+".incart",vo);
+	}
+	@Override
+	public List<CartVo> cart(String id) throws Exception{
+		return SqlSession.selectList(namespace+".cartlist",id);
+	}
+	@Override
+	public CartVo userchoice(int cartbno){
+		return SqlSession.selectOne(namespace+".userchoice",cartbno);
+	}
+	@Override
+	public void coloramount(CartVo cartvo){
+		SqlSession.update(namespace+".coloramount",cartvo);
 	}
 }

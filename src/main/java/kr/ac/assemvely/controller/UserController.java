@@ -68,14 +68,12 @@ public class UserController
 	//	String imgfullpath = savePath+"/"+imgname;
 		 
 		vo.setImgname(filename1);
-		vo.setImgpath(realPath);
+	 
 		
 		if(vo.getBsm().equals("b"))
 		{		
 			
-			vo.setFilename("null");
-			vo.setFilepath("null");
-			
+		 
 			service.join(vo);
 			return "homemain";
 		}
@@ -88,9 +86,7 @@ public class UserController
 //			String filename = imgfile2.getOriginalFilename();
 //			String filefullpath = savePath+"/"+filename;
 //			
-			vo.setFilename(filename2);
-			vo.setFilepath(realPath2);
-			
+		 
 			service.sellerjoin(vo);
 			return "homemain";
 			
@@ -161,21 +157,14 @@ public class UserController
 		else
 		{vo.setImgname("null");}
 		
-		if(tvo1.getImgpath()!=null)
-		{vo.setImgpath(tvo1.getImgpath());}
-		else
-		{vo.setImgpath("null");}
-		
+	 
 		
 		if(tvo1.getFilename()!=null)
 		{vo.setFilename(tvo1.getFilename());}
 		else
 		{vo.setFilename("null");}
 		
-		if(tvo1.getFilepath()!=null)
-		{vo.setFilepath(tvo1.getFilepath());}
-		else
-		{vo.setFilepath("null");}
+	 
 		
 		vo.setAddress("null");
 		
@@ -238,16 +227,17 @@ public class UserController
 	@RequestMapping(value="/mypage")
 	public String mypage(ItemVo itemvo,HttpSession session) throws Exception{
 		UserVo vo=service.user(itemvo.getId());//유저 정보받아우기
-	
+		 
 		 
 		session.setAttribute("fromuser",itemvo);
 		String path=null;
-	
+	 
 		if(vo.getBsm().equals("s")){
 			path="redirect:/item/sellerpage";
 		}else if(vo.getBsm().equals("b")){
 			path="redirect:/item/userpage";
-		}
+		} 
+	 
 		return path;
 	}
 	
@@ -259,11 +249,12 @@ public class UserController
 		
 		UserVo vo =service.user(itemvo.getId());
 		UserVo sessionvo=(UserVo) session.getAttribute("login");
+		 
 		String followingid=vo.getId();
 		String followerid=vo.getId();
 		String path=null;
 		
-		if(vo.getId()==sessionvo.getId()){//아이디가 세션하고일치하면
+		if(vo.getId().equals(sessionvo.getId())){//아이디가 세션하s고일치하면
 			model.addAttribute("ALREADY",2);//이다
 		}else{//아이디랑 세션이 불일치= 타인 계정
 		RelationVo relation=new RelationVo();
@@ -282,7 +273,7 @@ public class UserController
 		model.addAttribute("followingcounter", service.followercounter(followerid));
 		
 		model.addAttribute("followercounter", service.followingcounter(followingid));
-		System.out.println("여기 유저컨트롤러 마이페이지"+vo.getBsm());
+	 
 		
 		if(vo.getBsm().equals("b")){
 			path="/user/mypage";

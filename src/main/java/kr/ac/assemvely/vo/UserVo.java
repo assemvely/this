@@ -9,12 +9,23 @@ public class UserVo
 	  private String bsm;
 	  
 	  private String imgname;
-	  private String imgpath;
+	 
 	  
 	  private String filename;
-	  private String filepath;
+	 
 	  
 	  private String address;
+	  private Integer mileage;
+	  
+	  
+	  
+	public Integer getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(Integer mileage) {
+		this.mileage = mileage;
+	}
 
 	public String getId() {
 		return id;
@@ -56,13 +67,7 @@ public class UserVo
 		this.imgname = imgname;
 	}
 
-	public String getImgpath() {
-		return imgpath;
-	}
-
-	public void setImgpath(String imgpath) {
-		this.imgpath = imgpath;
-	}
+ 
 
 	public String getFilename() {
 		return filename;
@@ -72,13 +77,7 @@ public class UserVo
 		this.filename = filename;
 	}
 
-	public String getFilepath() {
-		return filepath;
-	}
-
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
-	}
+	 
 
 	public String getAddress() {
 		return address;
@@ -91,7 +90,7 @@ public class UserVo
 	@Override
 	public String toString() {
 		return "UserVo [id=" + id + ", pw=" + pw + ", email=" + email + ", bsm=" + bsm + ", imgname=" + imgname
-				+ ", imgpath=" + imgpath + ", filename=" + filename + ", filepath=" + filepath + ", address=" + address
+				+ ", filename=" + filename + ", address=" + address
 				+ "]";
 	}
 	  

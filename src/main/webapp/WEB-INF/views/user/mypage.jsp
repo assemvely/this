@@ -134,6 +134,17 @@
 	
 	
 </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<!-- owl carousel±ò±â -->
+<link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
+<!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
+<script src="/resources/jquery/jquery-1.12.4.min.js"></script>
+<script src="/resources/owl.carousel/owl.carousel.min.js"></script>
+
 </head>
 
 <body>
@@ -192,7 +203,7 @@
 		<a href="/user/unfollowed?id=${user.id}">unfollow</a>
 		 </c:when>
 		 <c:when test="${ALREADY==2}">
-		 <h3>¤¾¤¾</h3>
+			<h3>my page</h3>
 		 </c:when>
 		 </c:choose>
 		 </div>

@@ -16,7 +16,7 @@
 			)
 			VALUES (
 			#{followingid}, #{followerid}
-			)
+			) 
 				
 				]]>
 	
@@ -27,12 +27,12 @@
 		<![CDATA[ 	
 		
 			INSERT INTO USERTB	
-			(ID, PW, EMAIL, BSM, IMGNAME, IMGPATH,
-			FILENAME,FILEPATH ,ADDRESS
+			(ID, PW, EMAIL, BSM, IMGNAME,
+			FILENAME ,ADDRESS
 			)
 			VALUES (
-			#{id}, #{pw}, #{email}, #{bsm}, #{imgname}, #{imgpath},
-			 #{filename}, #{filepath}, #{address}
+			#{id}, #{pw}, #{email}, #{bsm}, #{imgname},
+			 #{filename},  #{address}
 			)
 
 				
@@ -43,12 +43,12 @@
 		<![CDATA[ 	
 		
 			INSERT INTO TEMPUSERTB	
-			(ID, PW, EMAIL, BSM, IMGNAME, IMGPATH,
-			FILENAME,FILEPATH ,ADDRESS
+			(ID, PW, EMAIL, BSM, IMGNAME,
+			FILENAME,ADDRESS
 			)
 			VALUES (
-			#{id}, #{pw}, #{email}, #{bsm}, #{imgname}, #{imgpath},
-			 #{filename}, #{filepath}, #{address}
+			#{id}, #{pw}, #{email}, #{bsm}, #{imgname},  
+			 #{filename}, #{address}
 			)
 
 				
@@ -178,7 +178,38 @@
 				]]>
 	
 		</select>
+		 
 		
+		<update id="updateaddress">
+		
+		<![CDATA[ 	
+			
+			update usertb
+			set address=#{address}
+			where id = #{id}
 				
+				]]>		
+		
+		</update>
+		
+		<update id="updatemileage">
+		
+		<![CDATA[ 	
+			
+			update usertb
+			set mileage=#{mileage}
+			where id = #{id}
+				
+				]]>		
+		
+		</update>
+		
+			
+	<select id="searchuser" resultType="kr.ac.assemvely.vo.UserVo">
+	
+	SELECT * FROM usertb WHERE id LIKE '%'||#{id}||'%'
+ 
+	</select>
+	
 	
 	</mapper>

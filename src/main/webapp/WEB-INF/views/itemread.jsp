@@ -78,13 +78,62 @@ body {
 <link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<!-- owl carousel깔기 -->
+<!-- owl carousel깔기 --> 
 <link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
 <!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
 <script src="/resources/jquery/jquery-1.12.4.min.js"></script>
 <script src="/resources/owl.carousel/owl.carousel.min.js"></script>
 <!-- <script src="/resources/owl.carousel/owl.carousel.js"></script> -->
 <script type="text/javascript">
+	 $(document).ready(function(){
+		 
+		  $("#cartbtn").on("click",function(){
+			  var color=$("#color option:selected").val();
+			  var amount=$("#amount").val();
+			  var clothcode=$("#clothcode").val();
+			  var price=$("#price").val();
+			  var name=$("#name").val();
+			  var imgname=$("#imgname").val();
+		 
+			  $.ajax({
+				contentType:'application.json',
+				type:'post',
+				url:'/item/incart',
+				headers:{
+					"Content-Type":"application/json",
+					"X-HTTP-Method-Override":"POST"
+					
+				},
+				dataType:'text',
+				data: JSON.stringify({
+					color:color,
+					amount:amount,
+					clothcode:clothcode,
+					price:price,
+					imgname:imgname,
+					name:name
+				}),
+				success:function(data){
+			   		 
+		/*     var str="";
+			   		$(data).each(function(){
+			   			str+="<h3>"+this.color+"/"+this.amount+"</h3>";
+			   			
+			   		});   */
+			   		
+			   		var jsonData = JSON.parse(data);
+			   		
+			   		$("#coloramount").append(jsonData.color);
+			   		$("#coloramount").append(jsonData.amount);
+					 $("#myModal").modal('toggle');
+				}
+				
+			  });
+
+		  });
+		 
+	 });
+	 
 	 
 </script>
 </head>
@@ -99,27 +148,81 @@ body {
 <br/>
 <br/>
 <br/>
+ <form action=/item/buy>
 <li><img src="/resources/itemimg/${READ.imgname}" alt="이미지가 없습니다"></li>
 
-<li>name:${READ.name}</li>
+<li >name:${READ.name}</li>
 <li>Price:${READ.price}</li>
 <li>mileage:${READ.mileage}</li>
-<li>color
-<c:forEach items="${COLOR}" var="info">
-<li> ${info.color}</li>
-</c:forEach>
+	
+<select id="color">
+		 <c:forEach items="${COLOR}" var="COLOR">
+		 		<option  value="${COLOR.color}">${COLOR.color}</option>
+		 	</c:forEach>
+		 	</select>
+		 	 	
+<input type="number" name="amount" id="amount" placeholder="amount"/>
+	
+<input type="hidden" id="clothcode"name="clothcode" value="${READ.clothcode}"/>
+ <input type="hidden" id="imgname" name="imgname" value="${READ.imgname}"/>
+<input type="hidden" id="name" name="name" value="${READ.name}"/>
+<input type="hidden" id="price" name="price" value="${READ.price}"/>
+ 
+<button id="cartbtn" class="btn btn-primary btn-lg">cart</button>
+
+ 
+  <input type="submit" value="buy now!" name="submit" class="btn btn-primary btn-lg">
+
+ </form>
+  	<!-- 버튼 -->
+
+ 
+ 	<div class="container">
+ 	  
+	<!-- 모달 팝업 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Shopping</span></button>
+		<h4 class="modal-title" id="myModalLabel">cart</h4>
+	      </div>
+	      <div class="modal-body">
+		 	<img src="/resources/itemimg/${READ.imgname}" alt="이미지가 없습니다">
+		 	${READ.name}
+		 <h4 id="coloramount"></h4>
+		 	<br/>
+		 	 <h4 id="coloramount"></h4>
+		 	
+	      </div>
+	      <div class="modal-footer">
+	      <form action="/item/cart">
+	      <input type="submit" value="cart" name="submit" class="btn btn-primary"/>
+	       
+	      </form>
+		<button type="button" class="btn btn-default" data-dismiss="modal">keep shopping</button>
+		 
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 
+
+</div>    
 <br/>
 <br/>
 <br/>
 <br/>
 <hr/>
-<li>${READ.content}
+<li>${READ.content}</li>
 
 
 <a href="/comment/list?clothcode=${READ.clothcode}">댓글보기</a>
 
-
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
 </body>
 </html>

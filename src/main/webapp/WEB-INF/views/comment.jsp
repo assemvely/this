@@ -245,7 +245,7 @@ function getAllList(){
 								"<td><div style='width: 100px; height: 100px; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 50px; overflow: hidden; background: red;'>"
 								+"<img src='/resources/userimg/"+this.imgname+";' style='margin-left: -200px;' />"
 								+"</div></td>"
-								+"<td>"+this.id+"</td>"+
+								+"<td>"+"<a href='/user/mypage?id="+this.id+"'>"+this.id+"</a>"+"</td>"+
 								"<td>"+this.reply+"</td>"+
 								"<td>"+this.writedate+"</td>"+
 								"<td><button class='replyDelBtn'>ªË¡¶</button></td></tr>"; 

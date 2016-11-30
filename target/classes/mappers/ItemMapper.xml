@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into ITEMTB (CLOTHCODE,ID,COLORCODE,PRICE,TEMPCODE,NAME,IMGNAME,CATEGORYCODE,CONTENT) values (CLOTHCODE_SEQ.NEXTVAL,#{id},#{colorcode},#{price},#{tempcode},#{name},#{imgname},#{categorycode},#{content})
 	</select>
  	<select id="selectone" resultType="kr.ac.assemvely.vo.ItemVo">
- 	select * from ITEMTB WHERE CLOTHCODE=#{clothcode}
+ 	select * from ITEMTB WHERE CLOTHCODE=#{clothcode} 
  	</select>
  
  	
@@ -35,11 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	select  * from ITEMINFOTB where CLOTHCODE=#{clothcode}
  	</select>
  	<select id="selectcategory" resultType="kr.ac.assemvely.vo.ItemVo">
-		SELECT * FROM ITEMTB WHERE CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{selectcategory})
+		SELECT * FROM ITEMTB WHERE CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{selectcategory})ORDER BY WRITEDATE DESC
 	</select>
 	
 	<select id="selectlittlecategory" resultType="kr.ac.assemvely.vo.ItemVo">
-		SELECT * FROM ITEMTB WHERE CATEGORYCODE=#{selectlittlecategory}
+		SELECT * FROM ITEMTB WHERE CATEGORYCODE=#{selectlittlecategory} ORDER BY WRITEDATE DESC
 	</select>
 	
 
@@ -47,12 +47,94 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 SELECT * FROM ITEMTB ORDER BY CLOTHCODE DESC
 	</select>
  	<select  id="selectuser" resultType="kr.ac.assemvely.vo.ItemVo">
- 		SELECT * FROM ITEMTB WHERE ID=#{id}
+ 		SELECT * FROM ITEMTB WHERE ID=#{id} ORDER BY WRITEDATE DESC
  	
  	</select>
  	<select id="branditem" resultType="kr.ac.assemvely.vo.ItemVo">
- 	 SELECT * FROM ITEMTB WHERE ID=#{id} and CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{categorycode})
+ 	 SELECT * FROM ITEMTB WHERE ID=#{id} and CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY=#{categorycode}) ORDER BY WRITEDATE DESC
  	</select>
+ 	
+ 	<select id="selectitemfromcart" resultType="kr.ac.assemvely.vo.CartVo">
+		  SELECT * FROM CARTTB where buyerid=#{id}
+	</select>
+	
+	<delete id="deletefromcart">
+	
+			<![CDATA[ 	
+	
+				delete from carttb where cartbno=#{cartbno}
+	
+				]]>
+				
+	</delete>
+	
+	<delete id="deletefrompay">
+	
+			<![CDATA[ 	
+	
+				delete from paytb where id=#{id}
+	
+				]]>
+				
+	</delete>
+	
+		<select id="searchitem" resultType="kr.ac.assemvely.vo.ItemVo">
+	
+	SELECT * FROM itemtb WHERE name LIKE '%'||#{name}||'%'
+	
+	
+	</select>
+	
+		<insert id="insertintopaytb">
+		
+		<![CDATA[ 	
+		
+			INSERT INTO paytb
+			(id, clothcode, brandid
+			)
+			VALUES (
+			#{id}, #{clothcode}, #{brandid}
+			)
+				
+				]]>
+	
+	</insert>
+	
+	<select id="selectitemfrompaytb" resultType="kr.ac.assemvely.vo.ItemVo">
+		 select * from itemtb where clothcode in (select clothcode from paytb where id=#{id})
+	</select>
+		
+	
+ 	<select resultType="kr.ac.assemvely.vo.ItemVo" id="shoppeditem">
+
+	<![CDATA[ 	
+							
+							SELECT * FROM itemtb
+							where clothcode=#{clothcode}
+							
+			]]>
+	</select>
+	<select id="incart">
+		insert into carttb (CARTBNO,BUYERID,CLOTHCODE,COLOR,AMOUNT) values (SEQ_CARTBNO.NEXTVAL,#{id},#{clothcode},#{color},#{amount})
+	</select>
+	
+	<select id="cartlist" resultType="kr.ac.assemvely.vo.CartVo">
+	select *  from carttb,itemtb where carttb.clothcode=itemtb.clothcode and carttb.buyerid=#{id} order by cartdate desc
+	</select>
+	<select id="userchoice" resultType="kr.ac.assemvely.vo.CartVo">
+	
+	   select *  from carttb,itemtb where carttb.clothcode=itemtb.clothcode and cartbno=#{cartbno}
+	</select>
+	<select id="coloramount">
+	
+	 UPDATE 
+        iteminfotb
+      SET 
+        amount =amount-#{amount}
+    WHERE 
+      clothcode = #{clothcode} and color=#{color}
+	</select>
+	 
 </mapper>
  
  

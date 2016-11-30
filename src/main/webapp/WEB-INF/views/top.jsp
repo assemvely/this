@@ -99,7 +99,7 @@ body {
 		if (selected != "0") {
 			var selectedUppercase = selected.toUpperCase();
 
-			document.getElementById("Form3").submit();
+			document.getElementById("Form2").submit();
 			form.Form3.submit();
 
 		}

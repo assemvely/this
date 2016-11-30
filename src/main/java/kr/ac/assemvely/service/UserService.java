@@ -2,6 +2,8 @@ package kr.ac.assemvely.service;
 
 import java.util.List;
 
+import kr.ac.assemvely.vo.AddressVo;
+import kr.ac.assemvely.vo.MileageVo;
 import kr.ac.assemvely.vo.RelationVo;
 import kr.ac.assemvely.vo.TempUserVo;
 import kr.ac.assemvely.vo.UserDto;
@@ -35,4 +37,11 @@ public interface UserService
 	public int buyercounter()throws Exception;
 	
 	public void deleteuser(UserDto dto)throws Exception;
+	
+
+	public void updateaddress(AddressVo avo)throws Exception;
+	
+	public List<UserVo> searchuser(String id) throws Exception;
+	
+	public void updatemileage(MileageVo mvo)throws Exception;
 }

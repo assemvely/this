@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.assemvely.dao.ItemDao;
 import kr.ac.assemvely.service.ItemService;
+import kr.ac.assemvely.vo.CartVo;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.PayVo;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -28,7 +30,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public ItemVo readposting(String clothcode) {
+	public ItemVo readposting(int clothcode) {
 	 
 		return dao.readposting(clothcode);
 	}
@@ -46,7 +48,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemInfoVo> readinfo(String clothcode) throws Exception {
+	public List<ItemInfoVo> readinfo(int clothcode) throws Exception {
 	
 		return dao.readinfo(clothcode);
 	}
@@ -78,5 +80,78 @@ public class ItemServiceImpl implements ItemService {
 	public List<ItemVo> branditem(ItemVo vo) throws Exception {
 		 
 		return dao.branditem(vo);
+	}
+	
+	
+
+	@Override
+	public ItemVo shoppeditem(Integer clothcode) throws Exception 
+	{
+		
+		return dao.shoppeditem(clothcode);
+	}
+
+	@Override
+	public List<ItemVo> selectcompanyitem(String id) 
+	{
+		
+		return dao.selectcompanyitem(id);
+	}
+
+	@Override
+	public List<ItemVo> searchitem(String name) throws Exception {
+		
+		//System.out.println("[ServiceImpl/searchitem()] name : " + name);
+		return dao.searchitem(name);
+	}
+
+	@Override
+	public List<CartVo> selectitemfromcart(String id) 
+	{
+	
+		return dao.selectitemfromcart(id);
+	}
+
+	@Override
+	public void deletefromcart(int clothcode) throws Exception {
+		dao.deletefromcart(clothcode);
+		
+	}
+
+	@Override
+	public void insertintopaytb(PayVo pvo) throws Exception {
+		dao.insertintopaytb(pvo);
+		
+	}
+
+	@Override
+	public List<ItemVo> selectitemfrompaytb(String id) throws Exception {
+	
+		return dao.selectitemfrompaytb(id);
+	}
+
+	@Override
+	public void deletefrompay(String id) throws Exception {
+	
+			dao.deletefrompay(id);
+		
+	}
+	@Override
+	public void incart(CartVo vo)throws Exception{
+		dao.incart(vo);
+	}
+	
+	@Override
+	public List<CartVo> cart(String id) throws Exception{
+		return dao.cart(id);
+	}
+	
+	@Override
+	public CartVo userchoice(int cartbno){
+		return dao.userchoice(cartbno);
+	}
+	@Override
+	public void coloramount(CartVo cartvo){
+		dao.coloramount(cartvo);
 	}
 }

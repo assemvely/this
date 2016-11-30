@@ -2,13 +2,14 @@ package kr.ac.assemvely.service.impl;
 
 import java.util.List;
 
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import kr.ac.assemvely.dao.UserDao;
 import kr.ac.assemvely.service.UserService;
+import kr.ac.assemvely.vo.AddressVo;
+import kr.ac.assemvely.vo.MileageVo;
 import kr.ac.assemvely.vo.RelationVo;
 import kr.ac.assemvely.vo.TempUserVo;
 import kr.ac.assemvely.vo.UserDto;
@@ -136,4 +137,25 @@ public class UserServiceImpl implements UserService
 		
 	}
 
+
+	@Override
+	public void updateaddress(AddressVo avo) throws Exception 
+	{
+		dao.updateaddress(avo);
+		
+	}
+
+	@Override
+	public List<UserVo> searchuser(String id) throws Exception 
+	{
+		System.out.println("[ServiceImpl/searchuser()] id : " + id);
+		return dao.searchuser(id);
+	}
+
+	@Override
+	public void updatemileage(MileageVo mvo) throws Exception {
+		
+		dao.updatemileage(mvo);
+		
+	}
 }

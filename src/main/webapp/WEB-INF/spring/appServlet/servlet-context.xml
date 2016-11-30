@@ -34,4 +34,23 @@
 	</interceptor>
 	</interceptors>
 	-->
+<!-- 	<beans:bean id="AlarmInterceptor" class="kr.ac.assemvely.interceptor.AlarmInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/following"/>
+			<beans:ref bean="AlarmInterceptor"/>
+		</interceptor>
+	</interceptors> -->
+	<beans:bean id="AuthorityInterceptor" class="kr.ac.assemvely.interceptor.AuthorityInterceptor"></beans:bean>
+	<interceptors>
+	
+	<interceptor>
+	<mapping path="/all/posting"/>
+	<mapping path="/user/mypage"/>
+	<mapping path="/item/incart"/>
+	<mapping path="/item/tocart"/> 
+	<mapping path="/item/select"/>
+	<beans:ref bean="AuthorityInterceptor"/>
+	</interceptor>
+	</interceptors>
 </beans:beans>
