@@ -148,14 +148,15 @@ body {
 <br/>
 <br/>
 <br/>
- <form action=/item/buy>
+ 
+<form action=/item/buy>
 <li><img src="/resources/itemimg/${READ.imgname}" alt="이미지가 없습니다"></li>
 
 <li >name:${READ.name}</li>
 <li>Price:${READ.price}</li>
 <li>mileage:${READ.mileage}</li>
 	
-<select id="color">
+<select id="color" name="color">
 		 <c:forEach items="${COLOR}" var="COLOR">
 		 		<option  value="${COLOR.color}">${COLOR.color}</option>
 		 	</c:forEach>
@@ -168,12 +169,12 @@ body {
 <input type="hidden" id="name" name="name" value="${READ.name}"/>
 <input type="hidden" id="price" name="price" value="${READ.price}"/>
  
-<button id="cartbtn" class="btn btn-primary btn-lg">cart</button>
 
  
   <input type="submit" value="buy now!" name="submit" class="btn btn-primary btn-lg">
 
  </form>
+ <button id="cartbtn" class="btn btn-primary btn-lg">cart</button>
   	<!-- 버튼 -->
 
  

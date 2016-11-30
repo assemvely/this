@@ -32,6 +32,8 @@ import kr.ac.assemvely.vo.CartVo;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.MileageVo;
+ 
+import kr.ac.assemvely.vo.OrderVo;
 import kr.ac.assemvely.vo.PayVo;
 import kr.ac.assemvely.vo.UserVo;
 
@@ -346,7 +348,7 @@ public class ItemController {
 		
 		String id=uvo.getId();
 	
-		System.out.println("여기"+cartvo.toString());
+	 
 		Integer price = 0;
 		Integer allprice = 0;
 		Integer deliverycharge =1;
@@ -395,76 +397,105 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="/ordertaker")
-	public String ordertaker(HttpSession session,
-			String name, String address, String howtopay, AddressVo avo) throws Exception
+	public  @ResponseBody OrderVo ordertaker(HttpSession session,
+			@RequestBody OrderVo ordervo) throws Exception
 	{
 	 
 		UserVo uvo = (UserVo) session.getAttribute("login");
 		String id=uvo.getId();
-		
+		 
 		 PayVo pvo=new PayVo();
 		 
 		    pvo.setId(id); 
+		    
+	 AddressVo avo=new AddressVo();
 		avo.setId(id);
-		avo.setAddress(address);
-		userservice.updateaddress(avo); //address 넣기
-		 System.out.println("나오니");
-		 
-		 
-		List<CartVo> cartlist=(List<CartVo>) session.getAttribute("shoppinglist");
-		for(int i=0;i<cartlist.size();i++){
-			CartVo cartvo=cartlist.get(i);
-			System.out.println("fgf"+cartvo.toString());
-			itemservice.coloramount(cartvo);//구입한 수량 빼기
-		 
+		avo.setAddress(ordervo.getAddress());
 	 
-		 itemservice.deletefromcart(cartvo.getCartbno());//장바구니에서 지우고
+	  	userservice.updateaddress(avo); //address 넣기
+		
+		List<CartVo> cartlist=(List<CartVo>) session.getAttribute("shoppinglist");
+		
+	for(int i=0;i<cartlist.size();i++){
+		CartVo cartvo=cartlist.get(i);
+		 
+			
+			cartvo.setId(id);
+		 
+			 itemservice.coloramount(cartvo);//구입한 수량 빼기
+	 
+			if(cartvo.getCartbno()!=0){
+			 itemservice.deletefromcart(cartvo.getCartbno());//장바구니에서 지우고
+			}
+	 
 		 ItemVo itvo=itemservice.readposting(cartvo.getClothcode());
 		 pvo.setBrandid(itvo.getId());
 		 pvo.setClothcode(cartvo.getClothcode());
-        itemservice.insertintopaytb(pvo);//ㅍㅔ이 티비에 넣고
+      itemservice.insertintopaytb(pvo);//ㅍㅔ이 티비에 넣고
 		}
-		session.setAttribute("ordertakername", name);
-		session.setAttribute("ordertakerhowtopay", howtopay);
-		
-					
-		return "/item/ordertaker";
+ 	 
+	 
+ 	
+	Integer plusmileage = (Integer) session.getAttribute("ordertakermileage");
+	Integer minusmileage =(Integer) session.getAttribute("ordertakerprice");
+	Integer deliverycharge=(Integer) session.getAttribute("ordertakerdeliverycharge");
+	Integer mileage = uvo.getMileage();
+ 
+ 
+	mileage +=plusmileage-minusmileage;
+ 
+	
+	MileageVo mvo = new MileageVo();
+	
+	mvo.setId(id);		
+	mvo.setMileage(mileage);
+ 	userservice.updatemileage(mvo);
+	 
+	 
+	ordervo.setDeliverycharge(deliverycharge);
+ 
+	ordervo.setMileage(plusmileage);
+	 
+	ordervo.setPrice(minusmileage);
+	
+	 		System.out.println(ordervo.toString());	
+ 	return ordervo;
 		
 	}
 	
 
-
-	@RequestMapping(value="/payment")
-	public String payment(HttpSession session,
-			String name, String address, String howtopay, AddressVo avo) throws Exception
-	{
-		
-		UserVo uvo = (UserVo) session.getAttribute("login");
-		String id = uvo.getId();
-		
-		Integer plusmileage = (Integer) session.getAttribute("ordertakermileage");
-		Integer minusmileage =(Integer) session.getAttribute("ordertakerprice");
-		
-		Integer mileage = uvo.getMileage();
-	 
-	 
-		mileage +=plusmileage-minusmileage;
-		
-	 
-		
-		MileageVo mvo = new MileageVo();
-		
-		mvo.setId(id);		
-		mvo.setMileage(mileage);
-		userservice.updatemileage(mvo);
-		
-		
-		userservice.updatemileage(mvo);
-				
-					
-		return "homemain";
-		
-	}
+//
+//	@RequestMapping(value="/payment")
+//	public String payment(HttpSession session,
+//			String name, String address, String howtopay, AddressVo avo) throws Exception
+//	{
+//		
+//		UserVo uvo = (UserVo) session.getAttribute("login");
+//		String id = uvo.getId();
+//		
+//		Integer plusmileage = (Integer) session.getAttribute("ordertakermileage");
+//		Integer minusmileage =(Integer) session.getAttribute("ordertakerprice");
+//		
+//		Integer mileage = uvo.getMileage();
+//	 
+//	 
+//		mileage +=plusmileage-minusmileage;
+//		
+//	 
+//		
+//		MileageVo mvo = new MileageVo();
+//		
+//		mvo.setId(id);		
+//		mvo.setMileage(mileage);
+//		userservice.updatemileage(mvo);
+//		
+//		
+//		userservice.updatemileage(mvo);
+//				
+//					
+//		return "homemain";
+//		
+//	}
 	@RequestMapping(value="/select")
 	private String select(@ModelAttribute("submit")String submit ,CartVo cartvo,ItemInfoVo iteminfovo,HttpSession session){
  
@@ -482,7 +513,7 @@ public class ItemController {
 	}
 	@RequestMapping(value="/incart",method=RequestMethod.POST)
 	private @ResponseBody CartVo select(@RequestBody CartVo cartvo,Model model,HttpSession session){
-	 System.out.println(cartvo.toString());
+	 
 		//ResponseEntity<String> entity=null;
 		try{
 			UserVo vo=(UserVo)session.getAttribute("login");
