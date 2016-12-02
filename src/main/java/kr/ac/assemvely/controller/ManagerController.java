@@ -42,7 +42,7 @@ public class ManagerController {
 	@RequestMapping(value="/posting")
 	public String posting(Locale locale,HttpSession session){
 	
-	System.out.println("³ª¿Â´Ù");
+ 
 		return "/manager/managerposting";
 	}
 	

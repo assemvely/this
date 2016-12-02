@@ -5,18 +5,97 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <style>
+#h2 {
+    position: absolute;
+    left: 1450px;
+    top: 80px;
+    color: red;
+}
 @font-face {
-	font-family: 'Nanum Gothic Coding', monospace;
-	padding-top: 70px;
+   font-family: 'Nanum Gothic Coding', monospace;
+   padding-top: 70px;
 }
 
 #main_footer {
-	/* footer 중앙 정렬 */
-	width: 960px;
-	margin: 0 auto;
-	margin-bottom: 10px;
-	/* footer 글씨 정렬 */
-	text-align: center;
+   /* footer 중앙 정렬 */
+   width: 960px;
+   margin: 0 auto;
+   margin-bottom: 10px;
+   /* footer 글씨 정렬 */
+   text-align: center;
+}
+
+body {
+   padding-top: 40px;
+   
+}
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+.nav-counter {
+ position:absolute;
+ top: 5px;
+ right: 5px;
+ min-width: 8px;
+ height: 20px;
+ line-height: 20px;
+ margin-top: -12px;
+ padding: 0 6px;
+ font-weight: normal;
+ font-size: small;
+ color: white;
+ text-align: center;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+ background: #e23442;
+ border: 1px solid #911f28;
+ border-radius: 11px;
+ background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -o-linear-gradient(top, #e8616c, #dd202f);
+ background-image: linear-gradient(to bottom, #e8616c, #dd202f);
+ -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+ box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
 }
 </style>
 
@@ -126,11 +205,12 @@
 </script>
 </head>
 <body>
+
 	<%@ include file="css.jinc"%>
-	<div>
-		<div>
-			<div>
-				<div>
+	<br/>
+	<br/>
+ 
+		  <div style="margin-left:400px; margin-right:400px;">
 					<div class="col-md-12">
 						<div class="jumbotron"
 							style="margin-top: 140px; text-align: center;">
@@ -153,14 +233,18 @@
 									aria-hidden="true"></span>
 							</h3>
 							<hr />
-							<br />
-
-						</div>
-					</div>
-	<form id="frm" action="/item/upload" method="post" enctype="multipart/form-data">
-					<div class="row" style="margin: auto; margin-left: 300px;">
-						<div class="col-lg-8">
+							<br /></div>
+					
+   
  
+						</div>
+
+							 <div class="row" style="margin-left:200px; margin-right:180px;">
+							 <div class="col-md-12"  >
+					
+						
+ 	<form id="frm" action="/item/upload" method="post" enctype="multipart/form-data" >
+							
 								<div class="form-group">
 
 									<label><img
@@ -250,17 +334,16 @@
 
 								</div>
 						
-						</div>
-				
-					<div>
-						<label>posting</label>
-						<textarea name="smarteditor" id="smarteditor" style="margin-left: auto; margin-right: auto;"></textarea>
-					</div>
+					
+						<textarea  rows="10" cols="30" name="smarteditor" id="smarteditor" style="width:690px; height:312px;"></textarea>
+					
 					<input type="button" id="save" value="submit" />
-			
-				</div>
-				
-					</form>
+					
+			 </form>
+			 </div>
+						</div>
+					</div>
+					 
 </body>
 
 </html>

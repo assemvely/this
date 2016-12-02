@@ -5,25 +5,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <style>
+#h2 {
+    position: absolute;
+    left: 1450px;
+    top: 80px;
+    color: red;
+}
 @font-face {
-	font-family: 'Nanum Gothic Coding', monospace;
-	padding-top: 70px;
+   font-family: 'Nanum Gothic Coding', monospace;
+   padding-top: 70px;
 }
 
 #main_footer {
-	/* footer 중앙 정렬 */
-	width: 960px;
-	margin: 0 auto;
-	margin-bottom: 10px;
-	/* footer 글씨 정렬 */
-	text-align: center;
+   /* footer 중앙 정렬 */
+   width: 960px;
+   margin: 0 auto;
+   margin-bottom: 10px;
+   /* footer 글씨 정렬 */
+   text-align: center;
 }
 
 body {
    padding-top: 40px;
-}
-@font-face {
-   font-family: 'Nanum Gothic Coding', monospace;
+   
 }
 .dropbtn {
     background-color: #4CAF50;
@@ -69,17 +73,49 @@ body {
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-
-</style> 
+.nav-counter {
+ position:absolute;
+ top: 5px;
+ right: 5px;
+ min-width: 8px;
+ height: 20px;
+ line-height: 20px;
+ margin-top: -12px;
+ padding: 0 6px;
+ font-weight: normal;
+ font-size: small;
+ color: white;
+ text-align: center;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+ background: #e23442;
+ border: 1px solid #911f28;
+ border-radius: 11px;
+ background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -o-linear-gradient(top, #e8616c, #dd202f);
+ background-image: linear-gradient(to bottom, #e8616c, #dd202f);
+ -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+ box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+}
+</style>
 <head>
 <title>Home</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
+  <link rel="Stylesheet" href="/resources/css/bootstrap.min.css" /> 
+
+<!-- =========================================================================== -->
+ 
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<!-- owl carousel깔기 --> 
+<!-- Bootstrap Core CSS 깔기 -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- owl carousel깔기 -->
 <link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
+
+<!-- css admin깔기 -->
+<link href="css/sb-admin.css" rel="stylesheet">
+
 <!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
 <script src="/resources/jquery/jquery-1.12.4.min.js"></script>
 <script src="/resources/owl.carousel/owl.carousel.min.js"></script>
@@ -136,6 +172,7 @@ body {
 	 
 	 
 </script>
+
 </head>
 <body>
 	
@@ -148,11 +185,14 @@ body {
 <br/>
 <br/>
 <br/>
- 
+ <br/>
+ <div class="col-md-12" style="margin-left:400px; margin-righg:400px;">
 <form action=/item/buy>
 <li><img src="/resources/itemimg/${READ.imgname}" alt="이미지가 없습니다"></li>
 
 <li >name:${READ.name}</li>
+<br/>
+<br/>
 <li>Price:${READ.price}</li>
 <li>mileage:${READ.mileage}</li>
 	
@@ -220,10 +260,11 @@ body {
 
 
 <a href="/comment/list?clothcode=${READ.clothcode}">댓글보기</a>
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
-<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
+</div>
+  <!-- 1588모달모달~ -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
 </body>
 </html>

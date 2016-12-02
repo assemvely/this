@@ -5,25 +5,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <style>
+#h2 {
+    position: absolute;
+    left: 1450px;
+    top: 80px;
+    color: red;
+}
 @font-face {
-	font-family: 'Nanum Gothic Coding', monospace;
-	padding-top: 70px;
+   font-family: 'Nanum Gothic Coding', monospace;
+   padding-top: 70px;
 }
 
 #main_footer {
-	/* footer 중앙 정렬 */
-	width: 960px;
-	margin: 0 auto;
-	margin-bottom: 10px;
-	/* footer 글씨 정렬 */
-	text-align: center;
+   /* footer 중앙 정렬 */
+   width: 960px;
+   margin: 0 auto;
+   margin-bottom: 10px;
+   /* footer 글씨 정렬 */
+   text-align: center;
 }
 
 body {
    padding-top: 40px;
-}
- @font-face {
-	font-family: 'Nanum Gothic Coding', monospace;
+   
 }
 .dropbtn {
     background-color: #4CAF50;
@@ -69,7 +73,30 @@ body {
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-
+.nav-counter {
+ position:absolute;
+ top: 5px;
+ right: 5px;
+ min-width: 8px;
+ height: 20px;
+ line-height: 20px;
+ margin-top: -12px;
+ padding: 0 6px;
+ font-weight: normal;
+ font-size: small;
+ color: white;
+ text-align: center;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+ background: #e23442;
+ border: 1px solid #911f28;
+ border-radius: 11px;
+ background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
+ background-image: -o-linear-gradient(top, #e8616c, #dd202f);
+ background-image: linear-gradient(to bottom, #e8616c, #dd202f);
+ -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+ box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+}
 </style> 
 <head>
 <title>Home</title>

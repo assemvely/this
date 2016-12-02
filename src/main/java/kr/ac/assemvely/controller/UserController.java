@@ -120,7 +120,12 @@ public class UserController
 	{
 		model.addAttribute("sellercounter", service.sellercounter());
 		model.addAttribute("buyercounter", service.buyercounter());
-		 
+		 //1. paytb brandid=sessionid인곳 숫자 세기
+		//2. 최근 칠일내 내brandid가 얼마나 언급되었는가 위에 숫자세기랑 똑같고 조건만 붙여주면 될듯
+		//3. 브랜드 순위는 브랜드 아이디가 많이 언급된순으로 ->db에서 해결할 방법 먼저 찾아보면 좋을듯(seller,manager)
+		//4. 브랜드가 내 아이디인곳에 clothcode별로 카운트 뽑아서 순서 정하면 될듯
+		//5. 게시글은 itemtb에 id가 세션id(seller)
+			 //총게시글은 itemtb의 수(manager)
 		return "/user/statistics";
 		
 	}
