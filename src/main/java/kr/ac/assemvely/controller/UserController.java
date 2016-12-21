@@ -88,6 +88,7 @@ public class UserController
 //			
 		 
 			service.sellerjoin(vo);
+	
 			return "homemain";
 			
 		}
@@ -258,8 +259,11 @@ public class UserController
 		String followingid=vo.getId();
 		String followerid=vo.getId();
 		String path=null;
-		
-		if(vo.getId().equals(sessionvo.getId())){//아이디가 세션하s고일치하면
+	 
+		if(sessionvo==null){
+			 
+			model.addAttribute("ALREADY",2);
+		}else if(vo.getId().equals(sessionvo.getId())){//아이디가 세션하s고일치하면
 			model.addAttribute("ALREADY",2);//이다
 		}else{//아이디랑 세션이 불일치= 타인 계정
 		RelationVo relation=new RelationVo();

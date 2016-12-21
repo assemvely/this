@@ -44,4 +44,6 @@ public interface UserService
 	public List<UserVo> searchuser(String id) throws Exception;
 	
 	public void updatemileage(MileageVo mvo)throws Exception;
+	public UserVo mypage(String id)throws Exception;
+	public List<UserVo> bybsm(String bsm)throws Exception;
 }

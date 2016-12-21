@@ -46,11 +46,29 @@
 	
 	<interceptor>
 	<mapping path="/all/posting"/>
-	<mapping path="/user/mypage"/>
+ 	<mapping path="/item/userpage"/>
 	<mapping path="/item/incart"/>
 	<mapping path="/item/tocart"/> 
 	<mapping path="/item/select"/>
+	<mapping path="/item/cart"/>
+	<mapping path="/item/buy"/>
+	<mapping path="/item/upload"/>
+	<mapping path="/item/ordertaker"/>
+	<mapping path="/comment/list"/>
+	
 	<beans:ref bean="AuthorityInterceptor"/>
+	</interceptor>
+	</interceptors>
+	
+	<beans:bean id="OnlybuyerInterceptor" class="kr.ac.assemvely.interceptor.OnlybuyerInterceptor"></beans:bean>
+	<interceptors>
+	<interceptor>
+	<mapping path="/item/incart"/>
+	<mapping path="/item/cart"/>
+	<mapping path="/item/buy"/>
+	<mapping path="/user/following"/>
+	<mapping path="/user/unfollowed"/>
+	<beans:ref bean="OnlybuyerInterceptor"/>
 	</interceptor>
 	</interceptors>
 </beans:beans>

@@ -158,4 +158,12 @@ public class UserServiceImpl implements UserService
 		dao.updatemileage(mvo);
 		
 	}
+	@Override
+	public UserVo mypage(String id)throws Exception{
+		return dao.mypage(id);
+	}
+	@Override
+	public List<UserVo> bybsm(String bsm)throws Exception{
+		return dao.bybsm(bsm);
+	}
 }

@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
- 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <style>
 #h2 {
-    position: absolute;
-    left: 1450px;
-    top: 80px;
-    color: red;
+   position: absolute;
+   left: 145px;
+   top: 80px;
+   color: red;
 }
+
 @font-face {
    font-family: 'Nanum Gothic Coding', monospace;
    padding-top: 70px;
@@ -27,79 +28,84 @@
 
 body {
    padding-top: 40px;
-   
 }
+
 .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+   background-color: #4CAF50;
+   color: white;
+   padding: 16px;
+   font-size: 16px;
+   border: none;
+   cursor: pointer;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    position: relative;
-    display: inline-block;
+   position: relative;
+   display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   display: none;
+   position: absolute;
+   background-color: white;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+   background-color: #f1f1f1
+}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-    display: block;
+   display: block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+   background-color: #3e8e41;
 }
+
 .nav-counter {
- position:absolute;
- top: 5px;
- right: 5px;
- min-width: 8px;
- height: 20px;
- line-height: 20px;
- margin-top: -12px;
- padding: 0 6px;
- font-weight: normal;
- font-size: small;
- color: white;
- text-align: center;
- text-shadow: 0 1px rgba(0, 0, 0, 0.2);
- background: #e23442;
- border: 1px solid #911f28;
- border-radius: 11px;
- background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
- background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
- background-image: -o-linear-gradient(top, #e8616c, #dd202f);
- background-image: linear-gradient(to bottom, #e8616c, #dd202f);
- -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
- box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
+   position: absolute;
+   top: 5px;
+   right: 5px;
+   min-width: 8px;
+   height: 20px;
+   line-height: 20px;
+   margin-top: -12px;
+   padding: 0 6px;
+   font-weight: normal;
+   font-size: small;
+   color: white;
+   text-align: center;
+   text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+   background: #e23442;
+   border: 1px solid #911f28;
+   border-radius: 11px;
+   background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
+   background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
+   background-image: -o-linear-gradient(top, #e8616c, #dd202f);
+   background-image: linear-gradient(to bottom, #e8616c, #dd202f);
+   -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px
+      rgba(0, 0, 0, 0.12);
+   box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px
+      rgba(0, 0, 0, 0.12);
 }
-</style> 
+</style>
 <head>
-<title>Home</title>
+<title>My Shopping</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
@@ -121,33 +127,107 @@ body {
    
 </script>
 </head>
-<body>
-   
-    <%@ include file="css.jinc" %>
-    
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-<div class="col-md-12" style="margin-left:400px; maring-rigth:400px;">
-<h3>내 마일리지 : ${login.mileage}</h3>
-<h3>구매내역 리스트</h3>
-	<div class="row">
-  
- <c:forEach items="${myshopping}" var="shopping">
- <div class="col-lg-3 text-center">
- <br/>
- <a href="/item/readposting?clothcode=${shopping.clothcode}">	<img src="/resources/itemimg/${shopping.imgname} " alt="No Image"></a>
-   ${shopping.name } 
-    ${shopping.price} 
-    
-    <br/>
-    </div>
- </c:forEach>
-  </div>
- </div>
+<body
+   style="margin-left: 400px; margin-right: 400px; align: center; margin-top: 200px;">
+
+   <%@ include file="css.jinc"%>
+   <br />
+   <br />
+   <h3>My Shopping</h3>
+   <br />
+   <hr />
+   <br />
+
+   <style type="text/css">
+.tg {
+   border-collapse: collapse;
+   border-spacing: 0;
+   border-color: #ccc;
+   margin: 0px auto;
+}
+
+.tg td {
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   padding: 10px 5px;
+   border-style: solid;
+   border-width: 1px;
+   overflow: hidden;
+   word-break: normal;
+   border-color: #ccc;
+   color: #333;
+   background-color: #fff;
+}
+
+.tg th {
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   font-weight: normal;
+   padding: 10px 5px;
+   border-style: solid;
+   border-width: 1px;
+   overflow: hidden;
+   word-break: normal;
+   border-color: #ccc;
+   color: #333;
+   background-color: #f0f0f0;
+}
+
+.tg .tg-58iv {
+   font-size: 18px;
+   font-family: Arial, Helvetica, sans-serif !important;;
+   text-align: center
+}
+
+.tg .tg-yw4l {
+   vertical-align: top
+}
+</style>
+   <table class="tg" width="800px" height="200px" text-align="center">
+      <tr>
+         <th text-align="center" class="tg-031e"><img src="/resources/userimg/${user.imgname}" alt="" /></th>
+         <th class="tg-58iv">내 마일리지</th>
+      </tr>
+      <tr>
+         <td class="tg-yw4l">${user.id}</td>
+         <td class="tg-yw4l" text-align="center">${login.mileage}</td>
+      </tr>
+   </table>
+   <!--  -->
+
+   <br />
+   <hr />
+   <br />
+   <br />
+   <h3>구매내역 리스트</h3>
+   <!--  -->
+
+   <br />
+   <hr />
+   <br />
+   <br />
+
+   <div class="row">
+
+      <c:forEach items="${myshopping}" var="shopping">
+         <div class="col-lg-3 text-center">
+
+
+            <div class="thumbnail">
+               <img src="/resources/itemimg/${shopping.imgname} " alt="No Image">
+               <div class="caption">
+                  <h3>${shopping.name}</h3>
+                  <p>${shopping.price}원</p>
+                  
+                  <p></p>
+               </div>
+
+            </div>
+         </div>
+      </c:forEach>
+
+   </div>
+
+
 </body>
 </html>

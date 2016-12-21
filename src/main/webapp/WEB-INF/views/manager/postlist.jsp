@@ -127,28 +127,35 @@ body {
 <br/>
 <br/>
 <br/>
+ <form action="/manager/banner" name="form" id="form" method="post">
 <table>
  <tr>
  	<th>id</th>
  	<th>type</th>
- 	 	<th>lenth</th>
+ 	<th>lenth</th>
  	 
  
  </tr>
- 
+
    
   <c:forEach items="${LIST}" var="managervo">
   
    <tr>
+  
+   <td><input type="checkbox" name='chk' id="chk" value="${managervo.managerbno}"></td>
   	<td>${managervo.managerbno}</td>
   
   	<td><a href="/manager/readposting?managerbno=${managervo.managerbno}">${managervo.title}</a></td>
   	<td>${managervo.writedate}</td>
    
+   
  
   </tr>
   
   </c:forEach>
+
      </table>
+     <button type="submit">배너이미지 설정</button>
+     </form>
 </body>
 </html>

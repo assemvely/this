@@ -166,7 +166,15 @@ public class UserDaoImpl implements UserDao
 		session.update(namespace+".updatemileage", mvo);
 		
 	}
-
+	@Override
+	public UserVo mypage(String id)throws Exception{
+		return session.selectOne(namespace+".mypage",id);
+		
+	}
+	@Override
+	public List<UserVo> bybsm(String bsm)throws Exception{
+		return session.selectList(namespace+".bybsm",bsm);
+	}
 	
 
 }

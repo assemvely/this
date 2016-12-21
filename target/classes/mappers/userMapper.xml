@@ -210,6 +210,11 @@
 	SELECT * FROM usertb WHERE id LIKE '%'||#{id}||'%'
  
 	</select>
-	
+	<select id="mypage" resultType="kr.ac.assemvely.vo.UserVo">
+	select * from usertb where id=#{id}
+	</select>
+	<select id="bybsm" resultType="kr.ac.assemvely.vo.UserVo">
+	select * from usertb where bsm=#{bsm}
+	</select>
 	
 	</mapper>

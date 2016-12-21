@@ -30,6 +30,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.ac.assemvely.service.ManagerService;
 import kr.ac.assemvely.vo.ManagerVo;
+import kr.ac.assemvely.vo.UserVo;
 
 @Controller
 @RequestMapping("/manager")
@@ -47,8 +48,8 @@ public class ManagerController {
 	}
 	
 	 @RequestMapping(value="/insert",method=RequestMethod.POST)
-	 public String save(@ModelAttribute("title") String title, @RequestParam MultipartFile imageFile,HttpServletRequest request,Model model) throws IllegalStateException, IOException{
-	  
+	 public String save(@ModelAttribute("title") String title, @RequestParam MultipartFile imageFile,HttpServletRequest request,Model model,HttpSession session) throws IllegalStateException, IOException{
+		 UserVo uservo=(UserVo) session.getAttribute("login");
 		 
 		 MultipartHttpServletRequest imgrequest=(MultipartHttpServletRequest)request;
 			Map<String, MultipartFile> files = ((MultipartRequest) imgrequest).getFileMap();
@@ -65,7 +66,7 @@ public class ManagerController {
 	
 		 ManagerVo managervo=new ManagerVo();
 		//userid 추가할것
-		 managervo.setId("ash");
+		 managervo.setId(uservo.getId());
 		 managervo.setTitle(title);
 		 managervo.setManagerimg(realfilename);
 		 managervo.setPosting(request.getParameter("smarteditor"));
@@ -102,7 +103,7 @@ public class ManagerController {
 	         //파일 기본경로
 	         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
 	         //파일 기본경로 _ 상세경로
-	         String filePath = dftFilePath + "resources" + File.separator + "popup" + File.separator+"uploadfile";//사진들어가는 경로
+	         String filePath = dftFilePath + "resources" +File.separator+"uploadfile";//사진들어가는 경로
 	         File file = new File(filePath);
 	         if(!file.exists()) {
 	            file.mkdirs();
@@ -111,7 +112,7 @@ public class ManagerController {
 	         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	         String today= formatter.format(new java.util.Date());
 	         realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
-	         String rlFileNm = filePath + realFileNm;
+	         String rlFileNm = filePath +"/"+ realFileNm;
 	         ///////////////// 서버에 파일쓰기 ///////////////// 
 	         InputStream is = request.getInputStream();
 	         OutputStream os=new FileOutputStream(rlFileNm);
@@ -130,7 +131,7 @@ public class ManagerController {
 	         sFileInfo += "&bNewLine=true";
 	         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 	         sFileInfo += "&sFileName="+ filename;
-	         sFileInfo += "&sFileURL="+"/resources/popup/uploadfile"+realFileNm; //사진들어가는경로인데 나는 resources안에 popup안에 uploadfile있다
+	         sFileInfo += "&sFileURL="+"/resources/uploadfile/"+realFileNm; //사진들어가는경로인데 나는 resources안에 popup안에 uploadfile있다
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
 	         print.flush();
@@ -141,7 +142,17 @@ public class ManagerController {
 	}
 	
 	@RequestMapping("/readposting")
-	private String readposting(@ModelAttribute("managerbno") int managerbno,Model model){
+	private String readposting(@ModelAttribute("managerbno") int managerbno,Model model,HttpSession session){
+		UserVo uservo=(UserVo) session.getAttribute("login");
+		if(uservo==null){
+			model.addAttribute("MANAGER",null);
+		}else{
+		if(uservo.getBsm().equals("m")){
+			model.addAttribute("MANAGER",uservo.getBsm());
+		}else{
+			model.addAttribute("MANAGER",null);
+		}
+		}
 		ManagerVo managervo=managerservice.readposting(managerbno);
 		model.addAttribute("READ",managervo);
 		return "/manager/readposting";
@@ -187,6 +198,23 @@ public class ManagerController {
 		return "/manager/readposting";
 		
 	}
-
+	@RequestMapping("/banner")
+	private String banner(int[] chk){
+	 
+		if(chk!=null){
+			for(int i=0;i<chk.length;i++){
+				int managerbno=chk[i];
+				managerservice.insertbanner(managerbno);
+			}
+		}
+		
+		return "redirect:/all/main";
+	}
+	@RequestMapping("/deletebanner")
+	private String banner(int managerbno){
+ 
+		 managerservice.deletebanner(managerbno);
+		 return"redirect:/all/main";
+	}
 	
 }

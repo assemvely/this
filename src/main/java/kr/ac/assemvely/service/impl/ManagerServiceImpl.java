@@ -46,9 +46,18 @@ public class ManagerServiceImpl  implements ManagerService {
 	}
 	
 	
-	
-
-
+	@Override
+	public void insertbanner(int managerbno){
+		managerdao.insertbanner(managerbno);
+	}
+	@Override
+	public void deletebanner(int managerbno){
+		managerdao.deletebanner(managerbno);
+	}
+	@Override
+	public List<ManagerVo> readbanner(){
+		return managerdao.readbanner();
+	}
 
 }
 

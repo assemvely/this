@@ -132,23 +132,23 @@ body {
                   <div>
                      <!-- 이벤트 창 만들기 시작 -->
                      <div class="col-md-12">
-                        <div class="jumbotron" style="margin-top: 120px; text-align: center;">
+                       <!--  <div class="jumbotron" style="margin-top: 120px; text-align: center;">
                            <div class="container" style="margin:auto; text-align:center;">
                               <h1>ASSEMVELY EVENT</h1>
                               <p>weather coupon best item best codi</p>
                               <a class="btnbtn-primary btn-large" href="#">Learn more</a>
                            </div>
-                        </div>
+                        </div> -->
 
                         <br />
                         <hr />
                         <br />
 
-                        <h3>Event</h3>
+                        <!-- <h3>Event</h3> -->
 
                          
                         <div id="carousel-example-generic" class="carousel slide"
-                           data-ride="carousel">
+                           data-ride="carousel" style="margin-top:48px;">
 
                            <!-- Indicators -->
                            <ol class="carousel-indicators">
@@ -158,42 +158,46 @@ body {
                               <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                               <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                            </ol>
-
+ 
 
                            <!-- Wrapper for slides -->
                            <div class="carousel-inner" role="listbox">
-                              <div class="item active">
+                            <div class="item active">
                                  <img src="/resources/image/mainslider.png" alt="no image">
-                                 <div class="carousel-caption"></div>
-
-                              </div>
+                               
+                               </div>
+                            <c:forEach items="${BANNER}" var="banner">
+                            	<div class="item">
+                            		<a href="/manager/readposting?managerbno=${banner.managerbno}"><img src="/resources/managerimg/${banner.managerimg}" alt="no images"></a>
+                            	</div> 
+                            
+                            </c:forEach>  
+                           
+                          <!-- 
                               <div class="item">
                                  <img src="/resources/image/mainslider.png" alt="no image">
-                                 <div class="carousel-caption"></div>
-
-                              </div>
+                               </div>
                               <div class="item">
                                  <img src="/resources/image/mainslider.png" alt="no image">
-                                 <div class="carousel-caption"></div>
-
+                                 
                               </div>
 
                               <div class="item">
                                  <img src="/resources/image/mainslider.png" alt="no image">
-                                 <div class="carousel-caption"></div>
+                                  
 
-                              </div>
+                              </div> -->
                            </div>
 
    <!-- Controls 화살표 표시 창 -->
                      <a class="left carousel-control" href="#carousel-example-generic"
                         role="button" data-slide="prev"> <span
                         class="glyphicon glyphicon-triangle-left" aria-hidden="true"
-                        style="margin-top: 120;"></span> <span class="sr-only">Previous</span>
+                        style="margin-top: 110;"></span> <span class="sr-only">Previous</span>
                      </a> <a class="right carousel-control"
                         href="#carousel-example-generic" role="button" data-slide="next">
                         <span class="glyphicon glyphicon-triangle-right"
-                        aria-hidden="true" style="margin-top: 120px;"></span> <span
+                        aria-hidden="true" style="margin-top: 110px;"></span> <span
                         class="sr-only">Next</span>
                      </a>
                      <!-- 끝 Controls 화살표 표시 창 끝-->
@@ -229,49 +233,49 @@ body {
                            })
                         </script>
 
-                        <h3>Brand</h3>
+                        <h4>Brand</h4>
                         <div class="owl-carousel">
                            <div class="item">
                               <img src="/resources/itemimg/redjacket.png" alt="No Image">
-                              <h4>안성현 성현</h4>
+                              <h5>안성현 성현</h5>
                            </div>
                            <div class="item">
                               <img src="/resources/image/coldplay2.jpg" alt="No Image">
-                              <h4>김수현 수현</h4>
+                              <h5>김수현 수현</h5>
                            </div>
                            <div class="item">
                               <img src="/resources/image/coldplay3.jpg" alt="No Image">
-                              <h4>이주영 주영</h4>
+                              <h5>이주영 주영</h5>
                            </div>
                            <div class="item">
                               <img src="/resources/image/coldplay4.jpg" alt="No Image">
-                              <h4>하지연 지연</h4>
+                              <h5>하지연 지연</h5>
                            </div>
                            <div class="item">
                               <img src="/resources/image/coldplay5.jpg" alt="No Image">
-                              <h4>안성현 성현</h4>
+                              <h5>안성현 성현</h5>
                            </div>
                            <div class="item">
                               <img src="/resources/image/coldplay6.jpg" alt="No Image">
-                              <h4>김수현 수현</h4>
+                              <h5>김수현 수현</h5>
                            </div>
                            <div class="item">
-                              <h4>이주영 주영</h4>
+                              <h5>이주영 주영</h5>
                            </div>
                            <div class="item">
-                              <h4>하지연 지연</h4>
+                              <h5>하지연 지연</h5>
                            </div>
                            <div class="item">
-                              <h4>안성현 성현</h4>
+                              <h5>안성현 성현</h5>
                            </div>
                            <div class="item">
-                              <h4>김수현 수현</h4>
+                              <h5>김수현 수현</h5>
                            </div>
                            <div class="item">
-                              <h4>이주영 주영</h4>
+                              <h5>이주영 주영</h5>
                            </div>
                            <div class="item">
-                              <h4>하지연 지연</h4>
+                              <h5>하지연 지연</h5>
                            </div>
                         </div>
 
@@ -280,11 +284,11 @@ body {
 
                         <!-- 네모 4개 띄우기 코디 폼  -->
 
-                        <br />
+                        <br /> <br />
                         <hr />
-                        <br />
+                        <br /><br/>
 
-                         <h3>인기 스타일</h3>
+                         <h4>Best Item</h4>
 
                      <!-- 인기 스타일 버전 1 -->
                      <div class="row">
@@ -322,11 +326,15 @@ body {
                         </div>
 
                      </div>
+                     
+                     <br /> <br />
+                        <hr />
+                        <br />
 
 
                      <!-- 인기 스타일 버전 1끝 -->
 
-                     <h3>최신 아이템</h3>
+                     <h4>New Item</h4>
 
                      <div class="row">
 
@@ -335,8 +343,8 @@ body {
 
 
                               <div class="thumbnail">
-                                 <img src="/resources/itemimg/${newitem.imgname} "
-                                    alt="No Image">
+                               <a href="/item/readposting?clothcode=${newitem.clothcode}">  <img src="/resources/itemimg/${newitem.imgname} "
+                                    alt="No Image"></a>
                                  <div class="caption">
                                     <h3>${newitem.id}</h3>
                                     <p>${newitem.name}</p>
@@ -368,7 +376,7 @@ body {
          <footer id="main_footer">
 
 
-            <h3>Shop Info</h3>
+            <h5>Shop Info</h5>
             <address>상호명: (주)ASSEMVELY 대표자: 안성현, 이주영, 하지연, 김수현</address>
          </footer>
 </body>

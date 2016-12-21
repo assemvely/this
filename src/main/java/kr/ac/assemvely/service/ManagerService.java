@@ -11,4 +11,7 @@ public interface ManagerService {
 	public List<ManagerVo> postlist();
 	public void deleteposting(int managerbno);
 	public void updateposting(ManagerVo vo);
+	public void insertbanner(int managerbno);
+	public void deletebanner(int managerbno);
+	public List<ManagerVo> readbanner();
 }

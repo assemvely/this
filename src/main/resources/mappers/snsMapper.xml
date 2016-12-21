@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.assemvely.mappers.snsMapper">
+
+ 
+<!-- <select id="list" resultType="kr.ac.assemvely.snsvo.SnsVo"> 
+<![CDATA[
+select * from snstb
+]]></select>
+select * from SNSTB,USERTB where snstb.id=usertb.id and snstb.id='aaa'
+ -->
+ 
+
+<select id="listall" resultType="kr.ac.assemvely.vo.SnsVo"> 
+
+select usertb.id,usertb.imgname,snstb.snsbno,snstb.snsimg,snstb.snscontent,snstb.writedate from snstb,usertb where snstb.id=usertb.id and usertb.id=#{id}
+
+
+</select>
+
+<!-- <select id="profile" resultType="kr.ac.assemvely.vo.mobilevo">
+select itemtb.id,itemtb.imgname,usertb.filename from itemtb,usertb where itemtb.id=usertb.id and itemtb.id=#{id}
+</select> -->
+<!-- 브랜드이름, 브랜드의 옷, 유저의 파일네임...? -->
+
+
+<select id="list" resultType="kr.ac.assemvely.vo.SnsVo">
+<![CDATA[
+select * from (
+select * from snstb where id in(select followingid from relationtb where followerid=#{id}) 
+union all
+select * from snstb where id=#{id} )
+order by writedate desc
+
+
+]]>
+
+</select>
+<select id="read" resultType="kr.ac.assemvely.vo.SnsVo">
+select usertb.id,usertb.imgname,snstb.snsbno,snstb.snsimg,snstb.snscontent,snstb.writedate from snstb,usertb where snstb.id=usertb.id and snsbno=#{snsbno}
+</select>
+
+<!-- <insert id="s_insert">
+
+<![CDATA[
+
+
+insert into snstb(snsbno,id,snscontent,snsimg) values(seq_snsbno.nextval,#{id},#{snscontent},#{snsimg})
+]]>
+</insert>
+
+
+<delete id="s_delete">
+
+<![CDATA[
+delete from snstb where snsbno=#{snsbno}
+
+]]>
+</delete>
+<update id="s_update">
+
+<![CDATA[
+update snstb set snsimg=#{snsimg},snscontent=#{snscontent} where snsbno=#{snsbno}
+]]>
+
+</update>
+
+<select id="s_select" resultType="kr.ac.assemvely.snsvo.SnsVo">
+<![CDATA[
+select * from snstb where snsbno=#{snsbno}
+]]>
+</select>
+ -->
+</mapper>

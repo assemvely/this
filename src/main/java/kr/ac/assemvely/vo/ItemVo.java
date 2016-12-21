@@ -15,7 +15,7 @@ public class ItemVo {
 	private String imgname;
 	private String categorycode;
 	private String content;
- 
+	
 
 	public int getMileage() {
 		return mileage;

@@ -129,14 +129,17 @@ body {
 <br/>
 <br/>
 <br/>
+
+
 <c:choose>
 
 
 		<c:when test="${not empty(READ)}">
-			<ul>
+				<ul>
 				<li>타이틀:${READ.title}</li>
 				<li>배너이미지:<img src="/resources/managerimg/${READ.managerimg} " alt="이미지가 없습니다"></li>
 			
+				 
 				<li>상세내용:${READ.posting}</li>
 			 
 	 
@@ -147,8 +150,22 @@ body {
 		<c:otherwise>
 			<span class="failed">파일업로드 실패</span>
 		</c:otherwise>
-	</c:choose>
-	<!-- 관리자만이 아래 글을 볼 수있습니다. -->
+</c:choose>
+<c:choose>
+	<c:when test="${not empty(MANAGER) }">
+
+			<a href="/manager/banner?chk=${READ.managerbno}"><input type="button" value="to banner"/></a>
+			<a href="/manager/deletebanner?managerbno=${READ.managerbno}"><input type="button" value="delete banner"/></a>
+			 
 		<a href="/manager/deleteposting?managerbno=${READ.managerbno}"><input type="button" id="save" value="삭제"/></a>
 		<a href="/manager/updateposting?managerbno=${READ.managerbno}"><input type="button" id="save" value="수정"/></a>
+	 
+	
+	</c:when>
+	<c:otherwise>
+		<h1>post</h1>
+	</c:otherwise>
+	</c:choose>
+	<!-- 관리자만이 아래 글을 볼 수있습니다. -->
+	
 </body>

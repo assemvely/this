@@ -47,6 +47,17 @@ public class ManagerDaoImpl implements ManagerDao {
 		
 		 sqlSession.update(namespace+".update",vo);
 	}
-	 
+	@Override
+	public void insertbanner(int managerbno){
+		sqlSession.insert(namespace+".insertbanner",managerbno);
+	}
+	 @Override
+	 public void deletebanner(int managerbno){
+		 sqlSession.delete(namespace+".deletebanner",managerbno);
+	 }
+	 @Override
+	 public List<ManagerVo> readbanner(){
+		return  sqlSession.selectList(namespace+".readbanner");
+	 }
 }
 

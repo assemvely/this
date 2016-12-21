@@ -23,4 +23,14 @@ insert into MANAGERBOARDTB (MANAGERBNO,ID,TITLE,MANAGERIMG,POSTING) values(SEQ_M
 <select id="update">
 	update MANAGERBOARDTB set TITLE=#{title},MANAGERIMG=#{managerimg},POSTING=#{posting} where MANAGERBNO=#{managerbno}
 </select>
+<select id="insertbanner">
+	insert into bannertb(managerbno) values(#{managerbno})
+</select>
+<select id="deletebanner">
+	delete bannertb where managerbno=#{managerbno}
+</select>
+<select id="readbanner" resultType="kr.ac.assemvely.vo.ManagerVo">
+select * from managerboardtb where managerbno in(select managerbno from bannertb)
+	
+</select>
 </mapper>

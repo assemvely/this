@@ -25,14 +25,15 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.ac.assemvely.service.ItemService;
+import kr.ac.assemvely.service.ManagerService;
 import kr.ac.assemvely.service.PayService;
 import kr.ac.assemvely.service.UserService;
 import kr.ac.assemvely.vo.AddressVo;
 import kr.ac.assemvely.vo.CartVo;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.ManagerVo;
 import kr.ac.assemvely.vo.MileageVo;
- 
 import kr.ac.assemvely.vo.OrderVo;
 import kr.ac.assemvely.vo.PayVo;
 import kr.ac.assemvely.vo.UserVo;
@@ -50,6 +51,8 @@ public class ItemController {
 	@Inject
 	private UserService userservice;
 	
+	@Inject 
+	private ManagerService managerservice;
 
 	@RequestMapping(value = "/main")
 	public String listGET(Model model) throws Exception {
@@ -60,8 +63,12 @@ public class ItemController {
 
 		List<ItemVo> newitem = itemservice.newitem();
 		model.addAttribute("NEWITEM", newitem);
+	
+		
+		List<ManagerVo> banner=managerservice.readbanner();
+	 
+		model.addAttribute("BANNER",banner);
 		return "homemain";
-
 	}
 	@RequestMapping(value="/posting" )
 	public String posting( HttpSession session,Model model){
@@ -160,6 +167,7 @@ public class ItemController {
 
 		return "outer";
 	}
+ 
 	@RequestMapping(value="userpage")
 	public String userpage(HttpSession session)throws Exception{
 		
@@ -458,7 +466,6 @@ public class ItemController {
 	 
 	ordervo.setPrice(minusmileage);
 	
-	 		System.out.println(ordervo.toString());	
  	return ordervo;
 		
 	}

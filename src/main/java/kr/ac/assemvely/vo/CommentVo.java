@@ -10,8 +10,21 @@ public class CommentVo {
 	private String reply;
 	private Date writedate;
 	private Integer c_bno;
+	private String imgname;
 	
 	
+	/**
+	 * @return the imgname
+	 */
+	public String getImgname() {
+		return imgname;
+	}
+	/**
+	 * @param imgname the imgname to set
+	 */
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
 	public String getId() {
 		return id;
 	}
