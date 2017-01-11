@@ -33,4 +33,12 @@ delete from commenttb where c_bno=#{c_bno}
 </delete>
 
 
+<insert id="codi_comment">
+insert into commenttb(id,boardcode,codi_writedate,reply,c_bno) values(#{id},#{boardcode},#{codi_writedate},#{reply},seq_c_bno.nextval)
+</insert>
+
+<select id="codi_list" resultType="kr.ac.assemvely.vo.CommentVo">
+select * from commenttb,usertb where codi_writedate=#{codi_writedate} and boardcode=#{boardcode} and commenttb.id=usertb.id order by writedate desc
+</select>
+
 </mapper>

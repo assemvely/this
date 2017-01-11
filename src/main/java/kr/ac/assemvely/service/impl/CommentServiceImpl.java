@@ -38,6 +38,20 @@ public class CommentServiceImpl implements CommentService {
 
 	
 
+	@Override
+	public int codi_comment(CommentVo commentvo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.codi_comment(commentvo);
+	}
+
+
+
+	@Override
+	public List<CommentVo> codi_list(CommentVo commentvo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.codi_list(commentvo);
+	}
+
 
 
 

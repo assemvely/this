@@ -1,384 +1,319 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
- 
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%-- <%@ page session="false"%> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-<style>
-#h2 {
-    position: absolute;
-    left: 1450px;
-    top: 80px;
-    color: red;
-}
-@font-face {
-   font-family: 'Nanum Gothic Coding', monospace;
-   padding-top: 70px;
-}
-
-#main_footer {
-   /* footer 중앙 정렬 */
-   width: 960px;
-   margin: 0 auto;
-   margin-bottom: 10px;
-   /* footer 글씨 정렬 */
-   text-align: center;
-}
-
-body {
-   padding-top: 40px;
-   
-}
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-.nav-counter {
- position:absolute;
- top: 5px;
- right: 5px;
- min-width: 8px;
- height: 20px;
- line-height: 20px;
- margin-top: -12px;
- padding: 0 6px;
- font-weight: normal;
- font-size: small;
- color: white;
- text-align: center;
- text-shadow: 0 1px rgba(0, 0, 0, 0.2);
- background: #e23442;
- border: 1px solid #911f28;
- border-radius: 11px;
- background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
- background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
- background-image: -o-linear-gradient(top, #e8616c, #dd202f);
- background-image: linear-gradient(to bottom, #e8616c, #dd202f);
- -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
- box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
-}
-</style> 
+<%@ include file="firststyle.jinc"%>
 <head>
-<title>Home</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="">
+<meta name="author" content="assemvely">
 <link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/jquery.js"></script>
+<script src="/resources/js/npm.js"></script>
 <!-- Bootstrap Core CSS 깔기 -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- owl carousel깔기 -->
 <link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
-
 <!-- css admin깔기 -->
 <link href="css/sb-admin.css" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
 <script src="/resources/jquery/jquery-1.12.4.min.js"></script>
 <script src="/resources/owl.carousel/owl.carousel.min.js"></script>
-<!-- <script src="/resources/owl.carousel/owl.carousel.js"></script> -->
+<link href="font-awsome/css/font-awesome.cin.css" rel="stylesheet"
+	type="text/css">
+<!-- footer 스타일시트 3개 -->
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Footer-with-button-logo.css">
+<!-- Custom Fonts -->
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link href="/resources/navbar/css/bootstrap.css" rel="stylesheet" />
+<link href="/resources/navbar/css/ct-navbar.css" rel="stylesheet" />
+<script src="/resources/navbar/js/bootstrap.js"></script>
+<script src="/resources/navbar/js/ct-navbar.js"></script>
+
+
+<title>ASSEMVELY</title>
+<style>
+
+@font-face {
+	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'Apple SD Gothic Neo', Sans-serif;
+}
+.owl-controls{
+vertical-align:center;
+margin-left:1000px;
+}
+.owl-prev {
+margin-top:10px;
+width:50px;
+height:20px;
+font-weight: bold;
+color:#999999;
+vertical-align:center;
+font-size: 14px;
+font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'Apple SD Gothic Neo', Sans-serif;
+}
+
+.owl-next {
+vertical-align:center;
+width:50px;
+height:20px;
+font-weight: bold;
+color:#999999;
+font-size: 14px;
+font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'Apple SD Gothic Neo', Sans-serif;
+	
+}
+</style>
+
 <script type="text/javascript">
-   
+	/* 맨위로 올라가는 화살표  */
+	$(document).ready(function() {
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 200) {
+				$('.jcm-top').fadeIn();
+			} else {
+				$('.jcm-top').fadeOut();
+			}
+		});
+		$('.jcm-top').click(function() {
+			$('html, body').animate({
+				scrollTop : 0
+			}, 400);
+			return false;
+		});
+	});
+
+	function onChangeSelect() {
+
+		var selected = $("#selectlittlecategory").val();
+
+		if (selected != "0") {
+			var selectedUppercase = selected.toUpperCase();
+
+			document.getElementById("Form3").submit();
+			form.Form3.submit();
+		}
+	}
+	$(document).ready(function() {
+	})
 </script>
 </head>
 <body>
-   
-    <%@ include file="css.jinc" %>
+	<%@ include file="secondstyle.jinc"%>
+	<%@ include file="header.jinc"%>
+	<div>
+		<div
+			style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">
+			<div>
+				<div>
+					<!-- 이벤트 창 만들기 시작 -->
+					<div class="col-md-12">
 
-    
-      <div>
-            <div style="margin-left:400px; margin-right:400px;">
-               <div>
-                  <div>
-                     <!-- 이벤트 창 만들기 시작 -->
-                     <div class="col-md-12">
-                       <!--  <div class="jumbotron" style="margin-top: 120px; text-align: center;">
-                           <div class="container" style="margin:auto; text-align:center;">
-                              <h1>ASSEMVELY EVENT</h1>
-                              <p>weather coupon best item best codi</p>
-                              <a class="btnbtn-primary btn-large" href="#">Learn more</a>
-                           </div>
-                        </div> -->
-
-                        <br />
-                        <hr />
-                        <br />
-
-                        <!-- <h3>Event</h3> -->
-
-                         
-                        <div id="carousel-example-generic" class="carousel slide"
-                           data-ride="carousel" style="margin-top:48px;">
-
-                           <!-- Indicators -->
-                           <ol class="carousel-indicators">
-                              <li data-target="#carousel-example-generic" data-slide-to="0"
-                                 class="active"></li>
-                              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                              <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                           </ol>
- 
-
-                           <!-- Wrapper for slides -->
-                           <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                 <img src="/resources/image/mainslider.png" alt="no image">
-                               
-                               </div>
-                            <c:forEach items="${BANNER}" var="banner">
-                            	<div class="item">
-                            		<a href="/manager/readposting?managerbno=${banner.managerbno}"><img src="/resources/managerimg/${banner.managerimg}" alt="no images"></a>
-                            	</div> 
-                            
-                            </c:forEach>  
-                           
-                          <!-- 
-                              <div class="item">
-                                 <img src="/resources/image/mainslider.png" alt="no image">
-                               </div>
-                              <div class="item">
-                                 <img src="/resources/image/mainslider.png" alt="no image">
-                                 
-                              </div>
-
-                              <div class="item">
-                                 <img src="/resources/image/mainslider.png" alt="no image">
-                                  
-
-                              </div> -->
-                           </div>
-
-   <!-- Controls 화살표 표시 창 -->
-                     <a class="left carousel-control" href="#carousel-example-generic"
-                        role="button" data-slide="prev"> <span
-                        class="glyphicon glyphicon-triangle-left" aria-hidden="true"
-                        style="margin-top: 110;"></span> <span class="sr-only">Previous</span>
-                     </a> <a class="right carousel-control"
-                        href="#carousel-example-generic" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-triangle-right"
-                        aria-hidden="true" style="margin-top: 110px;"></span> <span
-                        class="sr-only">Next</span>
-                     </a>
-                     <!-- 끝 Controls 화살표 표시 창 끝-->
-                        </div>
-
-                        <!-- 끝 Wrapper for slides 끝 -->
-
-                        <br /> <br />
-                        <hr />
-                        <br />
-
-                        <!-- owl-carousel 쓰기 -->
-                        <script>
-                           $(document).ready(function() {
-
-                              $(".owl-carousel").owlCarousel({
-                                 loop : true,
-                                 margin : 10,
-                                 nav : true,
-                                 responsive : {
-                                    0 : {
-                                       items : 1
-                                    },
-                                    600 : {
-                                       items : 3
-                                    },
-                                    1000 : {
-                                       items : 5
-                                    }
-                                 }
-                              });
-
-                           })
-                        </script>
-
-                        <h4>Brand</h4>
-                        <div class="owl-carousel">
-                           <div class="item">
-                              <img src="/resources/itemimg/redjacket.png" alt="No Image">
-                              <h5>안성현 성현</h5>
-                           </div>
-                           <div class="item">
-                              <img src="/resources/image/coldplay2.jpg" alt="No Image">
-                              <h5>김수현 수현</h5>
-                           </div>
-                           <div class="item">
-                              <img src="/resources/image/coldplay3.jpg" alt="No Image">
-                              <h5>이주영 주영</h5>
-                           </div>
-                           <div class="item">
-                              <img src="/resources/image/coldplay4.jpg" alt="No Image">
-                              <h5>하지연 지연</h5>
-                           </div>
-                           <div class="item">
-                              <img src="/resources/image/coldplay5.jpg" alt="No Image">
-                              <h5>안성현 성현</h5>
-                           </div>
-                           <div class="item">
-                              <img src="/resources/image/coldplay6.jpg" alt="No Image">
-                              <h5>김수현 수현</h5>
-                           </div>
-                           <div class="item">
-                              <h5>이주영 주영</h5>
-                           </div>
-                           <div class="item">
-                              <h5>하지연 지연</h5>
-                           </div>
-                           <div class="item">
-                              <h5>안성현 성현</h5>
-                           </div>
-                           <div class="item">
-                              <h5>김수현 수현</h5>
-                           </div>
-                           <div class="item">
-                              <h5>이주영 주영</h5>
-                           </div>
-                           <div class="item">
-                              <h5>하지연 지연</h5>
-                           </div>
-                        </div>
-
-                        <!-- 끝끝 owl-caraousel끝끝 -->
+						<br /> <br />
 
 
-                        <!-- 네모 4개 띄우기 코디 폼  -->
+						<div id="carousel-example-generic" class="carousel slide"
+							data-ride="carousel" style="margin-top: 48px;">
 
-                        <br /> <br />
-                        <hr />
-                        <br /><br/>
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<li data-target="#carousel-example-generic" data-slide-to="0"
+									class="active"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+							</ol>
 
-                         <h4>Best Item</h4>
+							<div class="carousel-inner" role="listbox">
+								<div class="item active">
+									<div class="item">
+										<a style="color:#d9534f;" href="#"><img src="/resources/userimg/dress2.jpg"
+											alt="no images"></a>
 
-                     <!-- 인기 스타일 버전 1 -->
-                     <div class="row">
-
-                        <div class="col-lg-3 text-center">
-                           <div class="panel panel-default">
-                              <div class="panel-body">.col-lg-3</div>
-                              <img class="img-thumbnail" src="http://placehold.it/400x400"
-                                 alt="no image">
-                           </div>
-                        </div>
-
-                        <div class="col-lg-3 text-center">
-                           <div class="panel panel-default">
-                              <div class="panel-body">.col-lg-3</div>
-                              <img class="img-thumbnail" src="http://placehold.it/400x400"
-                                 alt="no image">
-                           </div>
-                        </div>
-
-                        <div class="col-lg-3 text-center">
-                           <div class="panel panel-default">
-                              <div class="panel-body">.col-lg-3</div>
-                              <img class="img-thumbnail" src="http://placehold.it/400x400"
-                                 alt="no image">
-                           </div>
-                        </div>
-
-                        <div class="col-lg-3 text-center">
-                           <div class="panel panel-default">
-                              <div class="panel-body">.col-lg-3</div>
-                              <img class="img-thumbnail" src="http://placehold.it/400x400"
-                                 alt="no image">
-                           </div>
-                        </div>
-
-                     </div>
-                     
-                     <br /> <br />
-                        <hr />
-                        <br />
+									</div>
 
 
-                     <!-- 인기 스타일 버전 1끝 -->
+								</div>
+								<c:forEach items="${BANNER}" var="banner">
+									<div class="item">
+										<a href="/manager/readposting?managerbno=${banner.managerbno}"><img
+											src="/resources/managerimg/${banner.managerimg}"
+											alt="no images"></a>
+									</div>
 
-                     <h4>New Item</h4>
+								</c:forEach>
 
-                     <div class="row">
+							</div>
 
-                        <c:forEach items="${NEWITEM}" var="newitem">
-                           <div class="col-lg-3 text-center">
+							<!-- Controls 화살표 표시 창 -->
+							<a class="left carousel-control"
+									href="#carousel-example-generic" role="button"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-triangle-left" aria-hidden="true"
+									style="padding-top:120px;"></span> <span align="center"
+									class="sr-only">Previous</span>
+								</a> <a class="right carousel-control"
+									href="#carousel-example-generic" role="button"
+									data-slide="next"> <span
+									class="glyphicon glyphicon-triangle-right" aria-hidden="true"
+									style="margin-top: 120px;"></span> <span align="center"
+									class="sr-only">Next</span>
+								</a>
+							<!-- 끝 Controls 화살표 표시 창 끝-->
+						</div>
+
+						<!-- 끝 Wrapper for slides 끝 -->
+
+						<br /> <br />
+						<hr style="border-top: 1px solid #d9534f;">
+						<br />
+
+						<!-- owl-carousel 쓰기 -->
+						<script>
+							$(document).ready(function() {
+
+								$(".owl-carousel").owlCarousel({
+									loop : true,
+									margin : 10,
+									nav : true,
+									responsive : {
+										0 : {
+											items : 1
+										},
+										600 : {
+											items : 3
+										},
+										1000 : {
+											items : 5
+										}
+									}
+								});
+
+							})
+						</script>
+
+						<h5 id="important">
+							<b>BRAND</b>
+						</h5>
+						<br>
+						<div class="row" style="margin-left:10px; margin-right:10px;">
+							<div class="owl-carousel">
+								<c:forEach items="${BRANDGALLERY}" var="brandgallery">
+									<div class="item">
+										<a  style="color:#d9534f;" href="/user/mypage?id=${brandgallery.id}"><img
+											src="/resources/image/${brabdgallery.imgname }"
+											alt="No Image"></a> 
+											<h5><a id="itemid"
+											href="/user/mypage?id=${brandgallery.id}">${brandgallery.id}</a></h5>
+									</div>
+								</c:forEach>
+							</div>
+						</div> 
+
+						<!-- 끝끝 owl-caraousel끝끝 -->
+						<!-- 네모 4개 띄우기 코디 폼  -->
+						<br /> <br />
+						<hr style="border-top: 1px solid #d9534f;">
+						<br /> <br />
+
+						<h5 id="important">
+							<b>BEST CODI</b>
+						</h5>
+						<br>
+
+						<!-- 베스트 코디 시작 -->
+						<div class="row">
+							<div class="col-lg-3 text-center">
+								<div class="panel panel-default">
+									<div class="panel-body">.col-lg-3</div>
+									<img class="img-thumbnail" src="http://placehold.it/400x400"
+										alt="no image">
+								</div>
+							</div>
+							<div class="col-lg-3 text-center">
+								<div class="panel panel-default">
+									<div class="panel-body">.col-lg-3</div>
+									<img class="img-thumbnail" src="http://placehold.it/400x400"
+										alt="no image">
+								</div>
+							</div>
+						</div>
+						<!-- 베스트 코디 끝 -->
+					
+						<br /> <br />
+						<hr style="border-top: 1px solid #d9534f;">
+						<br />
+
+						<!-- 뉴아이템 시작 -->
+
+						<h5 id="important">
+							<b>NEW ITEM</b>
+						</h5>
+						<br>
+
+						<div class="row">
+
+							<c:forEach items="${NEWITEM}" var="newitem">
+								<div class="col-lg-3 text-center">
 
 
-                              <div class="thumbnail">
-                               <a href="/item/readposting?clothcode=${newitem.clothcode}">  <img src="/resources/itemimg/${newitem.imgname} "
-                                    alt="No Image"></a>
-                                 <div class="caption">
-                                    <h3>${newitem.id}</h3>
-                                    <p>${newitem.name}</p>
-                                    <p>${newitem.price}원</p>
-                                    <p>
-                                       <a href="#" class="btn btn-primary" role="button">좋아요</a> <a
-                                          href="#" class="btn btn-default" role="button">싫어요</a>
-                                    </p>
-                                 </div>
+									<div class="thumbnail">
+										<a href="/item/readposting?clothcode=${newitem.clothcode}">
+											<img src="/resources/itemimg/${newitem.imgname} "
+											alt="No Image">
+										</a>
+										<div class="caption">
+											<a href="/user/mypage?id=${newitem.id}">
+												<h3 id="itemid">${newitem.id}</h3>
+											</a> <a href="/item/readposting?clothcode=${newitem.clothcode}">
+												<p style="color: #999999;">${newitem.name}</p>
+											</a>
+											<p style="color: #d9534f;">${newitem.price}원</p>
+											<div class="caption1">
+												<p>
+													<a href="/item/like?clothcode='${newitem.clothcode}'"
+														class="btn btn-danger" id="like" role="button">♡</a>
+												</p>
+											</div>
+										</div>
 
-                              </div>
-                           </div>
-                        </c:forEach>
+									</div>
+								</div>
+							</c:forEach>
 
-                     </div>
+						</div>
 
+						<!-- 뉴 아이템 끝 -->
 
-                     <br />
-                     <hr />
-                     <br />
-
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!-- newitem뿌리기 끝-->
+						<a href="#" class="jcm-top"><img
+							src="/resources/glyphicons/glyphicons-214-arrow-upupup.png"
+							style="margin-bottom: 24px; width: 25px;"></a>
 
 
-         <footer id="main_footer">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- newitem뿌리기 끝-->
 
 
-            <h5>Shop Info</h5>
-            <address>상호명: (주)ASSEMVELY 대표자: 안성현, 이주영, 하지연, 김수현</address>
-         </footer>
 </body>
+<br />
+<br />
+
+<%@ include file="footer.jinc"%>
 
 </html>

@@ -18,7 +18,7 @@ public class OnlybuyerInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		// TODO Auto-generated method stub
 		UserVo vo=(UserVo) request.getSession().getAttribute("login");
-		if(vo.getBsm()!="b"){
+		if(!(vo.getBsm().equals("b"))){
 			 response.sendRedirect("/all/alert");
 			return false;
 		}

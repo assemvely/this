@@ -43,9 +43,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 
-	<select id="newitem" resultType="kr.ac.assemvely.vo.ItemVo">
-		 SELECT * FROM ITEMTB ORDER BY CLOTHCODE DESC
-	</select>
+<select id="newitem" resultType="kr.ac.assemvely.vo.ItemVo">
+      <![CDATA[
+         SELECT * FROM ITEMTB WHERE ROWNUM <=20 ORDER BY CLOTHCODE DESC
+      ]]>
+   </select>
  	<select  id="selectuser" resultType="kr.ac.assemvely.vo.ItemVo">
  		SELECT * FROM ITEMTB WHERE ID=#{id} ORDER BY WRITEDATE DESC
  	
@@ -134,7 +136,116 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE 
       clothcode = #{clothcode} and color=#{color}
 	</select>
-	 
+	<!-- 기온에 맞는 모든 옷을 가져온다. -->
+
+
+
+<select resultType="kr.ac.assemvely.vo.ItemVo" id="selectwithtempcode">
+
+<![CDATA[ 	
+					
+					select * from itemtb where tempcode = #{tempcode}
+					
+				]]>
+</select>
+
+<!-- 기온에 맞는 top을 가져온다. -->
+
+
+
+<select resultType="kr.ac.assemvely.vo.ItemVo" id="select_top_withtempcode">
+
+<![CDATA[ 	
+					
+					SELECT * FROM ITEMTB WHERE (tempcode=#{tempcode} or tempcode=#{tempcode-1} or tempcode=#{tempcode+1})
+					
+					 and CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY='TOP')
+					
+				]]>
+</select>
+
+<!-- 기온에 맞는 bottom을 가져온다. -->
+
+
+
+<select resultType="kr.ac.assemvely.vo.ItemVo" id="select_bottom_withtempcode">
+
+<![CDATA[ 	
+					
+					select * from itemtb WHERE categorycode IN (select categorycode from categorytb where category = 'BOTTOM')
+					AND (TEMPCODE=#{tempcode} OR TEMPCODE=#{tempcode-1} OR TEMPCODE=#{tempcode+1})
+					
+				]]>
+</select>
+
+<!-- 기온에 맞는 outer을 가져온다. -->
+
+
+
+<select resultType="kr.ac.assemvely.vo.ItemVo" id="select_outer_withtempcode">
+
+<![CDATA[ 	
+					
+					SELECT * FROM ITEMTB WHERE tempcode=#{tempcode} and CATEGORYCODE IN (SELECT CATEGORYCODE FROM CATEGORYTB WHERE CATEGORY='OUTER')
+					
+				]]>
+</select>
+
+<!-- 기온에 맞는 shoes를 가져온다. -->
+
+
+
+<select resultType="kr.ac.assemvely.vo.ItemVo" id="select_shoes_withtempcode">
+
+<![CDATA[ 	
+					
+					SELECT * FROM ITEMTB WHERE CATEGORYCODE = 'SHOES'
+					
+				]]>
+</select>
+
+<!-- 기온에 맞는 bag을 가져온다. -->
+
+
+
+<select resultType="kr.ac.assemvely.vo.ItemVo" id="select_bag_withtempcode">
+
+<![CDATA[ 	
+					
+					SELECT * FROM ITEMTB WHERE CATEGORYCODE = 'BAG'
+					
+				]]>
+</select>
+
+<!-- 아이템의 갯수를 센다. -->
+
+
+
+<select resultType="int" id="countitem">
+
+<![CDATA[ 				
+					select count(clothcode)from itemtb
+					]]>
+</select>
+
+<!-- 해당 페이지에 맞게 아이템 갯수를 세어 가져온다. -->
+
+
+
+<select resultType="kr.ac.assemvely.vo.ItemVo" id="item_list_page">
+
+<![CDATA[ 	
+		
+				select * from
+				(select ceil(rownum/#{perPageNum})page, CLOTHCODE, id, colorcode, price, likecnt, tempcode, name, imgname, categorycode, content, writedate
+				from itemtb
+				)
+				where page = #{page}
+				
+				]]>
+</select>
+
+
 </mapper>
  
  

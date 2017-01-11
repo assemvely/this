@@ -1,6 +1,8 @@
 package kr.ac.assemvely.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,6 +22,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import kr.ac.assemvely.service.ItemService;
+import kr.ac.assemvely.service.PayService;
 import kr.ac.assemvely.service.UserService;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.RelationVo;
@@ -34,67 +38,72 @@ public class UserController
 	@Inject
 	private UserService service;
 	
+	@Inject
+	private PayService payservice;
+	
+	@Inject
+	private ItemService itemservice;
+	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(
-			@RequestParam("imgfile1")MultipartFile imgfile1,
-			@RequestParam("imgfile2")MultipartFile imgfile2,
-			MultipartHttpServletRequest request,
-			MultipartHttpServletRequest request2,
-			ModelMap model,	UserVo vo) throws Exception
-	{
-				
-		Map<String, MultipartFile> files = ((MultipartRequest) request).getFileMap();
-		Map<String, MultipartFile> files2 = ((MultipartRequest) request).getFileMap();
-		
-		//파일 받아옴
-		CommonsMultipartFile cmf = (CommonsMultipartFile)files.get("imgfile1");
-		CommonsMultipartFile cmf2 = (CommonsMultipartFile)files2.get("imgfile2");
-		
-		//파일 경로를 reseource/img폴더로 지정
-		String savePath = request.getServletContext().getRealPath("/resources/userimg");
-		String randomid=UUID.randomUUID().toString();
-		String randomid2=UUID.randomUUID().toString();
-		//realPath를 경로이름+파일의 원래 이름으로.
-		String filename1=cmf.getOriginalFilename() +randomid;
-		String realPath = savePath+"/"+filename1;
-		
-		String filename2=cmf2.getOriginalFilename()+randomid2;
-		String realPath2 = savePath+"/"+filename2;
-	
-		File file = new File(realPath);
-		cmf.transferTo(file);
-		
-	//	String imgname = imgfile1.getOriginalFilename();
-	//	String imgfullpath = savePath+"/"+imgname;
-		 
-		vo.setImgname(filename1);
-	 
-		
-		if(vo.getBsm().equals("b"))
-		{		
-			
-		 
-			service.join(vo);
-			return "homemain";
-		}
-		
-		else if (vo.getBsm().equals("s"))
-		{
-			File file2 = new File(realPath2);
-			cmf2.transferTo(file2);
-			
-//			String filename = imgfile2.getOriginalFilename();
-//			String filefullpath = savePath+"/"+filename;
-//			
-		 
-			service.sellerjoin(vo);
-	
-			return "homemain";
-			
-		}
-		return "homemain";
-			
-	}
+	   public String join(
+	         @RequestParam("imgfile1")MultipartFile imgfile1,
+	         @RequestParam("imgfile2")MultipartFile imgfile2,
+	         MultipartHttpServletRequest request,
+	         MultipartHttpServletRequest request2,
+	         ModelMap model,   UserVo vo) throws Exception
+	   {
+	            
+	      Map<String, MultipartFile> files = ((MultipartRequest) request).getFileMap();
+	      Map<String, MultipartFile> files2 = ((MultipartRequest) request).getFileMap();
+	      
+	      //파일 받아옴
+	      CommonsMultipartFile cmf = (CommonsMultipartFile)files.get("imgfile1");
+	      CommonsMultipartFile cmf2 = (CommonsMultipartFile)files2.get("imgfile2");
+	      
+	      //파일 경로를 reseource/img폴더로 지정
+	      String savePath = request.getServletContext().getRealPath("/resources/userimg");
+	      String randomid=UUID.randomUUID().toString();
+	      String randomid2=UUID.randomUUID().toString();
+	      //realPath를 경로이름+파일의 원래 이름으로.
+	      String filename1=cmf.getOriginalFilename() +randomid;
+	      String realPath = savePath+"/"+filename1;
+	      
+	      String filename2=cmf2.getOriginalFilename()+randomid2;
+	      String realPath2 = savePath+"/"+filename2;
+	   
+	      File file = new File(realPath);
+	      cmf.transferTo(file);
+	      
+	   //   String imgname = imgfile1.getOriginalFilename();
+	   //   String imgfullpath = savePath+"/"+imgname;
+	       
+	      vo.setImgname(filename1);
+	    
+	      
+	      if(vo.getBsm().equals("b"))
+	      {      
+	         vo.setFilename("");
+	         service.join(vo);
+	         return "homemain";
+	      }
+	      
+	      else if (vo.getBsm().equals("s"))
+	      {
+	         File file2 = new File(realPath2);
+	         cmf2.transferTo(file2);
+	         
+//	         String filename = imgfile2.getOriginalFilename();
+//	         String filefullpath = savePath+"/"+filename;
+	      
+	         vo.setFilename(filename2);
+	       
+	         service.sellerjoin(vo);
+	         return "homemain";
+	         
+	      }
+	      return "homemain";
+	         
+	   }
 	
 	@RequestMapping(value="/joinPage", method=RequestMethod.GET)
 	public String toJoin(Model model) throws Exception
@@ -119,9 +128,35 @@ public class UserController
 	public String tostatistics(Model model, HttpServletRequest request, 
 			HttpServletResponse response, HttpSession session) throws Exception
 	{
-		model.addAttribute("sellercounter", service.sellercounter());
-		model.addAttribute("buyercounter", service.buyercounter());
-		 //1. paytb brandid=sessionid인곳 숫자 세기
+		UserVo vo=(UserVo) session.getAttribute("login");
+		String id=vo.getId();
+		List<ItemVo>bestlist=payservice.bestItem();
+		List<ItemVo> top3=new ArrayList<ItemVo>();
+		for(int i=0;i<3;i++){
+			top3.add(bestlist.get(i));
+			
+		}
+		
+		//2.판매자 통계 	
+		if(vo.getBsm().equals("s")){
+		List<ItemVo>mybest=payservice.mybestitem(id);
+		List<ItemVo>mytop3=new ArrayList<ItemVo>();
+		
+		for(int i=0;i<3;i++){
+			mytop3.add(mybest.get(i));
+		}
+		model.addAttribute("mybestitem",mytop3);
+		model.addAttribute("weeklymybuyer",payservice.weeklymybuyer(id));//주별 바이어
+		}
+		//1.매니져 통계
+		model.addAttribute("sellercounter", service.sellercounter());//셀러수
+		model.addAttribute("buyercounter", service.buyercounter());//바이어 수 
+		model.addAttribute("bestbrand",payservice.bestbrand());//브랜드 판매순위
+		
+		model.addAttribute("bestItem",top3);//베스트 아이템
+	//해놓긴 해놨음 주간 회원수	model.addAttribute("weeklyusercount",service.usercount());
+		 
+		//1. paytb brandid=sessionid인곳 숫자 세기
 		//2. 최근 칠일내 내brandid가 얼마나 언급되었는가 위에 숫자세기랑 똑같고 조건만 붙여주면 될듯
 		//3. 브랜드 순위는 브랜드 아이디가 많이 언급된순으로 ->db에서 해결할 방법 먼저 찾아보면 좋을듯(seller,manager)
 		//4. 브랜드가 내 아이디인곳에 clothcode별로 카운트 뽑아서 순서 정하면 될듯

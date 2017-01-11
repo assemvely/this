@@ -1,0 +1,74 @@
+<%@ page pageEncoding="utf-8"%>   
+<!-- footer시작 -->
+<footer id="myFooter">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<h2 class="logo">
+				<a href="#"><img src="/resources/image/assemVely1.png"> </a>
+			</h2>
+		</div>
+		<div class="col-sm-2">
+			<h5>
+				<b>SHOP INFO</b>
+			</h5>
+			<ul>
+				<li><a href="/all/main">Home</a></li>
+				<li><a href="/user/joinPage">Sign up</a></li>
+				<li><a href="/customerboard/listall">FAQ</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-2">
+			<h5>
+				<b>ABOUT US</b>
+			</h5>
+			<ul>
+				<li>
+					<h6>상호명: (주)어셈블리</h6>
+				</li>
+				<li>
+					<h6>사업자 등록번호</h6>
+				</li>
+				<li>
+					<h6>090-27-410118</h6>
+				</li>
+		</div>
+		</ul>
+		<div class="col-sm-2">
+			<h5>
+				<b>CS CENTER</b>
+			</h5>
+			<ul>
+				<li><h6>1680-1861</h6></li>
+				<li><h6>월-금 11AM ~ 6PM</h6></li>
+				<li><h6>DAY OFF 토 / 일/ 공휴일</h6></li>
+			</ul>
+		</div>
+		<div class="col-sm-3">
+			<div class="social-networks">
+				<a href="#" class="twitter"><i class="fa fa-twitter"></i></a> <a
+					href="#" class="facebook"><i class="fa fa-facebook"></i></a> <a
+					href="#" class="google"><i class="fa fa-google-plus"></i></a>
+			</div>
+			<button type="button" class="btn btn-default">
+				<a href="/customerboard/listall">Contact us</a>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="footer-copyright">
+	<p>© 2017 Copyright Text</p>
+</div>
+</footer>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- jQuery drop-down제이쿼리 추가 -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript drop-down제이쿼리 추가 -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- footer끝 -->

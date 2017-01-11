@@ -1,167 +1,216 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+   pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style>
-p, h1, form, button{border:0; margin:0; padding:0;}
-.spacer{clear:both; height:1px;}
-
-.myform{
-	margin:10px;
-	width:400px;
-	padding:14px;
-}
-
-#stylized{
-	border:solid 2px #b7ddf2;
-	background:#ebf4fb;
-}
-#stylized h1 {
-	font-size:16px;
-	font-weight:bold;
-	margin-bottom:8px;
-	font-family:nanumgothic,dotum;
-
-}
-#stylized p{
-	font-size:11px;
-	color:#666666;
-	margin-bottom:20px;
-	border-bottom:solid 1px #b7ddf2;
-	padding-bottom:10px;
-	font-family:dotum;
-}
-#stylized label{
-	display:block;
-	font-weight:bold;
-	text-align:right;
-	width:140px;
-	float:left;
-	font-family:tahoma;
-}
-#stylized .small{
-	color:#666666;
-	display:block;
-	font-size:11px;
-	font-weight:normal;
-	text-align:right;
-	width:140px;
-	font-family:dotum;
-	letter-spacing:-1px;
-}
-#stylized input{
-float:left;
-font-size:12px;
-padding:4px 2px;
-border:solid 1px #aacfe4;
-width:200px;
-margin:2px 0 20px 10px;
-}
-#stylized button{
-clear:both;
-margin-left:150px;
-width:125px;
-height:31px;
-text-align:center;
-line-height:31px;
-background-color:#000;
-color:#FFFFFF;
-font-size:11px;
-font-weight:bold;
-font-family:tahoma;
-}
-</style>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="Stylesheet" href="CSS/bootstrap.min.css" />
-<style>
-body {
-   padding-top: 40px;
-}
-@font-face {
-   font-family: 'Nanum Gothic Coding', monospace;
-}
-</style>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="js/bootsrap.min.js"></script>
-</head>
-
-<title>Insert title here</title>
-
-		<script type="text/javascript">
-
-		function Rradio_OnOff(id)
-		{
-		
-		   if(id == "Radio_On")
-		   {
-		      document.all["Radio_On"].style.display = 'none';         // ë³´ì´ê²Œ
-		      document.all["Radio_Off"].style.display = '';  // ì•ˆë³´ì´ê²Œ
-		   }
-		   else
-		   {
-		      document.all["Radio_On"].style.display = '';  // ì•ˆë³´ì´ê²Œ
-		      document.all["Radio_Off"].style.display = 'none';         // ë³´ì´ê²Œ
-		   }
-		}
-				
-		</script>
-
-
+<script src="https://use.typekit.net/ayg4pcz.js"></script>
+<title>Sign Up Page</title>
 </head>
 <body>
+   <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-	<div id="stylized" class="myform">
-		<form id="form" name="form" method="post" action="/user/join" enctype="multipart/form-data">
-			<h1>íšŒì›ê°€ì…</h1>
-			
+.join-page {
+   width: 360px;
+   padding: 8% 0 0;
+   margin: auto;
+}
 
-			<label>id <span class="small">ì´ë¦„ ì…ë ¥</span>	</label>
-			 <input type="text" name="id" id="id"/> 
-			<br/>
-			
-			<label>Password<span class="small">íŒ¨ìŠ¤ì›Œë“œ 6ì ì´ìƒ</span></label> 
-			<input type="text" name="pw" id="pw" />
-			<br/>
+.form {
+   position: relative;
+   z-index: 1;
+   background: #FFFFFF;
+   max-width: 360px;
+   margin: 0 auto 100px;
+   padding: 45px;
+   text-align: center;
+   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+      rgba(0, 0, 0, 0.24);
+}
 
-			<label>Email<span class="small">ì´ë©”ì¼ì£¼ì†Œ</span>	</label> 
-			<input type="text" name="email" id="email" />
-			<br/>
+.form input {
+   font-family: "Roboto", sans-serif;
+   outline: 0;
+   background: #f2f2f2;
+   width: 100%;
+   border: 0;
+   margin: 0 0 15px;
+   padding: 15px;
+   box-sizing: border-box;
+   font-size: 14px;
+}
 
-			<input TYPE='radio' id='bsm' name='bsm' value='b' onclick="Rradio_OnOff('Radio_On');" checked/>
-			<label for='b'>ì†Œë¹„ì
-			<span class="small">ì†Œë¹„ì</span>
-			</label><br/>
-			<input TYPE='radio' id='bsm' name='bsm' value='s' onclick="Rradio_OnOff('Radio_Off');"/>
-				<label for='b'>íŒë§¤ì
-			<span class="small">íŒë§¤ì</span>
-			</label>		
-				
-				<label>profile image<span class="small">profile img</span></label> 
-				<input type="file" name="imgfile1"><br>
-									
-			<br/>
-			
-			<div id="Radio_On" style="display:none;">
-			
-				<label>ì‚¬ì—…ì ì„œë¥˜ ë“±ë¡<span class="small">ì‚¬ì—…ì ì„œë¥˜ ë“±ë¡</span></label> 
-				<input type="file" name="imgfile2"><br>
-								
-			</div>
-			
-			<input type=hidden name="address" value="">
-			<button type="submit">íšŒì›ê°€ì…</button>
-			<div class="spacer"></div>
+.form button {
+   font-family: "Roboto", sans-serif;
+   text-transform: uppercase;
+   outline: 0;
+   background: #d9534f;
+   width: 100%;
+   border: 0;
+   padding: 15px;
+   color: #FFFFFF;
+   font-size: 14px;
+   -webkit-transition: all 0.3 ease;
+   transition: all 0.3 ease;
+   cursor: pointer;
+   border:1px solid #d9534f;
+}
 
-		</form>
-	</div>
+.form button:hover, .form button:active, .form button:focus {
+   background: #ffffff; /* #d9534f; */
+	color:#d9534f;
+	border:1px solid #d9534f;
+}
+
+.form .message {
+   margin: 15px 0 0;
+   color: #b3b3b3;
+   font-size: 12px;
+}
+
+.form .message a {
+   color: #d9534f;
+   text-decoration: none;
+}
+
+.form .register-form {
+   display: none;
+}
+
+.container {
+   position: relative;
+   z-index: 1;
+   max-width: 300px;
+   margin: 0 auto;
+}
+
+.container:before, .container:after {
+   content: "";
+   display: block;
+   clear: both;
+}
+
+.container .info {
+   margin: 50px auto;
+   text-align: center;
+}
+
+.container .info h1 {
+   margin: 0 0 0px;
+   padding: 0;
+   font-size: 36px;
+   font-weight: 300;
+   color: #1a1a1a;
+}
+
+.container .info span {
+   color: #4d4d4d;
+   font-size: 12px;
+}
+
+.container .info span a {
+   color: #000000;
+   text-decoration: none;
+}
+
+.container .info span .fa {
+   color: #EF3B3A;
+}
+
+body {
+   background-color: #d9534f;/* rgba(255, 202, 212, 0.5); */
+   /* background: rgba(255, 202, 212, 0.5); /*  #d9534f; */ */
+   /* fallback for old browsers */
+/*    background: -webkit-linear-gradient(right, rgba(255, 202, 212, 0.5),
+      #d9534f);
+   background: -moz-linear-gradient(right, rgba(255, 202, 212, 0.5),
+      #d9534f);
+   background: -o-linear-gradient(right, rgba(255, 202, 212, 0.5), #d9534f);
+   background: linear-gradient(to left, rgba(255, 202, 212, 0.5), #d9534f); */
+   font-family: "Roboto", sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+</style>
+
+   <!-- sh Ãß°¡ -->
+   <script type="text/javascript">
+      function Rradio_OnOff(id) {
+
+         if (id == "Radio_On") {
+            document.all["Radio_On"].style.display = 'none'; // º¸ÀÌ°Ôs
+            document.all["Radio_Off"].style.display = ''; // ¾Èº¸ÀÌ°Ô
+         } else {
+            document.all["Radio_On"].style.display = ''; // ¾Èº¸ÀÌ°Ô
+            document.all["Radio_Off"].style.display = 'none'; // º¸ÀÌ°Ô
+         }
+      }
+   </script>
+
+   <div class="join-page">
+   <div style="text-align:center; margin-bottom:10px;">
+   <a href="/all/main"><img src="/resources/image/assemvely2.png" alt="no image"></a>
+   </div>
+      <div class="form">
+        <!--  <form class="register-form">
+            <input type="text" placeholder="name" /> <input type="password"
+               placeholder="password" /> <input type="text"
+               placeholder="email address" />
+            <button>create</button>
+            <p class="message">
+               Already registered? <a href="#">Sign In</a>
+            </p>
+         </form> -->
 
 
+         <form id="form" name="form" class="join-form" method="post" action="/user/join"
+            enctype="multipart/form-data">
+            <input type="text" name="id" id="id" placeholder="Input your id"
+               required autofocus /> 
+               
+               <input type="password" name="pw"
+               id="password" placeholder="Input your pw" required autofocus /> 
+               
+               <input
+               type="text" name="email" placeholder="Email Address" required
+               autofocus /> <br /> 
+               
+               <div class="containerabc">
+              
+               <label class="radio-inline" for='b'>¼ÒºñÀÚ
+               <input type='radio' id='bsm' name="bsm" value='b' onclick="Rradio_OnOff('Radio_On');" checked>
+               </label>
+               
+               
+               <label class="radio-inline" for='b'>ÆÇ¸ÅÀÚ
+               <input type="radio" style="text-align: right;" id='bsm' name='bsm' value='s' onclick="Rradio_OnOff('Radio_Off');" >
+               </label>
+               
+               <br/>
+           
+               </div>
+               <br>
+                  <hr>            
+               </br>
+               <label><h5>ÇÁ·ÎÇÊ ÀÌ¹ÌÁö µî·Ï<h5></label>
+            <input type="file" name="imgfile1"><br>
+
+            <div id="Radio_On" style="display: none;">
+            <hr>
+               <label><h5>»ç¾÷ÀÚ ¼­·ù µî·Ï</h5></label> <input
+                  type="file" name="imgfile2"><br>
+
+            </div>
+
+            <input type=hidden name="address" value="">
+            <button type="submit">Sign In</button>
+            
+         </form>
+      </div>
+   </div>
 </body>
 </html>
-
-
-
-

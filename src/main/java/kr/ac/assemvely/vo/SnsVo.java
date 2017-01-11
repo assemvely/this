@@ -2,8 +2,15 @@ package kr.ac.assemvely.vo;
 
 import java.sql.Date;
 
+
 public class SnsVo {
 	
+	public String getBoardcode() {
+		return boardcode;
+	}
+	public void setBoardcode(String boardcode) {
+		this.boardcode = boardcode;
+	}
 	public String getPw() {
 		return pw;
 	}
@@ -46,7 +53,30 @@ public class SnsVo {
 	public void setImgname(String imgname) {
 		this.imgname = imgname;
 	}
-	
+	public String getFileid() {
+		return fileid;
+	}
+	public void setFileid(String fileid) {
+		this.fileid = fileid;
+	}
+	public String getFilecontenttype() {
+		return filecontenttype;
+	}
+	public void setFilecontenttype(String filecontenttype) {
+		this.filecontenttype = filecontenttype;
+	}
+	public String getFilelength() {
+		return filelength;
+	}
+	public void setFilelength(String filelength) {
+		this.filelength = filelength;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -60,6 +90,7 @@ public class SnsVo {
 	private Integer likecnt;
 	private Date writedate;
 	private String snsimgpath;
+	private String boardcode;
 	 
 	  private String pw;
 	  private String email;
@@ -68,7 +99,10 @@ public class SnsVo {
 	  private String imgcontenttype;
 	  private String imglength;
 	  private String imgname;
-
+	  private String fileid;
+	  private String filecontenttype;
+	  private String filelength;
+	  private String filename;
 	  private String address;
 	  
 	
@@ -123,3 +157,4 @@ public class SnsVo {
 	
 
 }
+

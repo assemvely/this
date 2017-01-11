@@ -13,5 +13,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					where ID=#{id}
 				]]>
 </select>
-
+<select id="bestbrand" resultType="kr.ac.assemvely.vo.PayVo">
+ select brandid,count(brandid) cnt from paytb group by brandid order by cnt desc
+</select>
+<select id="bestitem" resultType="kr.ac.assemvely.vo.ItemVo">
+select itemtb.clothcode,itemtb.imgname,itemtb.name from itemtb,paytb where itemtb.clothcode in(select clothcode from paytb)group by itemtb.CLOTHCODE,itemtb.imgname,itemtb.name order by (select count(clothcode)cnt from paytb where itemtb.clothcode=paytb.clothcode) desc 
+</select>
+<select id="weeklymybuyer" resultType="kr.ac.assemvely.vo.PayVo">
+select count(id)cnt from paytb where orderdate> to_char(sysdate - 7, 'YYMMDD') and brandid=#{id}
+</select>
+<select id="secondweek" resultType="kr.ac.assemvely.vo.PayVo">
+select count(id)cnt from paytb where orderdate between to_char(sysdate-14,'YYMMDD') and  to_char(sysdate-7) and brandid=#{id}
+</select>
+<select id="thirdweek" resultType="kr.ac.assemvely.vo.PayVo">
+select count(id)cnt from paytb where orderdate between to_char(sysdate-21,'YYMMDD') and to_char(sysdate-14) and brandid=#{id}
+</select>
+<select id="lastweek" resultType="kr.ac.assemvely.vo.PayVo">
+select count(id)cnt from paytb where orderdate between to_char(sysdate-28,'YYMMDD') and to_char(sysdate-21) and brandid=#{id}
+</select>
+<select id="mybestitem" resultType="kr.ac.assemvely.vo.ItemVo">
+ select itemtb.clothcode,itemtb.imgname,itemtb.name from itemtb,paytb where itemtb.clothcode in(select clothcode from paytb) and itemtb.id=#{id} group by itemtb.CLOTHCODE,itemtb.imgname,itemtb.name order by (select count(clothcode)cnt from paytb where itemtb.clothcode=paytb.clothcode) desc
+ </select>
 </mapper>

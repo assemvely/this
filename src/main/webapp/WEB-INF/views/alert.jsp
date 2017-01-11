@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>Alert!</title>
 </head>
 <script type="text/javascript">
 
-alert("권한이없습니다.");
-location.href="/item/main";
+alert("권한이없습니다. 로그인 해주세요.");
+location.href="/user/loginpage";
 </script>
 <body>
 

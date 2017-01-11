@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.ac.assemvely.dao.ItemDao;
 import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.vo.CartVo;
+import kr.ac.assemvely.vo.Criteria;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.PayVo;
@@ -153,5 +154,52 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void coloramount(CartVo cartvo){
 		dao.coloramount(cartvo);
+	}
+	@Override
+	public List<ItemVo> selectwithtempcode(int tempcode) throws Exception {
+		
+		return dao.selectwithtempcode(tempcode);
+	}
+
+	@Override
+	public List<ItemVo> select_top_withtempcode(int tempcode) throws Exception {
+		
+		return dao.select_top_withtempcode(tempcode);
+	}
+
+	@Override
+	public List<ItemVo> select_bottom_withtempcode(int tempcode) throws Exception {
+		
+		return dao.select_bottom_withtempcode(tempcode);
+	}
+
+	@Override
+	public List<ItemVo> select_outer_withtempcode(int tempcode) throws Exception {
+		
+		return dao.select_outer_withtempcode(tempcode);
+	}
+
+	@Override
+	public List<ItemVo> select_shoes_withtempcode(int tempcode) throws Exception {
+		
+		return dao.select_shoes_withtempcode(tempcode);
+	}
+
+	@Override
+	public List<ItemVo> select_bag_withtempcode(int tempcode) throws Exception {
+		
+		return dao.select_bag_withtempcode(tempcode);
+	}
+
+	@Override
+	public List<ItemVo> item_list_page(Criteria cri) throws Exception {
+		
+		return dao.item_list_page(cri);
+	}
+
+	@Override
+	public int countitem(Criteria cri) throws Exception {
+
+		return dao.countitem(cri);
 	}
 }

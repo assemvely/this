@@ -6,18 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.ac.assemvely.mappers.snsMapper">
 
  
-<!-- <select id="list" resultType="kr.ac.assemvely.snsvo.SnsVo"> 
+ <select id="searchlist" resultType="kr.ac.assemvely.vo.SnsVo"> 
 <![CDATA[
 select * from snstb
 ]]></select>
-select * from SNSTB,USERTB where snstb.id=usertb.id and snstb.id='aaa'
- -->
  
-
+ 
+ 
 <select id="listall" resultType="kr.ac.assemvely.vo.SnsVo"> 
-
-select usertb.id,usertb.imgname,snstb.snsbno,snstb.snsimg,snstb.snscontent,snstb.writedate from snstb,usertb where snstb.id=usertb.id and usertb.id=#{id}
-
+<![CDATA[
+select usertb.id,usertb.filename,snstb.snsbno,snstb.snsimg,snstb.snscontent,snstb.writedate, from snstb,usertb where snstb.id=usertb.id and usertb.id=#{id}
+]]>
 
 </select>
 
@@ -27,7 +26,7 @@ select itemtb.id,itemtb.imgname,usertb.filename from itemtb,usertb where itemtb.
 <!-- 브랜드이름, 브랜드의 옷, 유저의 파일네임...? -->
 
 
-<select id="list" resultType="kr.ac.assemvely.vo.SnsVo">
+<select id="list" resultType="kr.ac.assemvely.vo.Sns_codiVo">
 <![CDATA[
 select * from (
 select * from snstb where id in(select followingid from relationtb where followerid=#{id}) 
@@ -36,13 +35,55 @@ select * from snstb where id=#{id} )
 order by writedate desc
 
 
-]]>
+]]></select>
+
+<select id="test" resultType="kr.ac.assemvely.vo.CodiVo" >
+select coditb.writedate,coditb.clothcode,coditb.coordinate_x,coditb.coordinate_y,coditb.width,coditb.height,coditb.id,itemtb.imgname from coditb,itemtb where coditb.id=#{id} 
+and coditb.writedate=#{writedate} and coditb.clothcode=itemtb.clothcode
+</select>
+
+<select id="read" resultType="kr.ac.assemvely.vo.Sns_codiVo">
+select usertb.id,usertb.imgname,snstb.snsbno,snstb.snsimg,snstb.snscontent,snstb.writedate,snstb.likecount from snstb,usertb where snstb.id=usertb.id and snsbno=#{snsbno}
+</select>
+ <select id="delete">
+delete snstb where snsbno=#{snsbno}
+</select>
+ <insert id="insertlike">
+	 insert into liketb(likebno,id,board,bno) values(likebno_seq.nextval,#{id},#{board},#{bno})
+	 </insert>
+	 
+<select id="deletelike">
+	delete liketb where board=#{board} and bno=#{bno} and id=#{id}
+</select>
+
+ <select id="deletelikecodilike">
+ 	delete liketb where board=#{board} and likedate=#{likedate} and id=#{id}
+ </select>
+<select id="listlike" resultType="kr.ac.assemvely.vo.LikeVo">
+	select * from liketb where board=#{board} and bno=#{bno}
+</select>
+
+<select id="mylike" resultType="kr.ac.assemvely.vo.LikeVo">
+	select * from liketb where id=#{id}
+</select>
+<select id="countplus" >
+
+ UPDATE snstb SET likecount=likecount+1 WHERE snsbno=#{bno}
 
 </select>
-<select id="read" resultType="kr.ac.assemvely.vo.SnsVo">
-select usertb.id,usertb.imgname,snstb.snsbno,snstb.snsimg,snstb.snscontent,snstb.writedate from snstb,usertb where snstb.id=usertb.id and snsbno=#{snsbno}
+<select id="countminus">
+	update snstb set likecount=likecount-1 where snsbno=#{bno}
+</select>
+ 
+
+<select id="codilikeplus">
+update coditb3 set codilike=codilike+1 where codibno=#{bno} and id=#{id}
+
 </select>
 
+<select id="codilikeminus">
+update coditb3 set codilike=codilike-1 where codibno=#{bno} and id=#{id}
+</select>
 <!-- <insert id="s_insert">
 
 <![CDATA[
@@ -74,4 +115,129 @@ select * from snstb where snsbno=#{snsbno}
 ]]>
 </select>
  -->
+ <select id="sns_codi" resultType="kr.ac.assemvely.vo.Sns_codiVo">
+
+select * from sns_codi2 where id in(select followingid as id from (select * from relationtb where followerid=#{id})
+union
+select followerid as id from  (select * from relationtb where followerid=#{id}))
+
+
+</select>
+ <update id="codi_update">
+
+update coditb set coordinate_x=#{coordinate_x},coordinate_y=#{coordinate_y},width=#{width},height=#{height} where id=#{id} and clothcode=#{clothcode} and writedate=#{writedate}
+</update>
+
+<update id="codi_update2">
+update coditb3 set codicomment=#{codicomment},codicapture=#{codicapture} where id=#{id} and writedate=#{writedate}
+</update>
+
+
+<delete id="codi_delete1">
+
+delete from coditb where id=#{id} and writedate=#{writedate}
+
+</delete>
+
+<delete id="codi_delete2">
+delete from coditb3 where id=#{id} and writedate=#{writedate}
+</delete>
+
+
+
+<select id="codi_usertb" resultType="kr.ac.assemvely.vo.UserVo">
+select imgname,id from usertb where id=#{id}
+</select>
+
+<select id="codi_coditb3" resultType="kr.ac.assemvely.vo.CodiVo2">
+select * from coditb3 where id=#{id} and writedate=#{writedate}
+
+
+</select>
+
+<select id="codi_itemtb" resultType="kr.ac.assemvely.vo.ItemVo">
+select * from itemtb where clothcode in (select clothcode from coditb where id=#{id} and writedate=#{writedate})
+
+</select>
+<select id="codi_codibno" resultType="kr.ac.assemvely.vo.CodiVo">
+select * from (select * from coditb where id=#{id} order by writedate desc) where rownum=1
+</select>
+
+
+<insert id="codi_comment">
+
+insert into coditb3(writedate,id,codicomment,codicapture,boardcode,codibno) values(#{writedate},#{id},#{codicomment},#{codicapture},#{boardcode},seq_codi.nextval)
+</insert>
+
+
+<insert id="codi_insert">
+
+insert into coditb(clothcode,coordinate_x,coordinate_y,width,height,id) values(#{clothcode},#{coordinate_x},#{coordinate_y},#{width},#{height},#{id})
+	
+
+</insert>
+
+
+
+
+
+
+<select id="codi_cloth" resultType="kr.ac.assemvely.vo.ImageVo">
+
+select * from img where category in (select sort from categorytb where category=#{category})
+</select>
+
+
+<select id="all" resultType="kr.ac.assemvely.vo.ImageVo">
+select * from img
+</select>
+
+
+<select id="sns_list" resultType="kr.ac.assemvely.vo.SnsVo">
+<![CDATA[
+select * from (
+select * from snstb where id in(select followingid from relationtb where followerid=#{id}) 
+union all
+select * from snstb where id=#{id}) 
+order by writedate desc
+
+
+]]>
+
+</select>
+
+
+ <insert id="s_insert">
+
+<![CDATA[
+
+
+insert into snstb(snsbno,id,snscontent,snsimg,boardcode) values(seq_snsbno.nextval,#{id},#{snscontent},#{snsimg},#{boardcode})
+]]>
+</insert>
+
+
+<delete id="s_delete">
+
+<![CDATA[
+delete from snstb where snsbno=#{snsbno}
+
+]]>
+</delete>
+<update id="s_update">
+
+<![CDATA[
+update snstb set snsimg=#{snsimg},snscontent=#{snscontent} where snsbno=#{snsbno}
+]]>
+
+</update>
+
+<select id="s_select" resultType="kr.ac.assemvely.vo.SnsVo">
+<![CDATA[
+select * from snstb where snsbno=#{snsbno}
+]]>
+</select>
+ 
+
+ 
 </mapper>

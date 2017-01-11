@@ -166,4 +166,8 @@ public class UserServiceImpl implements UserService
 	public List<UserVo> bybsm(String bsm)throws Exception{
 		return dao.bybsm(bsm);
 	}
+	@Override
+	public List<UserVo> usercount()throws Exception{
+		return dao.usercount();
+	}
 }

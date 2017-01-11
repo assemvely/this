@@ -1,5 +1,8 @@
 package kr.ac.assemvely.mobile;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -89,5 +92,56 @@ public class McommentController {
 			
 			//return "redirect:/comment/m_list";
 	    }
+		
+
+		//코디 댓글쓰기
+		@RequestMapping(value="/codi_insert")
+		public @ResponseBody void codiinsertcomment(String reply,String writedate,String id) throws Exception{
+			
+		CommentVo commentvo=new CommentVo();
+		commentvo.setReply(reply);
+		
+		DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+		
+		Date date=inputFormat.parse(writedate);
+		System.out.println("?"+date);
+		commentvo.setCodi_writedate(date);
+		commentvo.setBoardcode("c");
+		commentvo.setId(id);
+		
+		
+			service.codi_comment(commentvo);
+	 	
+			
+			
+			
+		}
+		
+		
+		//코디 댓글 목록 불러오기
+		@RequestMapping(value="/codi_list")
+		public @ResponseBody List<CommentVo> codi_delete(String writedate) throws Exception{
+			
+			CommentVo commentvo=new CommentVo();
+			DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			
+			Date date=inputFormat.parse(writedate);
+			
+			System.out.println("왜ㅡ러냐"+date);
+			
+			commentvo.setCodi_writedate(date);
+			commentvo.setBoardcode("c");
+			System.out.println("?//");
+			
+			return service.codi_list(commentvo);
+			
+			
+			
+			
+		}
+		
+		
 			
 }

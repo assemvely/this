@@ -175,6 +175,9 @@ public class UserDaoImpl implements UserDao
 	public List<UserVo> bybsm(String bsm)throws Exception{
 		return session.selectList(namespace+".bybsm",bsm);
 	}
-	
+	@Override
+	public List<UserVo> usercount()throws Exception{
+		return session.selectList(namespace+".usercount");
+	}
 
 }

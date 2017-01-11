@@ -46,4 +46,5 @@ public interface UserService
 	public void updatemileage(MileageVo mvo)throws Exception;
 	public UserVo mypage(String id)throws Exception;
 	public List<UserVo> bybsm(String bsm)throws Exception;
+	public List<UserVo> usercount()throws Exception;
 }

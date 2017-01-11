@@ -1,165 +1,236 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
- 
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-<style>
-#h2 {
-    position: absolute;
-    left: 1450px;
-    top: 80px;
-    color: red;
-}
-@font-face {
-   font-family: 'Nanum Gothic Coding', monospace;
-   padding-top: 70px;
-}
-
-#main_footer {
-   /* footer 중앙 정렬 */
-   width: 960px;
-   margin: 0 auto;
-   margin-bottom: 10px;
-   /* footer 글씨 정렬 */
-   text-align: center;
-}
-
-body {
-   padding-top: 40px;
-   
-}
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-.nav-counter {
- position:absolute;
- top: 5px;
- right: 5px;
- min-width: 8px;
- height: 20px;
- line-height: 20px;
- margin-top: -12px;
- padding: 0 6px;
- font-weight: normal;
- font-size: small;
- color: white;
- text-align: center;
- text-shadow: 0 1px rgba(0, 0, 0, 0.2);
- background: #e23442;
- border: 1px solid #911f28;
- border-radius: 11px;
- background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
- background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
- background-image: -o-linear-gradient(top, #e8616c, #dd202f);
- background-image: linear-gradient(to bottom, #e8616c, #dd202f);
- -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
- box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
-}
-</style> 
+<%@ include file="firststyle.jinc"%>
 <head>
-<title>Home</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="">
+<meta name="author" content="">
 <link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<!-- Bootstrap Core CSS 깔기 -->
+<script src="/resources/js/jquery.js"></script>
+<script src="/resources/js/npm.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- owl carousel깔기 -->
 <link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
-
-<!-- css admin깔기 -->
 <link href="css/sb-admin.css" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
 <script src="/resources/jquery/jquery-1.12.4.min.js"></script>
 <script src="/resources/owl.carousel/owl.carousel.min.js"></script>
-<!-- <script src="/resources/owl.carousel/owl.carousel.js"></script> -->
+<link href="font-awsome/css/font-awesome.cin.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Footer-with-button-logo.css">
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link href="/resources/navbar/css/bootstrap.css" rel="stylesheet" />
+<link href="/resources/navbar/css/ct-navbar.css" rel="stylesheet" />
+<script src="/resources/navbar/js/jquery-1.10.2.js"></script>
+<script src="/resources/navbar/js/bootstrap.js"></script>
+<script src="/resources/navbar/js/ct-navbar.js"></script>
+<style>
+#h2 {
+	position: absolute;
+	left: 1450px;
+	top: 80px;
+	color: red;
+}
+
+@font-face {
+	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'Apple SD Gothic Neo', Sans-serif;
+}
+
+body {
+	padding-top: 40px;
+}
+
+a:-webkit-any-link {
+    color: #fffff;
+    cursor: auto;
+}
+
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+	margin: 0px auto;
+	vertical-align: center;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 15px 5px;
+	border-style: solid;
+	border-width: 0px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	vertical-align: center;
+	border-bottom:#d9534f;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 0px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #ffffff;
+	background-color: #d9534f;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	text-align: center;
+	vertical-align: center;
+}
+
+.tg .tg-58iv {
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif !important;;
+	vertical-align: center;
+	border-bottom:#d9534f;
+}
+
+.tg .tg-yw4l {
+	vertical-align: center;
+	align:left;
+	padding-left:15px;
+	border-bottom:#d9534f;
+}
+    #jusosearch{
+     align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    color: #ffffff;
+    background-color: #d9534f;
+    box-sizing: border-box;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-width: 2px;
+    border-color: #d43f3a;
+    border-style: none;
+    border-radius: 6px;
+    }
+</style>
+<title>Search Page</title>
+
 <script type="text/javascript">
-   
+/* 맨위로 올라가는 화살표  */
+$(document).ready(function() {
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 200) {
+			$('.jcm-top').fadeIn();
+		} else {
+			$('.jcm-top').fadeOut();
+		}
+	});
+	$('.jcm-top').click(function() {
+		$('html, body').animate({
+			scrollTop : 0
+		}, 400);
+		return false;
+	});
+});
 </script>
 </head>
 <body>
-   
-    <%@ include file="css.jinc" %>
-<div class="col-md-12" style="margin-left:400px; margin-rigth:400px;"> 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-	<h1>회원 목록</h1>
-	<h2>
-	<c:forEach items="${searchuserlist}" var="userVo">
-  	<p>
-	<a href="/user/mypage?id=${userVo.id}"> <img src="/resources/userimg/${userVo.imgname} " alt="이미지가 없습니다"></a>
-	<h3>${userVo.id}</h3>
-	</p>
-  	<hr/>
- 	 </c:forEach>
-	
+<%@ include file="secondstyle.jinc"%>
+	<%@ include file="header.jinc"%>
+	<div>
+		<div
+			style="margin-left: 400px; margin-right: 400px; margin-top: 200px;">
+			<div>
+				<div>
+					<div class="col-md-12">
+						<div class="col-md-12">
+		
+		
+		<h4 style="font-weight:bold; margin-left:120px; color:#d9534f;">검색된 사용자 정보</h4>
+		<br />
+		<table class="tg" width="800px" height="200px" style="text-align:center; border:solid 1px #d9345f;">
+			<tr>
+				<th class="tg-58iv" width=400px;>USER IMAGE</th>
+				<th class="tg-58iv" width=400px;>USER ID</th>
+			</tr>
+			<tr>
+				<c:forEach items="${searchuserlist}" var="userVo">
+					<td class="tg-yw4l" style="align:center;"><a style="color:black;"
+						href="/user/mypage?id=${userVo.id}"> <img width=50px; height=50px;
+							src="/resources/userimg/${userVo.imgname} " alt="이미지가 없습니다"
+							class="img-circle"></a></td>
+					<td class="tg-yw4l" style="align:center;"><a style="color:black;"
+						href="/user/mypage?id=${userVo.id}">${userVo.id}</a></td>
+				</c:forEach>
+			</tr>
+		</table>
+		<br /><br /> 
+		<hr style="border-top:1px solid #d9534f;"><br />
+		<h4 style="font-weight:bold; margin-left:120px; color:#d9534f;">검색된 아이템 정보</h4>
+		<!--  -->
+		
+		<div class="row" style="margin-top:65px;">
 
-	</h2>
-	<br/><br/><br/><br/><br/><hr/><br/><br/><br/>
-	
-	<h1>아이템 목록</h1>
-	<h2>
-	<c:forEach items="${searchitemlist}" var="itemVo">
-	<p>
-  	<a href="/item/readposting?clothcode=${itemVo.clothcode}"><img src="/resources/itemimg/${itemVo.imgname} " alt="No Image"></a>
-  	<h3>${itemVo.name}</h3> 
-  	</p>
-  	<hr/>
- 	 </c:forEach>
-	
-	
-	</h2>
+				<c:forEach items="${searchitemlist}" var="itemVo">
+					<div class="col-lg-3 text-center">
 
 
+						<div class="thumbnail">
+				<a href="/item/readposting?clothcode=${itemVo.clothcode}">
+				<img src="/resources/itemimg/${itemVo.imgname} "
+												alt="No Image"> </a>
+											<div class="caption">
+											<a href="/user/mypage?id=${itemVo.id}">
+												<h3 id="itemid">${itemVo.id}</h3></a>
+												
+												<a href="/item/readposting?clothcode=${itemVo.clothcode}">
+												<p style="color:#999999;">${itemVo.name}</p></a>
+												
+												<p style="color:#d9345f;">${itemVo.price}원</p>
+													<div class="caption1">
+														<p>
+															<a href="/item/like?clothcode='${shopping.clothcode}'"
+																class="btn btn-danger" id="like" role="button">♡</a>
+														</p>
+													</div>
+												
+												 
+											</div>
 
+										</div>
+									</div>
+								</c:forEach>
+
+							</div>
+		
 </div>
-
+						<a href="#" class="jcm-top"><img
+							src="/resources/glyphicons/glyphicons-214-arrow-upupup.png"
+							style="margin-bottom: 24px; width: 25px;"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<br />
+<br />
+
+<%@ include file="footer.jinc"%>
 </html>

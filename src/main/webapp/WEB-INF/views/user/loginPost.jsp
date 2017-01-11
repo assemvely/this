@@ -4,220 +4,165 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>Login Page</title>
 </head>
 <body>
 <style>	
-body, html {
-    height: 100%;
-    background-repeat: no-repeat;
-background: rgb(185,210,224); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(185,210,224,1) 0%, rgba(187,214,228,1) 0%, rgba(186,211,225,1) 15%, rgba(186,211,225,1) 38%, rgba(169,199,215,1) 68%, rgba(169,199,215,1) 68%, rgba(169,199,215,1) 82%, rgba(158,191,208,1) 100%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(185,210,224,1) 0%,rgba(187,214,228,1) 0%,rgba(186,211,225,1) 15%,rgba(186,211,225,1) 38%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 82%,rgba(158,191,208,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center,  rgba(185,210,224,1) 0%,rgba(187,214,228,1) 0%,rgba(186,211,225,1) 15%,rgba(186,211,225,1) 38%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 82%,rgba(158,191,208,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b9d2e0', endColorstr='#9ebfd0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+.login-page {
+	width: 360px;
+	padding: 8% 0 0;
+	margin: auto;
 }
 
-.login_box{
-    background:#f7f7f7;
-    border:3px solid #F4F4F4;
-    padding-left: 15px;
-    margin-bottom:25px;
-    }
-.input_title{
-    color:rgba(164, 164, 164, 0.9);
-    padding-left:3px;
-        margin-bottom: 2px;
-    }
-
-hr{
-    width:100%;
-}
-    
-.welcome{
-    font-family: "myriad-pro",sans-serif;
-    font-style: normal;
-    font-weight: 100;
-    color:#FFFFFF;
-    margin-bottom:25px;
-    margin-top:50px;
-
+.form {
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 360px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
 }
 
-.login_title{
-    font-family: "myriad-pro",sans-serif;
-    font-style: normal;
-    font-weight: 100;
-    color:rgba(164, 164, 164, 0.44);
+.form input {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
 }
 
-.card-container.card {
-    max-width: 350px;
-
+.form button {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #d9534f;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+	border:1px solid #d9534f;
 }
 
-.btn {
-    font-weight: 700;
-    height: 36px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
-    border-radius:0;
-    background:#43A6EB;
-    height: 55px;
-    margin-bottom:10px;
+.form button:hover, .form button:active, .form button:focus {
+	background: #ffffff; /* #d9534f; */
+	color:#d9534f;
+	border:1px solid #d9534f;
 }
 
-/*
- * Card component
- */
-.card {
-    background-color: #FFFFFF;
-    /* just in case there no content*/
-    padding: 1px 25px 30px;
-    margin: 0 auto 25px;
-    margin-top: 15%x;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+.form .message {
+	margin: 15px 0 0;
+	color: c;
+	font-size: 12px;
 }
 
-.profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+.form .message a {
+	color: #d9534f;/* 이건 이색 맞음 */
+	text-decoration: none;
 }
 
-/*
- * Form styles
- */
-.profile-name-card {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0 0;
-    min-height: 1em;
+.form .register-form {
+	display: none;
 }
 
-.reauth-email {
-    display: block;
-    color: #404040;
-    line-height: 2;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.container {
+	position: relative;
+	z-index: 1;
+	max-width: 300px;
+	margin: 0 auto;
 }
 
-.form-signin #inputEmail,
-.form-signin #inputPassword {
-    direction: ltr;
-    height: 44px;
-    font-size: 16px;
+.container:before, .container:after {
+	content: "";
+	display: block;
+	clear: both;
 }
 
-.form-signin input[type=email],
-.form-signin input[type=password],
-.form-signin input[type=text],
-.form-signin button {
-    width: 100%;
-    display: block;
-
-    z-index: 1;
-    position: relative;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.container .info {
+	margin: 50px auto;
+	text-align: center;
 }
 
-.form-signin .form-control:focus {
-    border-color: rgb(104, 145, 162);
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+.container .info h1 {
+	margin: 0 0 15px;
+	padding: 0;
+	font-size: 36px;
+	font-weight: 300;
+	color: #1a1a1a;
 }
 
-.btn.btn-signin {
-    /*background-color: #4d90fe; */
-    background-color: rgb(104, 145, 162);
-    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
-    padding: 0px;
-    font-weight: 700;
-    font-size: 14px;
-    height: 36px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    -o-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -webkit-transition: all 0.218s;
-    transition: all 0.218s;
+.container .info span {
+	color: #4d4d4d;
+	font-size: 12px;
 }
 
-.btn.btn-signin:hover,
-.btn.btn-signin:active,
-.btn.btn-signin:focus {
-    background-color: rgb(12, 97, 33);
+.container .info span a {
+	color: #000000;
+	text-decoration: none;
 }
 
-.forgot-password {
-    color: rgb(104, 145, 162);
+.container .info span .fa {
+	color: #EF3B3A;
 }
 
-.forgot-password:hover,
-.forgot-password:active,
-.forgot-password:focus{
-    color: rgb(12, 97, 33);
+body {
+	/* background-color: rgba(255, 202, 212, 0.5); */
+	/* background-image: url(../resources/designimg/girlsshopping.jpg); */
+	background-color:  #d9534f;
+	/* fallback for old browsers */
+	/* background: -webkit-linear-gradient(right, rgba(255, 202, 212, 0.5),
+		#d9534f);
+	background: -moz-linear-gradient(right, rgba(255, 202, 212, 0.5),
+		#d9534f);
+	background: -o-linear-gradient(right, rgba(255, 202, 212, 0.5), #d9534f);
+	background: linear-gradient(to left, rgba(255, 202, 212, 0.5), #d9534f); */
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
-
-
 </style>
-	
-
  <script src="https://use.typekit.net/ayg4pcz.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
-    <div class="container">
-    <h1 class="welcome text-center">Welcome to <br> Ice Code</h1>
-        <div class="card card-container">
-        <h2 class='login_title text-center'>Login</h2>
-        <hr>
+   <div class="login-page">
+   <div style="text-align:center; margin-bottom:10px;">
+   <a href="/all/main"><img src="/resources/image/assemvely2.png" alt="no image"></a>
+   </div>
+		<div class="form">
+			<form class="register-form">
+				<input type="text" placeholder="name" /> <input type="password"
+					placeholder="password" /> <input type="text"
+					placeholder="email address" />
+				<button>create</button>
+				<p class="message">
+					Already registered? <a href="#">Sign In</a>
+				</p>
+			</form>
 
-            <form class="form-signin" method="post" action="/user/loginPost" >
-                <span id="reauth-email" class="reauth-email"></span>
-                <p class="input_title">ID</p>
-                <input type="text" id="inputEmail" class="login_box" name="id"  placeholder="enter your id" required autofocus >
-                <p class="input_title">Password</p>
-                <input type="password" id="inputPassword" class="login_box"  name="pw" placeholder="******" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary" type="submit">Login</button>
-                <button class="btn btn-lg btn-primary"
-                onclick="location.href='/user/joinPage'">Join</button>
-                
-            </form><!-- /form -->
-        </div><!-- /card-container -->
-    </div><!-- /container -->
-	
+
+			<form class="login-form" method="post" action="/user/loginPost">
+				<input type="text" name="id" placeholder="Enter your id" required
+					autofocus /> <input type="password" id="inputPassword" name="pw"
+					placeholder="enter your pw" required autofocus />
+				<button type="submit">Login</button>
+				<p class="message a">
+					Not registered? <a href="/user/joinPage">Create an account</a>
+				</p>
+			</form>
+		</div>
+	</div>
 
 </body>
 </html>

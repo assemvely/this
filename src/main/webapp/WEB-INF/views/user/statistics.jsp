@@ -130,15 +130,24 @@ body {
 	<c:choose>
 		<c:when test="${login.bsm=='m'}">
 			<h1>manager 통계</h1>
-			<h2>
-				구매자 회원 수 : ${buyercounter} 		<br/> 
-				판매자 회원 수 : ${sellercounter}		<br/>
-				이번 주 sellingcnt : 					<br/> 
-				브랜드 판매 순위 : 						<br/> 
-				총 게시글 수 :							 <br/>
-
-
-			</h2>
+		 
+		<li>구매자 회원 수 : ${buyercounter} 		<br/></li> 
+		<li>판매자 회원 수 : ${sellercounter}		<br/></li>
+	 			 
+		<li>브랜드 판매 순위  						<br/></li>
+		
+				<c:forEach items="${bestbrand}" var="cnt">
+				<h3><a href="/user/mypage?id=${cnt.brandid}">brand ${cnt.brandid}</a></h3>
+				<h5>${cnt.cnt}</h5>
+				
+				</c:forEach> 
+		<li>베스트 상품</li>
+				<c:forEach items="${bestItem}" var="top3">
+				<a href="/item/readposting?clothcode=${top3.clothcode}">	<img src="/resources/itemimg/${top3.imgname} " alt="No Image"></a>
+				<p>${top3.name}</p>
+				</br>	
+				</c:forEach>
+		<li>주별 회원수</li>
 		</c:when>
 
 
@@ -146,23 +155,35 @@ body {
 		<c:when test="${login.bsm=='s'}">
 
 			<h1>seller 통계</h1>
-			<h2>
-				총 구매자 회원 수 : 		<br />
-				이번 주 내 계정 구매자 수 : <br />
-				내 브랜드 순위 :			<br /> 
-				아이템 판매 순위 : 		<br />
-				총 게시글 수 : 			<br />
+			
+			<li>총 구매자 회원 수 :${buyercounter}<br /></li>
+			<li>이번 주 내 계정 구매자 수 : <br /></li>
+			<c:forEach items="${weeklymybuyer}" var="buyer">
+			
+				<h3>${buyer.cnt}</h3>
+				</c:forEach>
+			<li>내 브랜드 순위 :			<br /></li> 
+				
+				<c:forEach items="${bestbrand}" var="cnt">
+				
+				<h3><a href="/user/mypage?id=${cnt.brandid}">brand ${cnt.brandid}</a></h3>
+				<h5>${cnt.cnt}</h5>	
+				</c:forEach> 	<br />
+				
+				<li>아이템 판매 순위</li>
+				<c:forEach items="${mybestitem}" var="mytop3">
+				<a href="/item/readposting?clothcode=${mytop3.clothcode}">	<img src="/resources/itemimg/${mytop3.imgname} " alt="No Image"></a>
+				<p>${mytop3.name}</p>
+				</br>	
+				</c:forEach>
+						<br />
 
 			</h2>
 		</c:when>
 
 	</c:choose>
 
-
-
-
-
-
+ 
 
 </body>
 </html>

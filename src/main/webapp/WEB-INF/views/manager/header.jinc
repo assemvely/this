@@ -1,0 +1,203 @@
+<%@ page pageEncoding="utf-8"%>   
+<div class="container">
+
+
+		<div style="overflow-x: hidden; overflow-y: scroll;">
+
+			<nav id="header" class="navbar navbar-default navbar-fixed-top"
+				style="margin: auto; text-align: center;" role="navigation"> <!-- 젤 윗부분 header 시작 -->
+			<div id="header_of_header_wrapper">
+				<div id="header_of_header">
+					<div class="btn_wrapper_left">
+						<a style="margin-left: 105px;" href="#">어셈블리 멤버쉽 안내</a>
+					</div>
+
+					<div class="stat_wrapper">
+						어셈블리 상품수: <span id="item_stat_cnt" class="stat">${COUNTITEM}</span>
+					</div>
+					<div class="stat_wrapper">
+						코디수: <span id="codi_stat_cnt" class="stat">${COUNTCODI}</span>
+					</div>
+
+					<div class="btn_wrapper_right1">
+						<a href="/user/joinPage" class="join btn">회원가입</a> <a
+							href="/customerboard/listall" class="cscenter btn">고객센터</a>
+
+						<c:choose>
+							<c:when test="${empty(login.id)}">
+								<a style="margin-top: 1px;" href="/user/loginpage">로그인 </a>
+							</c:when>
+							<c:when test="${login.bsm=='b'}">
+								<a style="margin-top: 1px;" href="/item/myshopping">마이 쇼핑</a>
+							</c:when>
+							<c:when test="${login.bsm=='m'}">
+								<a style="margin-top: 1px;" href="/user/tostatistics">통계보기</a>
+							</c:when>
+							<c:when test="${login.bsm=='s'}">
+								<a style="margin-top: 1px;" href="/user/tostatistics">통계보기</a>
+							</c:when>
+
+
+
+						</c:choose>
+
+						<a style="margin-right: 7px;" #" class="app btn">코디북 앱</a> <a
+							style="color: #ffffff;"
+							class="order_history1 requireLogin nonLoginOrderHistory btn">삭제하지마</a>
+					</div>
+				</div>
+			</div>
+			<!-- 젤 윗부분 header 끝 --> <!-- assemvely 로고 시작--> <a
+				style="margin-left: 400px;" class="navbar-brand" href="/item/main"><img
+				src="/resources/image/assemVely1.png"></a> <!-- assemvely 로고 끝-->
+
+
+			<!-- 이전꺼 검색 시작 -->
+			<form class="navbar-form navbar-right" role="search"
+				action="/all/search" method="get">
+				<div class="form-group"
+					style="margin: auto; text-align: center; margin-right: 400px;">
+					<input type="text" class="form-control1" placeholder="검색어를 입력하세요"
+						name="keyword">
+					<button type="submit" class="btn btn-default1">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</div>
+
+			</form>
+			<!-- 이전꺼 검색 끝 -->
+
+			<div class="navbar-header" style="margin: auto; margin-left: 400px;">
+				<div
+					style="overflow: auto; overflow-y: hidden; width: auto; height: auto; padding: 0 0 0px 0;">
+					<button class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#target">
+						<span class="sr-only">Toggle navigation</span> <span class>"icon-bar"</span>
+						<span class>"icon-bar"</span> <span class>"icon-bar"</span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="target">
+					<ul class="nav navbar-nav">
+						<c:choose>
+							<c:when test="${empty(login.id)}">
+								<li><a href="#">CODI</a></li>
+							</c:when>
+
+							<c:when test="${login.bsm=='b'}">
+								<li><a href="#">CODI</a></li>
+							</c:when>
+
+							<c:when test="${login.bsm=='m'}">
+								<li><a href="/manager/posting">POSTING</a></li>
+
+
+
+							</c:when>
+
+							<c:when test="${login.bsm=='s'}">
+								<li><a href="/all/posting">POSTING</a></li>
+							</c:when>
+						</c:choose>
+
+						<li><a href="/item/outer">OUTER</a></li>
+						<li><a href="/item/top">TOP</a></li>
+						<li><a href="/item/bottom">BOTTOM</a></li>
+						<li><a href="/item/skirt">SKIRT</a></li>
+						<li><a href="/item/dress">DRESS</a></li>
+						<li><a href="/item/acc">ACC</a></li>
+						<li><a href="/customerboard/listall">BOARD</a></li>
+
+						<c:choose>
+							<c:when test="${empty(login.id)}">
+								<ul class="nav navbar-nav navbar-right">
+									<li style="margin-left: 416px;" class="dropdown"><a
+										href="/user/loginpage">
+											<p>LOGIN</p>
+									</a></li>
+								</ul>
+							</c:when>
+
+							<c:when test="${login.bsm=='b'}">
+
+								<ul class="nav navbar-nav navbar-right">
+									<li style="margin-left: 340px;"><a href="#"><p>MESSAGES</p></a></li>
+
+									<li class="dropdown"><a style="margin-right: 7px;"
+										#" class="dropdown-toggle" data-toggle="dropdown">
+											<p>MY PAGE</p>
+									</a>
+
+										<ul class="dropdown-menu">
+											<li style="text-align: center";><a>HI! ${login.id}</a></li>
+											<li class="divider"></li>
+											<li style="text-align: center";><a
+												href="/user/mypage?id=${login.id}">MY ACCOUNT</a></li>
+											<li style="text-align: center";><a href="/item/cart">CART</a></li>
+											<li style="text-align: center";><a
+												href="/item/myshopping">MY SHOPPING</a></li>
+											<li class="divider"></li>
+											<li style="text-align: center";><a href="/user/logout">LOGOUT</a></li>
+										</ul></li>
+								</ul>
+							</c:when>
+
+							<c:when test="${login.bsm=='m'}">
+
+								<ul class="nav navbar-nav navbar-right">
+									<li style="margin-left: 340px;"><a href="#"><p>MESSAGES</p></a></li>
+
+
+									<li class="dropdown"><a href="#" class="dropdown-toggle"
+										data-toggle="dropdown">
+											<p>MY PAGE</p>
+									</a>
+
+										<ul class="dropdown-menu">
+											<li style="text-align: center";><a
+												href="/user/tomanaginguser">USER LIST</a></li>
+											<li style="text-align: center";><a
+												href="/user/tostatistics">STATISTICS</a></li>
+											<li style="text-align: center";><a
+												href="/user/towaitinglist">SELLER</a></li>
+											<li style="text-align: center";><a href="/manager/list">POSTING</a></li>
+											<li class="divider"></li>
+											<li style="text-align: center";><a href="/user/logout">LOGOUT</a></li>
+										</ul></li>
+								</ul>
+							</c:when>
+
+							<c:when test="${login.bsm=='s'}">
+
+								<ul class="nav navbar-nav navbar-right">
+									<li style="margin-left: 340px;"><a href="#"><p>MESSAGES</p></a></li>
+
+									<li class="dropdown"><a href="#" class="dropdown-toggle"
+										data-toggle="dropdown">
+											<p>MY PAGE</p>
+									</a>
+
+										<ul class="dropdown-menu">
+											<li style="text-align: center";><a>HI! ${login.id}</a></li>
+											<li class="divider"></li>
+											<li style="text-align: center";><a
+												href="/user/mypage?id=${login.id}">MY ACCOUNT</a></li>
+											<li style="text-align: center";><a
+												href="/user/tostatistics">STATISTICS</a></li>
+
+											<li class="divider"></li>
+											<li style="text-align: center";><a href="/user/logout">LOGOUT</a></li>
+										</ul></li>
+								</ul>
+							</c:when>
+
+
+
+
+						</c:choose>
+					</ul>
+
+				</div>
+			</div>
+			</nav>
+		</div>
+	</div>

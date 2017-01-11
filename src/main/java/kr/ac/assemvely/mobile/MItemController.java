@@ -1,6 +1,9 @@
 package kr.ac.assemvely.mobile;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -38,11 +41,11 @@ public class MItemController {
 	@Inject
 	private UserService userservice; 
 	
-	@RequestMapping(value="readposting")
-	public @ResponseBody List<ItemVo> listlittlecategoryouterGET()throws Exception{
-		String st="OUTER";
-		return itemservice.selectcategory(st);
-	}
+//	@RequestMapping(value="readposting")
+//	public @ResponseBody List<ItemVo> listlittlecategoryouterGET()throws Exception{
+//		String st="OUTER";
+//		return itemservice.selectcategory(st);
+//	}
 	
 	@RequestMapping(value="/readposting",method=RequestMethod.POST)
 	private @ResponseBody ItemVo readposting(String clothcode) throws Exception{
@@ -55,6 +58,34 @@ public class MItemController {
 				
 				
 				
+	}
+	@RequestMapping(value="/content")
+	private @ResponseBody List<ItemVo> readcontent(int clothcode)throws Exception{
+		ItemVo itemvo=new ItemVo();
+		
+		Pattern pattern=Pattern.compile("src=[\"']?[^>\"']+");
+		itemvo=itemservice.readposting(clothcode);
+		String content=itemvo.getContent();
+	
+		String realcontent=content.replaceAll("[°¡-ÆR¤¡-¤¾¤¿-¤Ó!~]","");
+
+			Matcher match=pattern.matcher(realcontent);
+			String imgTag=null;
+			String realimgname=null;
+			
+		List<ItemVo> all=new ArrayList<>();
+			while(match.find()){
+				ItemVo item=new ItemVo();
+				imgTag=match.group();
+				 realimgname=imgTag.replaceAll("(src=?[\"'])","");
+			 
+				 item.setImgname(realimgname);
+				 
+				 all.add(item);
+			}
+		 
+		return all;
+		
 	}
 	
 	@RequestMapping(value="/readinfo")
@@ -329,7 +360,7 @@ public class MItemController {
          cvo.setImgname(imgname);
          cvo.setPrice(Integer.parseInt(price));
          cvo.setCartbno(Integer.parseInt(cartbno));
-         
+   
          
          itemservice.coloramount(cvo);   //±¸ÀÔÇÑ ¼ö·® »©±â
          

@@ -3,6 +3,7 @@ package kr.ac.assemvely.dao;
 import java.util.List;
 
 import kr.ac.assemvely.vo.CartVo;
+import kr.ac.assemvely.vo.Criteria;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.PayVo;
@@ -51,4 +52,24 @@ public List<ItemVo> newitem();
 	
 	public CartVo userchoice(int cartbno);
 	public void coloramount(CartVo cartvo);
+	
+
+	public List<ItemVo> selectwithtempcode (int tempcode) throws Exception;
+	
+	public List<ItemVo> select_top_withtempcode (int tempcode) throws Exception;
+	
+	public List<ItemVo> select_bottom_withtempcode (int tempcode) throws Exception;
+	
+	public List<ItemVo> select_outer_withtempcode (int tempcode) throws Exception;
+	
+	public List<ItemVo> select_shoes_withtempcode (int tempcode) throws Exception;
+	
+	public List<ItemVo> select_bag_withtempcode (int tempcode) throws Exception;
+	
+	
+	public List<ItemVo> item_list_page (Criteria cri) throws Exception;
+	
+	public int countitem (Criteria cri) throws Exception;
+	
+
 }

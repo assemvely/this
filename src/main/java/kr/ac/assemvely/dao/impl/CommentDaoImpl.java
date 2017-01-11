@@ -38,5 +38,17 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 
+	@Override
+	public int codi_comment(CommentVo commentvo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.insert(namespace+".codi_comment",commentvo);
+	}
+
+
+	@Override
+	public List<CommentVo> codi_list(CommentVo commentvo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".codi_list",commentvo);
+	}
 
 }

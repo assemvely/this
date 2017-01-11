@@ -9,11 +9,8 @@ public class PayVo
 	private Integer clothcode;
 	private Date orderdate;
 	private String brandid;
-	@Override
-	public String toString() {
-		return "PayVo [id=" + id + ", clothcode=" + clothcode + ", orderdate=" + orderdate + ", brandid=" + brandid
-				+ "]";
-	}
+	private int cnt;
+ 
 	public String getId() {
 		return id;
 	}
@@ -38,7 +35,12 @@ public class PayVo
 	public void setBrandid(String brandid) {
 		this.brandid = brandid;
 	}
-	
+	public int getCnt(){
+		return cnt;
+	}
+	public void setCnt(int cnt){
+		this.cnt=cnt;
+	}
 	
 	
 }

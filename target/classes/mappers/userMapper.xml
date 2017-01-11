@@ -216,5 +216,8 @@
 	<select id="bybsm" resultType="kr.ac.assemvely.vo.UserVo">
 	select * from usertb where bsm=#{bsm}
 	</select>
+	<!-- <select id="usercount" resultType="kr.ac.assemvely.vo.UserVo">
+	select * from usertb where joindate> to_char(sysdate - 7, 'YYMMDD')
+	</select> -->
 	
 	</mapper>
