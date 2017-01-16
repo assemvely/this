@@ -30,6 +30,7 @@ import kr.ac.assemvely.service.PayService;
 import kr.ac.assemvely.service.UserService;
 import kr.ac.assemvely.vo.AddressVo;
 import kr.ac.assemvely.vo.CartVo;
+import kr.ac.assemvely.vo.CodiVo2;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.ManagerVo;
@@ -60,18 +61,44 @@ public class ItemController {
 		vo = itemservice.listitem();
 		model.addAttribute("LIST", vo);
 		
-
+		List<CodiVo2> codi=itemservice.bestcodi();
+		List<CodiVo2> codilist=new ArrayList<>();
+		for(int i=0;i<codilist.size();i++){
+			int count=0;
+			CodiVo2 codi2=codi.get(i);
+			codilist.add(codi2);
+			count++;
+			if(count==4){
+				break;
+			}
+		}
+		
+		List<UserVo> brandgallery = userservice.brandgallery();
+		model.addAttribute("BRANDGALLERY", brandgallery);
+		
+		model.addAttribute("BESTCODI", codilist);
 		List<ItemVo> newitem = itemservice.newitem();
 		model.addAttribute("NEWITEM", newitem);
 	
+
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
 		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		List<ManagerVo> banner=managerservice.readbanner();
 	 
 		model.addAttribute("BANNER",banner);
 		return "homemain";
 	}
 	@RequestMapping(value="/posting" )
-	public String posting( HttpSession session,Model model){
+	public String posting( HttpSession session,Model model) throws Exception{
+
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 			UserVo vo=(UserVo) session.getAttribute("login");
 			model.addAttribute("userVO",vo);
 		return "itemposting";
@@ -125,11 +152,16 @@ public class ItemController {
 		 }
 		
 		
-		return "homemain";
+		return "redirect:/item/main";
 	}
 	@RequestMapping(value="/readposting")
 	private String readposting(@ModelAttribute("clothcode") int clothcode,Model model) throws Exception{
- 
+
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		ItemVo itemvo=itemservice.readposting(clothcode);
 		 
 		int Price=(itemvo.getPrice());
@@ -147,6 +179,11 @@ public class ItemController {
 	@RequestMapping(value = "/outer")
 	public String listlittlecategoryouterGET(Model model, String outer) throws Exception {
 
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		String selectcategory;
 
 		if (outer == null)
@@ -209,6 +246,11 @@ public class ItemController {
 	@RequestMapping(value = "/top")
 	public String listlittlecategorytopGET(Model model, String top) throws Exception {
 
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		String selectcategory;
 		if (top == null)
 			selectcategory = "TOP";
@@ -229,6 +271,11 @@ public class ItemController {
 	@RequestMapping(value = "/bottom")
 	public String listlittlecategorybottomGET(Model model, String bottom) throws Exception {
 
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		String selectcategory;
 		if (bottom == null)
 			selectcategory = "BOTTOM";
@@ -249,6 +296,11 @@ public class ItemController {
 	@RequestMapping(value = "/skirt")
 	public String listlittlecategoryskirtGET(Model model, String skirt) throws Exception {
 
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		String selectcategory;
 		if (skirt == null)
 			selectcategory = "SKIRT";
@@ -269,6 +321,11 @@ public class ItemController {
 	@RequestMapping(value = "/dress")
 	public String listlittlecategorydressGET(Model model, String dress) throws Exception {
 
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		String selectcategory;
 		if (dress == null)
 			selectcategory = "DRESS";
@@ -289,6 +346,11 @@ public class ItemController {
 	@RequestMapping(value = "/acc")
 	public String listlittlecategoryaccGET(Model model, String acc) throws Exception {
 
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		String selectcategory;
 		if (acc == null)
 			selectcategory = "ACC";
@@ -312,7 +374,12 @@ public class ItemController {
 	public String tocart(HttpSession session, Model model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
+
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
 		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		UserVo uvo=(UserVo) session.getAttribute("login");	
 		String id = uvo.getId();
 						
@@ -351,7 +418,12 @@ public class ItemController {
 			HttpServletRequest request, HttpServletResponse response,CartVo cartvo
 			) throws Exception
 	{
-	 
+
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		UserVo uvo =  (UserVo) session.getAttribute("login");
 		
 		String id=uvo.getId();
@@ -550,6 +622,12 @@ public class ItemController {
 	 
 @RequestMapping(value="/cart")
 private String cart(HttpSession session,Model model) throws Exception{
+
+	int countitem = itemservice.countitem();
+	model.addAttribute("COUNTITEM", countitem);
+	
+	int countcodi = itemservice.countcodi();
+	model.addAttribute("COUNTCODI", countcodi);
 	UserVo uservo=(UserVo)session.getAttribute("login");
 	
 	List<CartVo> vo=itemservice.cart(uservo.getId());
@@ -559,6 +637,12 @@ private String cart(HttpSession session,Model model) throws Exception{
 }
 @RequestMapping(value="/myshopping")
 private String myshopping(HttpSession session,Model model)throws Exception{
+
+	int countitem = itemservice.countitem();
+	model.addAttribute("COUNTITEM", countitem);
+	
+	int countcodi = itemservice.countcodi();
+	model.addAttribute("COUNTCODI", countcodi);
 	UserVo uservo=(UserVo)session.getAttribute("login");
 	List<ItemVo> itemvo=itemservice.selectitemfrompaytb(uservo.getId());
 	model.addAttribute("myshopping",itemvo);

@@ -21,10 +21,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.ac.assemvely.service.BoardService;
 import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.service.UserService;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.UserVo;
 //메인에서 가는 모든 경로를 지정
 @Controller
@@ -36,6 +39,10 @@ public class AllController {
 	
 	@Inject
 	private ItemService itemservice;
+	
+	
+	@Inject
+	private BoardService boardservice;
 	
 	@RequestMapping(value="/main")
 	public String main(){
@@ -64,6 +71,11 @@ public class AllController {
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String search(Model model, String keyword) throws Exception
 	{
+		int countitem = boardservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = boardservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		String id = keyword;
 	 
 		List<UserVo> searchuserlist = userservice.searchuser(id);
@@ -76,7 +88,15 @@ public class AllController {
 		
 		return "searchpage";
 	}
-	 
+	 @RequestMapping(value="/notify", method=RequestMethod.GET)
+	 public @ResponseBody List<NotifyVo> notify(HttpSession session) throws Exception{
+		 UserVo vo=(UserVo)session.getAttribute("login");
+		 List<NotifyVo> notify=itemservice.getnotify(vo.getId());
+
+		 System.out.println("djfalkdjaeil"+notify.toString()); 
+		 return notify;
+		 
+	 }
 	  
 	   //날씨 페이지.     
 	   //위치, 날씨(하늘, 최고기온, 최저기온  )받아옴.
@@ -326,6 +346,8 @@ public class AllController {
 	      return "weathercodi2";
 	      
 	   }
+	   
+	   
 	   
 
 		

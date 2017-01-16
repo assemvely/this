@@ -5,13 +5,18 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.service.UserService;
+import kr.ac.assemvely.vo.NotifyVo;
+import kr.ac.assemvely.vo.RelationVo;
 import kr.ac.assemvely.vo.UserDto;
 import kr.ac.assemvely.vo.UserVo;
 
@@ -20,7 +25,8 @@ import kr.ac.assemvely.vo.UserVo;
 public class MuserController {
 	@Inject
 	private UserService service;
-	
+	@Inject
+	private ItemService itemservice;
 	
 	@RequestMapping(value="/follower" ) 
 	public @ResponseBody List<UserVo> follow(String id)throws Exception{
@@ -75,11 +81,15 @@ public class MuserController {
 	   {
 	      System.out.println("mobilelogin");
 	      request.setCharacterEncoding("UTF-8");
-	       response.setContentType("text/html;charset=UTF-8");
+	      response.setContentType("text/html;charset=UTF-8");
 	         
+	       
+	       
 	        // 요청한 곳으로부터 파라미터 받기
 	       String id = request.getParameter("id");
 	       String pw = request.getParameter("pw");
+	       
+	       System.out.println(id);
 	       
 
 	      dto.setId(pw);
@@ -92,6 +102,33 @@ public class MuserController {
 	   }
 	
 	
-	   
+
+		@RequestMapping(value="/following", method=RequestMethod.GET)
+		public @ResponseBody RelationVo following(@RequestParam("id")String followingid, HttpSession session) throws Exception
+		{ 
+			
+		
+			RelationVo relationvo=new RelationVo();
+			RelationVo rvo = new RelationVo();
+			
+			UserVo vo = (UserVo) session.getAttribute("login");
+			String followerid = vo.getId();
+			//---------------여기 알람 인설트
+			NotifyVo notifyvo=new NotifyVo();
+			
+			notifyvo.setId(followingid);
+			notifyvo.setSendid(followerid);
+			notifyvo.setBno(0);
+			notifyvo.setBoard("f");
+			notifyvo.setNotifycode("follow");
+			itemservice.insertboardnotify(notifyvo);
+			//--------------------------
+			
+			rvo.setFollowerid(followerid);
+			rvo.setFollowingid(followingid);
+			service.following(rvo);
+			return relationvo;
+			
+		}
 
 }

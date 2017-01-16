@@ -1159,11 +1159,11 @@ a.jcm-top { /* 맨위로 가는 화살표  */
 					</div>
 					<div class="bottom_wrapper" style="bottom: 0px;">
 						<div class="tag_wrapper"></div>
-						<div class="liked_wrapper">
+						<!-- <div class="liked_wrapper">
 							<div class="total_liked">
 								<span class="numLike">2</span>명이 좋아합니다
 							</div>
-						</div>
+						</div> -->
 						<button class="like_icon requireLogin"></button>
 					</div>
 				</div>
@@ -1289,6 +1289,8 @@ a.jcm-top { /* 맨위로 가는 화살표  */
 
 	<span>${READ.content}</span>
 	
+	
+		<h3><a href="/comment/list?clothcode=${READ.clothcode}" style="color:black">comment</a></h3>
 	<!-- 여기까지 -->
 	
 	
@@ -1309,6 +1311,7 @@ a.jcm-top { /* 맨위로 가는 화살표  */
 							</div>
 							</div>
 							
+						
 </body>
 <br />
 <br />

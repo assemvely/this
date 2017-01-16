@@ -15,13 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.assemvely.service.CommentService;
+import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.vo.CommentVo;
+import kr.ac.assemvely.vo.NotifyVo;
 
 @Controller
 @RequestMapping("/m/comment")
 public class McommentController {
 	@Inject
 	CommentService service;
+	
+	@Inject
+	ItemService itemservice;
 	
 	//sns�뙎湲� �궘�젣�븯湲�
 	@RequestMapping(value="/delete",method=RequestMethod.POST)
@@ -68,8 +73,8 @@ public class McommentController {
 		//�븘�뮘�뒗 �씠誘� sharedpreference? 嫄곌린�뿉 �떞湲닿굅 �떞�븯�떎�뒗 媛��젙�븯�뿉...
 		@RequestMapping(value="/insert", method=RequestMethod.POST)
 		public @ResponseBody void insertcomment(HttpServletRequest request,CommentVo commentvo,HttpServletResponse response) throws Exception{
-			
-			
+			 
+	
 			request.setCharacterEncoding("UTF-8");
 		    response.setContentType("text/html;charset=UTF-8");
 
@@ -89,6 +94,25 @@ public class McommentController {
 			
 		
 			service.c_insert(commentvo);
+			//----------------------------------여기부터 저아래까지가 notify좋아요 코드
+			 
+			NotifyVo notifyvo=new NotifyVo();
+			 
+			notifyvo.setSendid(commentvo.getId());
+			notifyvo.setBoard(commentvo.getBoardcode());
+			notifyvo.setBno(commentvo.getBno());
+			notifyvo.setNotifycode("comment");
+			if(commentvo.getBoardcode().equals("s")){
+				
+				itemservice.insertnotify(notifyvo);
+			}else if(commentvo.getBoardcode().equals("c")){
+				itemservice.insertcodilikenotify(notifyvo);
+			
+			}
+	 
+			
+			//------------------------------------------
+			
 			
 			//return "redirect:/comment/m_list";
 	    }

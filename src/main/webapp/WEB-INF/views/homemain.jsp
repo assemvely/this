@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-<%@ include file="firststyle.jinc"%>
+<%@ include file="example2.jinc"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta charset="utf-8">
@@ -93,7 +93,7 @@ font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'App
 			return false;
 		});
 	});
-
+	
 	function onChangeSelect() {
 
 		var selected = $("#selectlittlecategory").val();
@@ -107,11 +107,23 @@ font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'App
 	}
 	$(document).ready(function() {
 	})
+	$(document).on('click','#messagebtn',function(){
+		$.ajax({
+			contentType:'application/json',
+			type:'get'
+			url:'all/notify',
+			
+			success:function(result){
+				alert("룰루");
+			}
+		});
+		
+	});
 </script>
 </head>
 <body>
 	<%@ include file="secondstyle.jinc"%>
-	<%@ include file="header.jinc"%>
+	<%@ include file="example.jinc"%>
 	<div>
 		<div
 			style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">
@@ -233,7 +245,23 @@ font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'App
 						<br>
 
 						<!-- 베스트 코디 시작 -->
+						
+						
 						<div class="row">
+						
+							<c:forEach items="${BESTCODI}" var="codi">
+			 <!-- C:\\android\codi\7e7a2c26-0792-4194-8918-b1f985b04670.png -->
+									 	<div class="col-lg-3 text-center"> 
+									 	<div class="panel panel-default">
+									 	<div class="panel-body">${codi.id}</div>
+								<!-- 	 <img class="img-thumbnail" src="file:///C://android/codi/7e7a2c26-0792-4194-8918-b1f985b04670.png"	alt="no images">  -->
+									<img class="img-thumbnail" src="C://zzz/codi/daa82a04-c322-4075-a8a9-480cb7c7e794.jpg" 	alt="no images">
+									 </div>
+									</div>
+<!--  http://localhost:9090/C://zzz/codi/daa82a04-c322-4075-a8a9-480cb7c7e794.jpg -->
+								</c:forEach>
+						
+						<!-- 
 							<div class="col-lg-3 text-center">
 								<div class="panel panel-default">
 									<div class="panel-body">.col-lg-3</div>
@@ -247,7 +275,7 @@ font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'App
 									<img class="img-thumbnail" src="http://placehold.it/400x400"
 										alt="no image">
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<!-- 베스트 코디 끝 -->
 					

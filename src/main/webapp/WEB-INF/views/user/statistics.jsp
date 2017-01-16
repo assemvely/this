@@ -1,189 +1,242 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-     <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-
- 
+<%@ include file="firststyle.jinc"%>
 <head>
-<style>
-#h2 {
-    position: absolute;
-    left: 1450px;
-    top: 80px;
-    color: red;
-}
-@font-face {
-   font-family: 'Nanum Gothic Coding', monospace;
-   padding-top: 70px;
-}
-
-#main_footer {
-   /* footer Áß¾Ó Á¤·Ä */
-   width: 960px;
-   margin: 0 auto;
-   margin-bottom: 10px;
-   /* footer ±Û¾¾ Á¤·Ä */
-   text-align: center;
-}
-
-body {
-   padding-top: 40px;
-   
-}
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-.nav-counter {
- position:absolute;
- top: 5px;
- right: 5px;
- min-width: 8px;
- height: 20px;
- line-height: 20px;
- margin-top: -12px;
- padding: 0 6px;
- font-weight: normal;
- font-size: small;
- color: white;
- text-align: center;
- text-shadow: 0 1px rgba(0, 0, 0, 0.2);
- background: #e23442;
- border: 1px solid #911f28;
- border-radius: 11px;
- background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
- background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
- background-image: -o-linear-gradient(top, #e8616c, #dd202f);
- background-image: linear-gradient(to bottom, #e8616c, #dd202f);
- -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
- box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
-}
-</style> 
-<head>
-<title>Home</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="">
+<meta name="author" content="">
 <link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<!-- Bootstrap Core CSS ±ò±â -->
+<script src="/resources/js/jquery.js"></script>
+<script src="/resources/js/npm.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- owl carousel±ò±â -->
 <link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
-
-<!-- css admin±ò±â -->
 <link href="css/sb-admin.css" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
 <script src="/resources/jquery/jquery-1.12.4.min.js"></script>
 <script src="/resources/owl.carousel/owl.carousel.min.js"></script>
-<!-- <script src="/resources/owl.carousel/owl.carousel.js"></script> -->
+<link href="font-awsome/css/font-awesome.cin.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Footer-with-button-logo.css">
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link href="/resources/navbar/css/bootstrap.css" rel="stylesheet" />
+<link href="/resources/navbar/css/ct-navbar.css" rel="stylesheet" />
+<script src="/resources/navbar/js/jquery-1.10.2.js"></script>
+<script src="/resources/navbar/js/bootstrap.js"></script>
+<script src="/resources/navbar/js/ct-navbar.js"></script>
+
+<style>
+#h2 {
+	position: absolute;
+	left: 1450px;
+	top: 80px;
+	color: red;
+}
+
+body {
+	padding-top: 40px;
+}
+</style>
+<style type="text/css">
+@font-face {
+	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'ë§‘ì€ ê³ ë”•', Dotum, 'Apple SD Gothic Neo', Sans-serif;
+}
+
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+	margin: 0px auto;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 0px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	vertical-align: center;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 15px 5px;
+	border-style: solid;
+	border-width: 0px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #d9534f;
+	color: #ffffff;
+	background-color:#d9534f;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	vertical-align: center;
+	text-align: center;
+}
+
+.tg .tg-58iv {
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif !important;
+	text-align: center;
+	vertical-align: center;
+	border:1px solid #d9534f;
+}
+
+.tg .tg-yw4l {
+	vertical-align: center;
+	border-bottom:1px solid #d9534f;
+	
+}
+#thisistitle {
+	color: #black;
+}
+
+.tg-yw4l, .tg-031e {
+	width: 200px;
+	heignt: 100px;
+	text-align: center;
+	vertical-align: center;
+}
+</style>
+
+<title>ASSEMVELY STATISTICS</title>
+
+<script type="text/javascript">
+	/* ë§¨ìœ„ë¡œ ì˜¬ë¼ê°€ëŠ” í™”ì‚´í‘œ  */
+	$(document).ready(function() {
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 200) {
+				$('.jcm-top').fadeIn();
+			} else {
+				$('.jcm-top').fadeOut();
+			}
+		});
+		$('.jcm-top').click(function() {
+			$('html, body').animate({
+				scrollTop : 0
+			}, 400);
+			return false;
+		});
+	});
+</script>
 </head>
-<body style="margin-left:400px;margin-right:400px;">
-<%@ include file="css.jinc"%>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-	<c:choose>
-		<c:when test="${login.bsm=='m'}">
-			<h1>manager Åë°è</h1>
-		 
-		<li>±¸¸ÅÀÚ È¸¿ø ¼ö : ${buyercounter} 		<br/></li> 
-		<li>ÆÇ¸ÅÀÚ È¸¿ø ¼ö : ${sellercounter}		<br/></li>
-	 			 
-		<li>ºê·£µå ÆÇ¸Å ¼øÀ§  						<br/></li>
-		
-				<c:forEach items="${bestbrand}" var="cnt">
-				<h3><a href="/user/mypage?id=${cnt.brandid}">brand ${cnt.brandid}</a></h3>
-				<h5>${cnt.cnt}</h5>
-				
-				</c:forEach> 
-		<li>º£½ºÆ® »óÇ°</li>
-				<c:forEach items="${bestItem}" var="top3">
-				<a href="/item/readposting?clothcode=${top3.clothcode}">	<img src="/resources/itemimg/${top3.imgname} " alt="No Image"></a>
-				<p>${top3.name}</p>
-				</br>	
-				</c:forEach>
-		<li>ÁÖº° È¸¿ø¼ö</li>
-		</c:when>
+<body>
+	<%@ include file="secondstyle.jinc"%>
+	<%@ include file="header.jinc"%>
+	<div>
+		<div
+			style="margin-left: 400px; margin-right: 400px; margin-top: 100px;">
+			<div>
+				<div>
+					<div class="col-md-12">
+						<div class="col-md-12">
+
+							<c:choose>
+
+
+								<c:when test="${login.bsm=='m'}">
+									<div class="jumbotron"
+										style="margin-top: 45px; text-align: center;">
+										<div class="container"
+											style="margin: auto; text-align: center;">
+											<h1>MANAGER STATISTICS</h1>
+											<p>ë§¤ë‹ˆì € í†µê³„ ìë£Œ</p>
+											<a class="btnbtn-primary btn-large" href="#">ë²„íŠ¼ì„ í•˜ë ¤ë©´ í•˜ê³ 
+												ë§ë¼ë©´ ë§ìŸ!</a>
+										</div>
+									</div>
+									<table class="tg" width="800px" height="100px" style="margin-top:55px;
+										margin-right:auto;">
+										<tr>
+											<th class="tg-031e">êµ¬ë§¤ì íšŒì› ìˆ˜</th>
+											<th class="tg-031e">íŒë§¤ì íšŒì› ìˆ˜</th>
+											<th class="tg-031e">ë¸Œëœë“œ íŒë§¤ ìˆœìœ„</th>
+											<th class="tg-031e">ë² ìŠ¤íŠ¸ ìƒí’ˆ</th>
+											<th class="tg-031e">ì£¼ë³„ íšŒì› ìˆ˜</th>
+										</tr>
+
+										<tr>
+											<td class="tg-yw4l">${buyercounter}</td>
+											<td class="tg-yw4l">${sellercounter}</td>
+											<td class="tg-yw4l"></td>
+											<td class="tg-yw4l"></td>
+											<td class="tg-yw4l"></td>
+										</tr>
+									</table>
+
+								</c:when>
 
 
 
-		<c:when test="${login.bsm=='s'}">
+								<c:when test="${login.bsm=='s'}">
+									<div class="jumbotron"
+										style="margin-top: 45px; text-align: center;">
+										<div class="container"
+											style="margin: auto; text-align: center;">
+											<h1>SELLER STATISTICS</h1>
+											<p>íŒë§¤ì í†µê³„ ìë£Œ</p>
+											<a class="btnbtn-primary btn-large" href="#">ë²„íŠ¼ì„ í•˜ë ¤ë©´ í•˜ê³ 
+												ë§ë¼ë©´ ë§ìŸ!</a>
+										</div>
+									</div>
 
-			<h1>seller Åë°è</h1>
-			
-			<li>ÃÑ ±¸¸ÅÀÚ È¸¿ø ¼ö :${buyercounter}<br /></li>
-			<li>ÀÌ¹ø ÁÖ ³» °èÁ¤ ±¸¸ÅÀÚ ¼ö : <br /></li>
-			<c:forEach items="${weeklymybuyer}" var="buyer">
-			
-				<h3>${buyer.cnt}</h3>
-				</c:forEach>
-			<li>³» ºê·£µå ¼øÀ§ :			<br /></li> 
-				
-				<c:forEach items="${bestbrand}" var="cnt">
-				
-				<h3><a href="/user/mypage?id=${cnt.brandid}">brand ${cnt.brandid}</a></h3>
-				<h5>${cnt.cnt}</h5>	
-				</c:forEach> 	<br />
-				
-				<li>¾ÆÀÌÅÛ ÆÇ¸Å ¼øÀ§</li>
-				<c:forEach items="${mybestitem}" var="mytop3">
-				<a href="/item/readposting?clothcode=${mytop3.clothcode}">	<img src="/resources/itemimg/${mytop3.imgname} " alt="No Image"></a>
-				<p>${mytop3.name}</p>
-				</br>	
-				</c:forEach>
-						<br />
+									<table class="tg" width="800px" height="100px"
+										margin-right="auto">
+										<tr>
+											<th class="tg-031e">ì´ êµ¬ë§¤ì íšŒì› ìˆ˜</th>
+											<th class="tg-031e">ì´ë²ˆì£¼ ë‚´ ê³„ì • êµ¬ë§¤ì ìˆ˜</th>
+											<th class="tg-031e">ë‚´ ë¸Œëœë“œ ìˆœìœ„</th>
+											<th class="tg-031e">ì•„ì´í…œ íŒë§¤ ìˆœìœ„</th>
+										<tr>
+											<td class="tg-yw4l"></td>
+											<td class="tg-yw4l"></td>
+											<td class="tg-yw4l"></td>
+											<td class="tg-yw4l"></td>
+										</tr>
+									</table>
 
-			</h2>
-		</c:when>
 
-	</c:choose>
 
- 
 
+								</c:when>
+
+							</c:choose>
+							<br /> <br /> <br /> <br />
+						</div>
+						<a href="#" class="jcm-top"><img
+							src="/resources/glyphicons/glyphicons-214-arrow-upupup.png"
+							style="margin-bottom: 24px; width: 25px;"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<br />
+<br />
+
+<%@ include file="footer.jinc"%>
+
 </html>

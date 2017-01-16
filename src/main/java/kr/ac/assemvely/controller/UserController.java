@@ -26,6 +26,7 @@ import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.service.PayService;
 import kr.ac.assemvely.service.UserService;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.RelationVo;
 import kr.ac.assemvely.vo.TempUserVo;
 import kr.ac.assemvely.vo.UserDto;
@@ -84,7 +85,7 @@ public class UserController
 	      {      
 	         vo.setFilename("");
 	         service.join(vo);
-	         return "homemain";
+	         return "redirect:/item/main";
 	      }
 	      
 	      else if (vo.getBsm().equals("s"))
@@ -98,10 +99,10 @@ public class UserController
 	         vo.setFilename(filename2);
 	       
 	         service.sellerjoin(vo);
-	         return "homemain";
+	         return "redirect:/item/main";
 	         
 	      }
-	      return "homemain";
+	      return "redirect:/item/main";
 	         
 	   }
 	
@@ -162,6 +163,11 @@ public class UserController
 		//4. 브랜드가 내 아이디인곳에 clothcode별로 카운트 뽑아서 순서 정하면 될듯
 		//5. 게시글은 itemtb에 id가 세션id(seller)
 			 //총게시글은 itemtb의 수(manager)
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		return "/user/statistics";
 		
 	}
@@ -231,11 +237,11 @@ public class UserController
 		UserVo vo = service.login(dto);
 		if(vo==null){
 			
-			return "homemain";
+			return "redirect:/item/main";
 		}
 		session.setAttribute("login", vo);
 		 
-		return "homemain";
+		return "redirect:/item/main";
 		
 	 
 	}
@@ -253,14 +259,14 @@ public class UserController
 						
 			session.removeAttribute("login");
 			session.invalidate();
-			return "homemain";
+			return "redirect:/item/main";
 		}
 		
 		
 		session.removeAttribute("login");
 		session.invalidate();
 		
-		return "homemain";
+		return "redirect:/item/main";
 		
 				
 	}
@@ -317,7 +323,11 @@ public class UserController
 		model.addAttribute("followingcounter", service.followercounter(followerid));
 		
 		model.addAttribute("followercounter", service.followingcounter(followingid));
-	 
+		int countitem = itemservice.countitem();
+		model.addAttribute("COUNTITEM", countitem);
+		
+		int countcodi = itemservice.countcodi();
+		model.addAttribute("COUNTCODI", countcodi);
 		
 		if(vo.getBsm().equals("b")){
 			path="/user/mypage";
@@ -362,7 +372,7 @@ public class UserController
 				
 		service.deleteuser(dto);
 		logout(request, response, session);
-		return "homemain";
+		return "redirect:/item/main";
 		
 	}
 	
@@ -381,10 +391,21 @@ public class UserController
 	public String following(@RequestParam("id")String followingid, HttpSession session) throws Exception
 	{ 
 		
+	
+		
 		RelationVo rvo = new RelationVo();
 		
 		UserVo vo = (UserVo) session.getAttribute("login");
 		String followerid = vo.getId();
+		//---------------여기 알람 인설트
+		NotifyVo notifyvo=new NotifyVo();
+		
+		notifyvo.setId(followingid);
+		notifyvo.setSendid(followerid);
+	 
+		notifyvo.setNotifycode("follow");
+		itemservice.insertusernotify(notifyvo);
+		//--------------------------
 		
 		rvo.setFollowerid(followerid);
 		rvo.setFollowingid(followingid);

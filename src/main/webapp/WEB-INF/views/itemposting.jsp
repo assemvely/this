@@ -37,6 +37,10 @@
 <script src="/resources/navbar/js/jquery-1.10.2.js"></script>
 <script src="/resources/navbar/js/bootstrap.js"></script>
 <script src="/resources/navbar/js/ct-navbar.js"></script>
+<script type="text/javascript" src="/resources/Editor/js/HuskyEZCreator.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <style>
 #h2 {
 	position: absolute;
@@ -89,15 +93,17 @@ body {
 		});
 
 		a();
-
+		 
+		
+		
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "smarteditor",
+			elPlaceHolder :"smarteditor",
 			//SmartEditor2Skin.html 파일이 존재하는 경로
 			sSkinURI : "/resources/Editor/SmartEditor2Skin.html",
 			htParams : {
 				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-				bUseToolbar : true,
+				bUseToolbar :true,
 				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
 				bUseVerticalResizer : true,
 				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
@@ -119,6 +125,8 @@ body {
 		})
 
 	});
+	
+	
 
 	function a() {
 		if (counter > 10) {
@@ -131,17 +139,13 @@ body {
 
 		newTextBoxDiv.after().html(
 				'<label>Textbox #' + counter + ' : </label>'
-						+ '<input type="text" name="a"  id="color' + counter
-						+ '" placeholder="(색상)" style="font-size:8pt;">'
-						+ '<label>Textbox #' + counter + ' : </label>'
-						+ '<input type="text" name="a"  id="amount' + counter
-						+ '"  placeholder="(수량)" style="font-size:8pt;">');
+						+ '<input type="text" name="a"  id="color'+ counter+ '" placeholder="(색상)" style="font-size:8pt;">'
+						+ '<label>Textbox #' + counter + ' : </label>'+ '<input type="text" name="a"  id="amount'+ counter+ '"  placeholder="(수량)" style="font-size:8pt;">');
 
 		newTextBoxDiv.appendTo("#TextBoxesGroup");
 
 		counter++;
 	}
-
 	/* 맨위로 올라가는 화살표  */
 	$(document).ready(function() {
 		$(window).scroll(function() {
@@ -284,7 +288,7 @@ body {
 
 
 					<textarea rows="10" cols="30" name="smarteditor" id="smarteditor"
-						style="width: 690px; height: 312px;"></textarea>
+						style="width: 630px; height: 312px;"></textarea>
 
 					<input type="button" id="save" value="submit" />
 

@@ -47,4 +47,5 @@ public interface UserService
 	public UserVo mypage(String id)throws Exception;
 	public List<UserVo> bybsm(String bsm)throws Exception;
 	public List<UserVo> usercount()throws Exception;
+	public List<UserVo> brandgallery() throws Exception;
 }

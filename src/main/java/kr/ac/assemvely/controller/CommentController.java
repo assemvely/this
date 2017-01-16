@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.assemvely.service.CommentService;
+import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.vo.CommentVo;
+import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.UserVo;
 
 @Controller
@@ -28,6 +30,8 @@ public class CommentController {
 	@Inject
 	CommentService service;
 	
+	@Inject
+	ItemService itemservice;
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("clothcode") Integer clothcode,Model model) throws Exception{
@@ -39,12 +43,30 @@ public class CommentController {
 	
 	@RequestMapping(value="/b_insert",method=RequestMethod.POST)
 	public ResponseEntity<String> insert(@RequestBody CommentVo commentvo){
-		
+		//itemservice.notifymessage();
 		ResponseEntity<String> entity=null;
 		try {
 			service.c_insert(commentvo);
 			entity=new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 			
+			
+			//----------------------------------여기부터 저아래까지가 notify좋아요 코드
+			 
+			NotifyVo notifyvo=new NotifyVo(); 
+			notifyvo.setSendid(commentvo.getId());
+			notifyvo.setBoard(commentvo.getBoardcode());
+			notifyvo.setBno(commentvo.getBno());
+			notifyvo.setNotifycode("comment");
+			if(commentvo.getBoardcode().equals("b")){
+
+				itemservice.insertboardnotify(notifyvo);
+			}else if(commentvo.getBoardcode().equals("c")){
+				itemservice.insertcodilikenotify(notifyvo);
+			
+			}
+	 
+			
+			//------------------------------------------
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity=new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);

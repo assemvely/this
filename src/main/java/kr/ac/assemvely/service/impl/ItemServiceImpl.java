@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import kr.ac.assemvely.dao.ItemDao;
 import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.vo.CartVo;
+import kr.ac.assemvely.vo.CodiVo2;
 import kr.ac.assemvely.vo.Criteria;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.PayVo;
 
 @Service
@@ -201,5 +203,44 @@ public class ItemServiceImpl implements ItemService {
 	public int countitem(Criteria cri) throws Exception {
 
 		return dao.countitem(cri);
+	}
+	
+
+	@Override
+	public int countitem() throws Exception {
+		return dao.countitem();
+	}
+
+	@Override
+	public int countcodi() throws Exception {
+		return dao.countcodi();
+	}
+	@Override
+	public List<CodiVo2> bestcodi() throws Exception{
+		return dao.bestcodi();
+	}
+	@Override
+	public List<NotifyVo> notifymessage(NotifyVo vo ) throws Exception{
+		return dao.notifymessage(vo);
+	}	
+	@Override
+	public void insertnotify(NotifyVo vo)throws Exception{
+		dao.insertnotify(vo);
+	}
+	@Override
+	public void insertcodilikenotify(NotifyVo vo)throws Exception{
+		dao.insertcodilikenotify(vo);
+	}
+	@Override
+	public void insertboardnotify(NotifyVo vo)throws Exception{
+		dao.insertboardnotify(vo);
+	}
+	@Override
+	public void insertusernotify(NotifyVo vo)throws Exception{
+		dao.insertusernotify(vo);
+	}
+	@Override
+	public List<NotifyVo> getnotify(String id)throws Exception{
+		return dao.getnotify(id);
 	}
 }

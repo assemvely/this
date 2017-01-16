@@ -179,5 +179,10 @@ public class UserDaoImpl implements UserDao
 	public List<UserVo> usercount()throws Exception{
 		return session.selectList(namespace+".usercount");
 	}
+	@Override
+	public List<UserVo> brandgallery() {
+		return session.selectList(namespace+".brandgallery");
+	}
+	
 
 }

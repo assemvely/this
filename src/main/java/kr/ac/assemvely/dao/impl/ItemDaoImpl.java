@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.assemvely.dao.ItemDao;
 import kr.ac.assemvely.vo.CartVo;
+import kr.ac.assemvely.vo.CodiVo2;
 import kr.ac.assemvely.vo.Criteria;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.PayVo;
 
 @Repository
@@ -202,5 +204,43 @@ public class ItemDaoImpl implements ItemDao {
 		
 		return SqlSession.selectOne(namespace+".countitem", cri);
 	
+	}
+
+	@Override
+	public int countitem() {
+		return SqlSession.selectOne(namespace+ ".countitem");
+	}
+
+	@Override
+	public int countcodi() {
+		return SqlSession.selectOne(namespace+ ".countcodi");
+	}
+	@Override
+	public List<CodiVo2> bestcodi() throws Exception{
+		return SqlSession.selectList(namespace+".bestcodi");
+	}
+	@Override
+	public List<NotifyVo> notifymessage(NotifyVo vo ) throws Exception{
+		return SqlSession.selectList(namespace+".notifymessage",vo);
+	}
+	@Override
+	public void insertnotify(NotifyVo vo)throws Exception{
+		SqlSession.insert(namespace+".insertnotify",vo);
+	}
+	@Override
+	public void insertcodilikenotify(NotifyVo vo)throws Exception{
+		SqlSession.insert(namespace+".insertcodilikenotify",vo);
+	}
+	@Override
+	public void insertboardnotify(NotifyVo vo)throws Exception{
+		SqlSession.insert(namespace+".insertboardnotify",vo);
+	}
+	@Override
+	public void insertusernotify(NotifyVo vo)throws Exception{
+		SqlSession.insert(namespace+".insertusernotify",vo);
+	}
+	@Override
+	public List<NotifyVo> getnotify(String id)throws Exception{
+		return SqlSession.selectList(namespace+".getnotify",id);
 	}
 }

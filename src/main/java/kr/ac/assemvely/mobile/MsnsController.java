@@ -17,6 +17,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -37,10 +38,12 @@ import kr.ac.assemvely.vo.CodiVo;
 import kr.ac.assemvely.vo.CodiVo2;
 import kr.ac.assemvely.vo.ImageVo;
 import kr.ac.assemvely.vo.LikeVo;
+import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.SearchVo;
 import kr.ac.assemvely.vo.SnsVo;
 import kr.ac.assemvely.vo.Sns_codiVo;
 import kr.ac.assemvely.vo.SnslikeVo;
+import kr.ac.assemvely.vo.UserVo;
 
 
 
@@ -204,10 +207,31 @@ public class MsnsController {
 		return searchvo;
 	}
 	@RequestMapping(value="/like")
-	public @ResponseBody LikeVo like(LikeVo likevo)throws Exception{
-	 
+	public @ResponseBody LikeVo like(LikeVo likevo,HttpSession session)throws Exception{
+		
+		 
+		//----------------------------------여기부터 저아래까지가 notify좋아요 코드
+		UserVo uservo=(UserVo)session.getAttribute("login");
+		
+		NotifyVo notifyvo=new NotifyVo();
+		notifyvo.setBsm("b");
+		notifyvo.setSendid(likevo.getId());
+		notifyvo.setBoard(likevo.getBoard());
+		notifyvo.setBno(likevo.getBno());
+		notifyvo.setNotifycode("like");
+		if(likevo.getBoard().equals("s")){
+
+			itemservice.insertnotify(notifyvo);
+		}else if(likevo.getBoard().equals("c")){
+			itemservice.insertcodilikenotify(notifyvo);
+		
+		}
+ 
+		
+		//------------------------------------------
+		
 		service.insertlike(likevo);
-	 
+		
 		if(likevo.getBoard().equals("s")){
 		service.countplus(likevo);
 		}else{

@@ -137,7 +137,6 @@ $(document).ready( function(){
 						function(){
 						  str+="<li data-rno='"+this.c_bno+"' class='replyLi'>"
 							+this.c_bno+":" +this.id+this.reply+"<button id='replyDelBtn'>MOD</button></li>"+
-							"<input type='hidden' id='c_bno'"; 
 							 
 							
 							str+="<li data-c_bno='"+this.c_bno+"'>" +this.c_bno+":" +this.reply+"</li>";

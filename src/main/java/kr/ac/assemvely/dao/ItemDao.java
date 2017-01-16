@@ -3,9 +3,11 @@ package kr.ac.assemvely.dao;
 import java.util.List;
 
 import kr.ac.assemvely.vo.CartVo;
+import kr.ac.assemvely.vo.CodiVo2;
 import kr.ac.assemvely.vo.Criteria;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
+import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.PayVo;
 
 public interface ItemDao {
@@ -70,6 +72,14 @@ public List<ItemVo> newitem();
 	public List<ItemVo> item_list_page (Criteria cri) throws Exception;
 	
 	public int countitem (Criteria cri) throws Exception;
-	
+	public int countcodi();
+	public int countitem();
+	public List<CodiVo2> bestcodi() throws Exception;
+	public List<NotifyVo> notifymessage(NotifyVo vo ) throws Exception;
+	public void insertnotify(NotifyVo vo)throws Exception;
+	public void insertcodilikenotify(NotifyVo vo)throws Exception;
+	public void insertboardnotify(NotifyVo vo)throws Exception;
 
+	public void insertusernotify(NotifyVo vo)throws Exception;
+	public List<NotifyVo> getnotify(String id)throws Exception;
 }

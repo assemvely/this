@@ -88,7 +88,7 @@ public class CommentVo {
 	private String reply;
 	private Date writedate;
 	private Integer c_bno;
-	  
+	
 	private Date codi_writedate;
 	
 	  private String pw;

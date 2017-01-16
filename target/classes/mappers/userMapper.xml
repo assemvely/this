@@ -219,5 +219,12 @@
 	<!-- <select id="usercount" resultType="kr.ac.assemvely.vo.UserVo">
 	select * from usertb where joindate> to_char(sysdate - 7, 'YYMMDD')
 	</select> -->
-	
+	 <select resultType="kr.ac.assemvely.vo.UserVo" id="brandgallery">
+
+ <![CDATA[
+		
+		select ID, PW, EMAIL,IMGNAME, FILENAME, ADDRESS, MILEAGE from USERTB WHERE BSM='s'
+				
+				]]>
+</select>
 	</mapper>

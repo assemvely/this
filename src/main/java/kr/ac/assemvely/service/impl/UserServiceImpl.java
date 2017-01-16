@@ -170,4 +170,9 @@ public class UserServiceImpl implements UserService
 	public List<UserVo> usercount()throws Exception{
 		return dao.usercount();
 	}
+	
+	@Override
+	public List<UserVo> brandgallery() throws Exception {
+		return dao.brandgallery();
+	}
 }
