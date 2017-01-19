@@ -194,11 +194,11 @@
 								style="margin-top: 10px; text-align: center;">
 
 								<c:choose>
-									<c:when test="${empty user.imgname}">
+								<c:when test="${empty user.imgname}">
 										<img src="/resources/userimg/null.jpg" alt="" />
 									</c:when>
 									<c:when test="${not empty user.imgname}">
-										<img src="/resources/userimg/${user.imgname}" alt="" />
+										<img src="data:image/jpeg;base64,${user.imgname}" alt="" />
 									</c:when>
 
 								</c:choose>

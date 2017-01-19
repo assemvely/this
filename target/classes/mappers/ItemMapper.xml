@@ -255,23 +255,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				]]>
 </select>
  <insert id="insertnotify">
- insert into notifytb(id,sendid,board,bno,bsm,notifycode,imgname) values((select id from snstb where snsbno=#{bno}),#{sendid},#{board},#{bno},(select bsm from usertb where id= (select id from snstb where snsbno=#{bno})) ,#{notifycode},(select imgname from usertb where id=(select id from snstb where snsbno=#{bno})))
+ insert into notifytb(notifybno,id,sendid,board,bno,bsm,notifycode,imgname) values(seq_notify.nextval,(select id from snstb where snsbno=#{bno}),#{sendid},#{board},#{bno},(select bsm from usertb where id= (select id from snstb where snsbno=#{bno})) ,#{notifycode},(select imgname from usertb where id=(select id from snstb where snsbno=#{bno})))
  </insert>
  <insert id="insertcodilikenotify">
- insert into notifytb(id,sendid,board,bno,bsm,notifycode,imgname) values((select id from coditb3 where codibno=#{bno}),#{sendid},#{board},#{bno},(select bsm from usertb where id= (select id from coditb3 where codibno=#{bno})) ,#{notifycode},(select imgname from usertb where id=(select id from coditb3 where codibno=#{bno})))
+ insert into notifytb(notifybno,id,sendid,board,bno,bsm,notifycode,imgname) values(seq_notify.nextval,(select id from coditb3 where codibno=#{bno}),#{sendid},#{board},#{bno},(select bsm from usertb where id= (select id from coditb3 where codibno=#{bno})) ,#{notifycode},(select imgname from usertb where id=(select id from coditb3 where codibno=#{bno})))
  
  </insert>
  <insert id="insertboardnotify">
-  insert into notifytb(id,sendid,board,bno,bsm,notifycode,imgname) values((select id from itemtb where clothcode=#{bno}),#{sendid},#{board},#{bno},(select bsm from usertb where id= (select id from itemtb where clothcode=#{bno})) ,#{notifycode},(select imgname from usertb where id=(select id from itemtb where clothcode=#{bno})))
+  insert into notifytb(notifybno,id,sendid,board,bno,bsm,notifycode,imgname) values(seq_notify.nextval,(select id from itemtb where clothcode=#{bno}),#{sendid},#{board},#{bno},(select bsm from usertb where id= (select id from itemtb where clothcode=#{bno})) ,#{notifycode},(select imgname from usertb where id=(select id from itemtb where clothcode=#{bno})))
  
  </insert>
  <insert id="insertusernotify">
- insert into notifytb(id,sendid,bsm,notifycode,imgname) values(#{id},#{sendid},(select bsm from usertb where id=#{id}),#{notifycode},(select imgname from usertb where id=#{sendid}))
+ insert into notifytb(notifybno,id,sendid,bsm,notifycode,imgname) values(seq_notify.nextval,#{id},#{sendid},(select bsm from usertb where id=#{id}),#{notifycode},(select imgname from usertb where id=#{sendid}))
  </insert>
  
  <select id="getnotify" resultType="kr.ac.assemvely.vo.NotifyVo">
   select * from notifytb where id=#{id}
  </select>
+ <select id="changeonoff">
+ 	update notifytb set onoff=1 where notifybno=#{notifybno}
+ 
+ </select>
+ 
  	</mapper>
  
  

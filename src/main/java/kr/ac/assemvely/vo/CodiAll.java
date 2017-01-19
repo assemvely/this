@@ -55,6 +55,19 @@ public class CodiAll {
 	private int codilike;
 	private List<LikeVo> likevo;
 	private  CodiVo2 codivo;
+	private String codicomment;
+	/**
+	 * @return the codicomment
+	 */
+	public String getCodicomment() {
+		return codicomment;
+	}
+	/**
+	 * @param codicomment the codicomment to set
+	 */
+	public void setCodicomment(String codicomment) {
+		this.codicomment = codicomment;
+	}
 	/**
 	 * @return the codivo
 	 */

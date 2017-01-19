@@ -1,6 +1,9 @@
 package kr.ac.assemvely.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import com.oreilly.servlet.Base64Encoder;
 
 import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.service.PayService;
@@ -62,7 +68,9 @@ public class UserController
 	      CommonsMultipartFile cmf2 = (CommonsMultipartFile)files2.get("imgfile2");
 	      
 	      //파일 경로를 reseource/img폴더로 지정
-	      String savePath = request.getServletContext().getRealPath("/resources/userimg");
+	    //  String savePath = request.getServletContext().getRealPath("/resources/userimg");
+	     
+	      String savePath = request.getServletContext().getRealPath("/android/profile/");
 	      String randomid=UUID.randomUUID().toString();
 	      String randomid2=UUID.randomUUID().toString();
 	      //realPath를 경로이름+파일의 원래 이름으로.
@@ -118,8 +126,27 @@ public class UserController
 	public String tomanaginuser(Model model) throws Exception
 	{
 		 
-		model.addAttribute("userlist", service.userlist());
-		 
+		List<UserVo> userlist1 = service.userlist();
+		
+		List<UserVo> userlist = new ArrayList<>();
+				
+		for(int i =0; i<userlist.size(); i++)
+		{
+			UserVo vo = userlist.get(i);
+			String path  = "C://android//profile//"+vo.getImgname();		
+			InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+			byte[] info =IOUtils.toByteArray(in);	
+			   
+		    String encodeBase64 = Base64Encoder.encode(info);
+
+		    vo.setImgname(encodeBase64);
+			  
+			userlist.add(vo);
+			
+			model.addAttribute("userlist", service.userlist());
+		}
+		
 		return "/user/managinguser";
 		
 	}
@@ -200,7 +227,8 @@ public class UserController
 		vo.setBsm(tvo1.getBsm());
 			
 		if(tvo1.getImgname()!=null)
-		{vo.setImgname(tvo1.getImgname());}
+		{
+			vo.setImgname(tvo1.getImgname());}
 		else
 		{vo.setImgname("null");}
 		
@@ -235,12 +263,62 @@ public class UserController
 	{
 		
 		UserVo vo = service.login(dto);
-		if(vo==null){
+		String path  = "C://android//profile//"+vo.getImgname();
+		String path2  = "C://android//profile//"+vo.getFilename();
+		String path3 =  "C://android//profile//null.jpg";
+		
+		
+		//null이면
+		if(path.equals("C://android//profile//null"))
+		{
+	
+			InputStream in = new BufferedInputStream(new FileInputStream(path3));	
+			
+			byte[] info =IOUtils.toByteArray(in);		
+			
+			String encodeBase64 = Base64Encoder.encode(info);
+			
+			vo.setImgname(encodeBase64);
+			
+		}
+		else
+		{
+			InputStream in = new BufferedInputStream(new FileInputStream(path));	
+			
+			byte[] info =IOUtils.toByteArray(in);		
+			
+			String encodeBase64 = Base64Encoder.encode(info);
+			
+			vo.setImgname(encodeBase64);
+			
+		}
+		if(path2.equals("C://android//profile//null"))
+		{
+			InputStream in2 = new BufferedInputStream(new FileInputStream(path3));	
+			byte[] info2 =IOUtils.toByteArray(in2);		
+			String encodeBase642 = Base64Encoder.encode(info2);				
+			vo.setFilename(encodeBase642);
+		}
+		else
+		{
+		
+			InputStream in2 = new BufferedInputStream(new FileInputStream(path2));	
+			byte[] info2 =IOUtils.toByteArray(in2);		
+			String encodeBase642 = Base64Encoder.encode(info2);
+			
+			vo.setFilename(encodeBase642);
+			
+		}
+				
+			
+		if(vo==null)
+		{
 			
 			return "redirect:/item/main";
 		}
-		session.setAttribute("login", vo);
-		 
+		
+		session.setAttribute("login", vo); 
+	//	System.out.println(vo);
 		return "redirect:/item/main";
 		
 	 
@@ -273,9 +351,11 @@ public class UserController
 	
 	@RequestMapping(value="/mypage")
 	public String mypage(ItemVo itemvo,HttpSession session) throws Exception{
+	
 		UserVo vo=service.user(itemvo.getId());//유저 정보받아우기
-		 
-		 
+	 
+		System.out.println(vo);
+		
 		session.setAttribute("fromuser",itemvo);
 		String path=null;
 	 
@@ -381,7 +461,24 @@ public class UserController
 	public String selecttempuser(@RequestParam("id")String id, Model model) throws Exception
 	{
 		
-		model.addAttribute("tempuser", service.selecttempuser(id));
+		TempUserVo vo =  service.selecttempuser(id);
+		
+		String path  = "C://android//profile//"+vo.getImgname();	
+		String path2  = "C://android//profile//"+vo.getFilename();	
+		
+		InputStream in = new BufferedInputStream(new FileInputStream(path));
+		InputStream in2 = new BufferedInputStream(new FileInputStream(path2));
+		
+		byte[] info =IOUtils.toByteArray(in);	
+		byte[] info2 =IOUtils.toByteArray(in2);	
+		
+		 String encodeBase64 = Base64Encoder.encode(info);
+		 String encodeBase642 = Base64Encoder.encode(info2);
+
+		 vo.setImgname(encodeBase64);
+		
+		
+		model.addAttribute("tempuser", vo);
 	 
 		return "/user/readtempuserinfo";
 	}

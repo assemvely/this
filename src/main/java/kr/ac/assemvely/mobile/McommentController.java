@@ -71,29 +71,25 @@ public class McommentController {
 	
 	//�븞�뱶濡쒖씠�뱶 �뙎湲��벐�뒗 遺�遺�!!
 		//�븘�뮘�뒗 �씠誘� sharedpreference? 嫄곌린�뿉 �떞湲닿굅 �떞�븯�떎�뒗 媛��젙�븯�뿉...
-		@RequestMapping(value="/insert", method=RequestMethod.POST)
-		public @ResponseBody void insertcomment(HttpServletRequest request,CommentVo commentvo,HttpServletResponse response) throws Exception{
+		@RequestMapping(value="/sc_insert", method=RequestMethod.POST)
+		public @ResponseBody void insertcomment(String snsbno,String reply,String id) throws Exception{
 			 
-	
-			request.setCharacterEncoding("UTF-8");
-		    response.setContentType("text/html;charset=UTF-8");
-
 		    
-		   Integer bno=Integer.parseInt(request.getParameter("snsbno"));
-		  
-		    String reply=request.getParameter("reply");
-		    String id=request.getParameter("id");
-			//bno,reply
-			//�븘�뮘 �떞寃쇰떎�뒗 媛��젙�븯�뿉..
+			   Integer bno=Integer.parseInt(snsbno);
+			  
+			    String reply1=reply;
+			    
 			
-			String boardcode="s";
-			commentvo.setId(id);
-			commentvo.setBoardcode(boardcode);
-			commentvo.setReply(reply);
-			commentvo.setBno(bno);
+				String boardcode="s";
+				CommentVo commentvo=new CommentVo();
+				commentvo.setId(id);
+				commentvo.setBoardcode(boardcode);
+				commentvo.setReply(reply1);
+				commentvo.setBno(bno);
+				
 			
-		
-			service.c_insert(commentvo);
+				service.insertcomment(commentvo);
+				
 			//----------------------------------여기부터 저아래까지가 notify좋아요 코드
 			 
 			NotifyVo notifyvo=new NotifyVo();
@@ -120,24 +116,43 @@ public class McommentController {
 
 		//코디 댓글쓰기
 		@RequestMapping(value="/codi_insert")
-		public @ResponseBody void codiinsertcomment(String reply,String writedate,String id) throws Exception{
+		public @ResponseBody void codiinsertcomment(String reply,String writedate,String id,String codi_id) throws Exception{
 			
-		CommentVo commentvo=new CommentVo();
-		commentvo.setReply(reply);
+			CommentVo commentvo=new CommentVo();
+			commentvo.setReply(reply);
+			
+			DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-		
-		Date date=inputFormat.parse(writedate);
-		System.out.println("?"+date);
-		commentvo.setCodi_writedate(date);
-		commentvo.setBoardcode("c");
-		commentvo.setId(id);
-		
-		
-			service.codi_comment(commentvo);
+			
+			Date date=inputFormat.parse(writedate);
+			System.out.println("?"+date);
+			commentvo.setCodi_writedate(date);
+			commentvo.setBoardcode("c");
+			commentvo.setId(id);
+			commentvo.setCodi_id(codi_id);
+			
+			
+				service.codi_comment(commentvo);
+		 	
 	 	
+			//----------------------------------여기부터 저아래까지가 notify좋아요 코드
+			 
+			NotifyVo notifyvo=new NotifyVo();
+			 
+			notifyvo.setSendid(commentvo.getId());
+			notifyvo.setBoard(commentvo.getBoardcode());
+			notifyvo.setBno(commentvo.getBno());
+			notifyvo.setNotifycode("comment");
+			if(commentvo.getBoardcode().equals("s")){
+				
+				itemservice.insertnotify(notifyvo);
+			}else if(commentvo.getBoardcode().equals("c")){
+				itemservice.insertcodilikenotify(notifyvo);
 			
+			}
+	 
+			
+			//------------------------------------------
 			
 			
 		}
@@ -145,7 +160,7 @@ public class McommentController {
 		
 		//코디 댓글 목록 불러오기
 		@RequestMapping(value="/codi_list")
-		public @ResponseBody List<CommentVo> codi_delete(String writedate) throws Exception{
+		public @ResponseBody List<CommentVo> codi_delete(String writedate,String codi_id) throws Exception{
 			
 			CommentVo commentvo=new CommentVo();
 			DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -154,13 +169,14 @@ public class McommentController {
 			Date date=inputFormat.parse(writedate);
 			
 			System.out.println("왜ㅡ러냐"+date);
-			
+	
+			System.out.println("dd아디"+codi_id);
 			commentvo.setCodi_writedate(date);
 			commentvo.setBoardcode("c");
+			commentvo.setCodi_id(codi_id);
 			System.out.println("?//");
 			
 			return service.codi_list(commentvo);
-			
 			
 			
 			

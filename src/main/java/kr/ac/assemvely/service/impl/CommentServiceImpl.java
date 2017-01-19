@@ -53,6 +53,11 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 
+	@Override
+	public void insertcomment(CommentVo commentvo) throws Exception {
+		dao.insertcomment(commentvo);
+		
+	}
 
 
 }

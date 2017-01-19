@@ -213,16 +213,7 @@ $(document).ready( function(){
 	
 	
 
-function getAllList(){
-	
-	 	//var bno=$("#bno").val();
-	 	//var boardcode=$("#boardcode").val();
-	 	
-	
-	 	//var checkboxValues=[];
-	 	
-	 	//var allData={"bno":bno,"boardcode":boardcode};
-	 	
+function getAllList(){ 
 		
 			$.ajax({
 				url:'/comment/b_list/',

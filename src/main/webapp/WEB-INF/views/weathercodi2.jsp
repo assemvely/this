@@ -6,24 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="Stylesheet" href="/resources/css/bootstrap.min.css" />
-<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<!-- Bootstrap Core CSS 깔기 -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- owl carousel깔기 -->
-<link rel="stylesheet" href="/resources/owl.carousel/owl.carousel.css">
-
-<!-- css admin깔기 -->
-<link href="css/sb-admin.css" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="owl.carousel/owl.theme.default.min.css"> -->
-<script src="/resources/jquery/jquery-1.12.4.min.js"></script>
-<script src="/resources/owl.carousel/owl.carousel.min.js"></script>
-<!-- <script src="/resources/owl.carousel/owl.carousel.js"></script> -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript"	src="https://www.gstatic.com/charts/loader.js"></script><!-- 그래프 그리기 -->
+<script type="text/javascript"	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
+
 
 	var canvas;
 	var ctx;
@@ -52,13 +39,13 @@
 				for(var i=0; i<list.length; i++)
 					{
 					
-						if(list[i] == 'TSHIRT' || list[i] == 'KNIT'|| list[i] == 'SHIRT')
+						if(list[i] == 'TSHIRT' || list[i] == 'KNIT'|| list[i] == 'SHIRT' || list[i] == 'DRESS')
 						{
 							//alert(list[i]+imglist[i]);
 							image.src = "/resources/itemimg/"+imglist[i];						
 							ctx.drawImage(image, 20, 20, 300, 300);					
 						}
-						else if(list[i] == 'PANTS' || list[i] == 'SHORTS')
+						else if(list[i] == 'PANTS' || list[i] == 'SHORTS' || list[i] == 'SKIRT')
 						{
 							//alert(list[i]+imglist[i]);
 							image.src = "/resources/itemimg/"+imglist[i];						
@@ -68,13 +55,13 @@
 						{
 							//alert(list[i]+imglist[i]);
 							image.src = "/resources/itemimg/"+imglist[i];						
-							ctx.drawImage(image, 300, 20, 300, 400);					
+							ctx.drawImage(image, 200, 10, 300, 400);					
 						}
 						else if (list[i] == 'SHOES') 
 						{
 							//alert(list[i]+imglist[i]);
 							image.src = "/resources/itemimg/"+imglist[i];
-							ctx.drawImage(image, 300, 300, 150, 150);
+							ctx.drawImage(image, 300, 350, 150, 150);
 						}
 						else if (list[i] == 'BAG') 
 						{
@@ -85,6 +72,36 @@
 					}			
 			});
 </script>
+
+ <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      /* 지금 시간으로부터 4,7,10,13,16시간 뒤의 기온정보를 각각 가져와 그래프로 만들어줍니당.  */ 
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable
+        ([
+          ['time', 'Temparature'],
+          ['${fourhoursafter_int}시',  ${temp4hour}],
+          ['${sevenhoursafter_int}시',  ${temp7hour}],
+          ['${tenhoursafter_int}시',  ${temp10hour}],
+          ['${thirteenhoursafter_int}시',  ${temp13hour}],
+          ['${sixteenhoursafter_int}시',  ${temp16hour}]
+        ]);
+
+        var options = {
+          title: 'todays temparature',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+
 <style type="text/css">
 
 	#canvas
@@ -123,136 +140,49 @@
 				
 	}
 	
-
-	#h2 {
-    position: absolute;
-    left: 1450px;
-    top: 80px;
-    color: red;
+	#curve_chart
+	{
+		position : absolute;
+		top :  150px;
+		align : center;
+		left : 850px;
+				
 	}
-	@font-face {
-   font-family: 'Nanum Gothic Coding', monospace;
-   padding-top: 70px;
-	}
-
-	#main_footer {
-   /* footer 중앙 정렬 */
-   width: 960px;
-   margin: 0 auto;
-   margin-bottom: 10px;
-   /* footer 글씨 정렬 */
-   text-align: center;
-	}
-
-	body {
-   padding-top: 40px;
-   
-}
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-.nav-counter {
- position:absolute;
- top: 5px;
- right: 5px;
- min-width: 8px;
- height: 20px;
- line-height: 20px;
- margin-top: -12px;
- padding: 0 6px;
- font-weight: normal;
- font-size: small;
- color: white;
- text-align: center;
- text-shadow: 0 1px rgba(0, 0, 0, 0.2);
- background: #e23442;
- border: 1px solid #911f28;
- border-radius: 11px;
- background-image: -webkit-linear-gradient(top, #e8616c, #dd202f);
- background-image: -moz-linear-gradient(top, #e8616c, #dd202f);
- background-image: -o-linear-gradient(top, #e8616c, #dd202f);
- background-image: linear-gradient(to bottom, #e8616c, #dd202f);
- -webkit-box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
- box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.1), 0 1px rgba(0, 0, 0, 0.12);
-}
-
+	
 </style>
 
 
 </head>
-<body style="margin-left:400px; margin-right:400px;">
- <%@ include file="css.jinc" %>
- 
- 	<div class="col-md-12">
- 	
- 	
+<body>
+
 	<h1>weather 페이지</h1>
 		
 	
 	<span id = "weatherinfo">
 	<h1>오늘 날씨</h1>
+		<h3> ${city} </h3>
+		
 	<c:choose>
 		<c:when test="${todayskyname=='맑음'}">
-			<img  src="/resources/weather/맑음.png" alt="no images" width="150" height="150">			
+			<img  src="/resources/weather/맑음.png" alt="no images" width="150" >			
 		</c:when>
 		<c:when test="${todayskyname=='구름조금'}">
-			<img  src="/resources/weather/구름조금.png" alt="no images"width="150" height="150">
+			<img  src="/resources/weather/구름조금.png" alt="no images"width="150" >
 		</c:when>
 		<c:when test="${todayskyname=='구름많음'}">
-			<img  src="/resources/weather/구름많음.png" alt="no images" width="150" height="150">
+			<img  src="/resources/weather/구름많음.png" alt="no images" width="150">
 		</c:when>
 		<c:when test="${todayskyname=='흐림'}">
-			<img src="/resources/weather/흐림.png" alt="no images" width="150" height="150">
+			<img src="/resources/weather/흐림.png" alt="no images" width="150">
 		</c:when>
 		<c:when test="${todayskyname=='비'}">
-			<img src="/resources/weather/비.png"  alt="no images" width="150" height="150">
+			<img src="/resources/weather/비.png"  alt="no images" width="150" >
 		</c:when>
 		<c:when test="${todayskyname=='눈'}">
-			<img  src="/resources/weather/눈.png" alt="no images" width="150" height="150">
+			<img  src="/resources/weather/눈.png" alt="no images" width="150">
 		</c:when>
 		<c:when test="${todayskyname=='비 또는 눈'}">
-			<img src="/resources/weather/비또는눈.png" alt="no images"  width="150" height="150">
+			<img src="/resources/weather/비또는눈.png" alt="no images"  width="150" >
 		</c:when>
 	</c:choose>
 	<h3>최고 기온 : ${todaytemperaturetmax}</h3>
@@ -266,11 +196,20 @@
 			<img id="${itemvo.categorycode}" src="/resources/itemimg/${itemvo.imgname}" style="WIDTH:100PX; HEIGHT:100PX;"/>	
 	</c:forEach>
 	</span>
-	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 		<img id="refresh" src="/resources/weather/refresh.png" style="WIDTH:50px; HEIGHT:50px;" onClick="window.location.reload()"/>
 		<br>
+
+	<div id="curve_chart" style="width: 900px; height: 500px"></div>
+
 	
-</div>
+
+	<c:forEach items="${todayscomment}" var="todayscomment">		
+		<h3>오늘의 추천 코디 : ${todayscomment}</h3>
+	</c:forEach>
+
+	
+	
+
 </body>
 </html>

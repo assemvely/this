@@ -1,6 +1,9 @@
 package kr.ac.assemvely.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -24,6 +28,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.oreilly.servlet.Base64Encoder;
+
 import kr.ac.assemvely.service.ItemService;
 import kr.ac.assemvely.service.ManagerService;
 import kr.ac.assemvely.service.PayService;
@@ -31,11 +37,13 @@ import kr.ac.assemvely.service.UserService;
 import kr.ac.assemvely.vo.AddressVo;
 import kr.ac.assemvely.vo.CartVo;
 import kr.ac.assemvely.vo.CodiVo2;
+import kr.ac.assemvely.vo.Criteria;
 import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.ManagerVo;
 import kr.ac.assemvely.vo.MileageVo;
 import kr.ac.assemvely.vo.OrderVo;
+import kr.ac.assemvely.vo.PageMaker;
 import kr.ac.assemvely.vo.PayVo;
 import kr.ac.assemvely.vo.UserVo;
 
@@ -55,6 +63,7 @@ public class ItemController {
 	@Inject 
 	private ManagerService managerservice;
 
+	
 	@RequestMapping(value = "/main")
 	public String listGET(Model model) throws Exception {
 		List<ItemVo> vo;
@@ -92,7 +101,8 @@ public class ItemController {
 		return "homemain";
 	}
 	@RequestMapping(value="/posting" )
-	public String posting( HttpSession session,Model model) throws Exception{
+	public String posting( HttpSession session,Model model) throws Exception
+	{
 
 		int countitem = itemservice.countitem();
 		model.addAttribute("COUNTITEM", countitem);
@@ -108,9 +118,13 @@ public class ItemController {
 
 	@RequestMapping(value = "/upload")
 	private String upload(@RequestParam MultipartFile imgfile, MultipartHttpServletRequest request, ModelMap model,ItemVo itemvo, HttpSession session,ItemInfoVo info) throws Exception {
+	
 		Map<String, MultipartFile> files = ((MultipartRequest) request).getFileMap();
+		
 		CommonsMultipartFile cmf = (CommonsMultipartFile) files.get("imgfile");
-		String savePath = request.getServletContext().getRealPath("/resources/itemimg");
+				
+	//	String savePath = request.getServletContext().getRealPath("/resources/itemimg");
+		String savePath = request.getServletContext().getRealPath("/android/item/");
 		String realPath = savePath + "/" + cmf.getOriginalFilename();
 		
 		File file = new File(realPath);
@@ -118,6 +132,9 @@ public class ItemController {
 		System.out.println("여기 리얼 패스"+realPath);
 		// �뙆�씪 �뾽濡쒕뱶 泥섎━ �셿猷�.
 		cmf.transferTo(file);
+		
+		
+		
 		UserVo vo=(UserVo) session.getAttribute("login");
 		itemvo.setId(vo.getId());
 		itemvo.setImgname(cmf.getOriginalFilename());
@@ -162,8 +179,15 @@ public class ItemController {
 		
 		int countcodi = itemservice.countcodi();
 		model.addAttribute("COUNTCODI", countcodi);
+		
 		ItemVo itemvo=itemservice.readposting(clothcode);
-		 
+		String path  = "C://android//item//"+itemvo.getImgname();	
+		InputStream in = new BufferedInputStream(new FileInputStream(path));
+		byte[] imginfo =IOUtils.toByteArray(in);	
+		String encodeBase64 = Base64Encoder.encode(imginfo);
+		itemvo.setImgname(encodeBase64);
+		
+		
 		int Price=(itemvo.getPrice());
 		int mileage=(int) (Price*(0.1));
 		itemvo.setMileage(mileage);
@@ -192,14 +216,53 @@ public class ItemController {
 			selectcategory = outer.toUpperCase();
 
 		List<ItemVo> outervo;
+		List<ItemVo> result_outervo = new ArrayList<>();
+		
 
-		if (selectcategory.equals("OUTER")) {
+		if (selectcategory.equals("OUTER")) 
+		{
 			outervo = itemservice.selectcategory(selectcategory);
-		} else {
+			for(int i=0; i<outervo.size(); i++)
+			{
+				ItemVo itemvo  = outervo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();	
+				
+				InputStream in = new BufferedInputStream(new FileInputStream(path));
+				byte[] info =IOUtils.toByteArray(in);	
+				String encodeBase64 = Base64Encoder.encode(info);
+				
+			//	System.out.println(encodeBase64);
+				itemvo.setImgname(encodeBase64);
+			
+				result_outervo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_outervo);
+			}
+		
+		
+		} 
+		else 
+		{
 			outervo = itemservice.selectlittlecategory(selectcategory);
+			for(int i=0; i<outervo.size(); i++)
+			{
+				ItemVo itemvo  = outervo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();		
+				
+				InputStream in = new BufferedInputStream(new FileInputStream(path));
+				byte[] info =IOUtils.toByteArray(in);	
+				String encodeBase64 = Base64Encoder.encode(info);
+				
+				itemvo.setImgname(encodeBase64);
+			
+				result_outervo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_outervo);
+			}
+
 		}
-		model.addAttribute("SELECTCATEGORY", outervo);
-		System.out.println(outervo.toString());
+	/*	model.addAttribute("SELECTCATEGORY", outervo);
+		System.out.println(outervo.toString());*/
 		model.addAttribute("SELECTLITTLECATEGORY", selectcategory);
 
 		return "outer";
@@ -221,6 +284,56 @@ public class ItemController {
 		
 		return "redirect:/user/selectuser?id="+itemvo.getId();
 	}
+	
+
+	//코디 페이지로 이동
+	@RequestMapping(value = "/codipage", method=RequestMethod.GET)
+	public String codipage(Model model,	@ModelAttribute("cri")Criteria cri) throws Exception 
+	{
+
+		model.addAttribute("SELECTCATEGORY", itemservice.item_list_page(cri));
+		
+		PageMaker pagemaker = new PageMaker();
+		pagemaker.setCri(cri);
+		pagemaker.setTotalCount(itemservice.countitem(cri));
+		
+		model.addAttribute("pagemaker", pagemaker);
+
+	//	System.out.println("codipage pagemaker : "+pagemaker);
+		
+		return "practicecodipage2";
+	}
+	
+	@RequestMapping(value = "/select_codi_category", method={RequestMethod.POST, RequestMethod.GET})
+	public String select_codi_category_GET
+	(Model model, String outer, HttpServletRequest request, HttpServletResponse response) throws Exception 
+	{
+		List<ItemVo> itemvo;
+
+		String selectcategory;
+
+			if (outer == null)
+				selectcategory = "OUTER";
+			else
+				selectcategory = outer.toUpperCase();
+
+
+			if (selectcategory.equals("OUTER")) 
+			{
+				itemvo = itemservice.listitem();
+			} 
+			else 
+			{
+				itemvo = itemservice.selectlittlecategory(selectcategory);
+			}
+
+			model.addAttribute("SELECTCATEGORY", itemvo);
+	//		System.out.println(itemvo.toString());
+			model.addAttribute("SELECTLITTLECATEGORY", selectcategory);
+
+		return "practicecodipage2";
+	}
+	
 	
  @RequestMapping(value="sellerpage")
  public String sellerpage(HttpSession session)throws Exception{
@@ -257,13 +370,55 @@ public class ItemController {
 		else
 			selectcategory = top.toUpperCase();
 		List<ItemVo> topvo;
+		List<ItemVo> result_topervo = new ArrayList<>();
+		
 
-		if (selectcategory.equals("TOP")) {
+		if (selectcategory.equals("TOP")) 
+		{
 			topvo = itemservice.selectcategory(selectcategory);
-		} else {
+			for(int i=0; i<topvo.size(); i++)
+			{
+
+				ItemVo itemvo  = topvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+							
+				InputStream in = new BufferedInputStream(new FileInputStream(path));
+				byte[] info =IOUtils.toByteArray(in);	
+				String encodeBase64 = Base64Encoder.encode(info);
+				
+				itemvo.setImgname(encodeBase64);
+			
+				result_topervo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_topervo);
+			}
+		
+		
+		} 
+		else 
+		{
 			topvo = itemservice.selectlittlecategory(selectcategory);
+			for(int i=0; i<topvo.size(); i++)
+			{
+				ItemVo itemvo  = topvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+							
+				InputStream in = new BufferedInputStream(new FileInputStream(path));
+				byte[] info =IOUtils.toByteArray(in);	
+				String encodeBase64 = Base64Encoder.encode(info);
+				
+				itemvo.setImgname(encodeBase64);
+			
+				result_topervo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_topervo);
+			}
+
 		}
-		model.addAttribute("SELECTCATEGORY", topvo);
+	/*	model.addAttribute("SELECTCATEGORY", outervo);
+		System.out.println(outervo.toString());*/
+		
+		
 		model.addAttribute("SELECTLITTLECATEGORY", selectcategory);
 		return "top";
 	}
@@ -282,14 +437,60 @@ public class ItemController {
 		else
 			selectcategory = bottom.toUpperCase();
 		List<ItemVo> bottomvo;
+		List<ItemVo> result_bottomvo = new ArrayList<>();
+		
 
-		if (selectcategory.equals("BOTTOM")) {
+		if (selectcategory.equals("BOTTOM")) 
+		{
 			bottomvo = itemservice.selectcategory(selectcategory);
-		} else {
+			for(int i=0; i<bottomvo.size(); i++)
+			{
+				ItemVo itemvo  = bottomvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				result_bottomvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_bottomvo);
+			}
+		
+		
+		} 
+		else 
+		{
 			bottomvo = itemservice.selectlittlecategory(selectcategory);
+			for(int i=0; i<bottomvo.size(); i++)
+			{
+				ItemVo itemvo  = bottomvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				result_bottomvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_bottomvo);
+			}
+
 		}
-		model.addAttribute("SELECTCATEGORY", bottomvo);
+	/*	model.addAttribute("SELECTCATEGORY", outervo);
+		System.out.println(outervo.toString());*/
 		model.addAttribute("SELECTLITTLECATEGORY", selectcategory);
+
 		return "bottom";
 	}
 
@@ -307,14 +508,58 @@ public class ItemController {
 		else
 			selectcategory = skirt.toUpperCase();
 		List<ItemVo> skirtvo;
-
-		if (selectcategory.equals("SKIRT")) {
+		List<ItemVo> result_skirtvo = new ArrayList<>();
+		
+		if (selectcategory.equals("SKIRT")) 
+		{
 			skirtvo = itemservice.selectcategory(selectcategory);
-		} else {
+			for(int i=0; i<skirtvo.size(); i++)
+			{
+				ItemVo itemvo  = skirtvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				   result_skirtvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_skirtvo);
+			}
+		
+		
+		} 
+		else 
+		{
 			skirtvo = itemservice.selectlittlecategory(selectcategory);
+			for(int i=0; i<skirtvo.size(); i++)
+			{
+				ItemVo itemvo  = skirtvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				   result_skirtvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_skirtvo);
+			}
+
 		}
-		model.addAttribute("SELECTCATEGORY", skirtvo);
+
 		model.addAttribute("SELECTLITTLECATEGORY", selectcategory);
+			
 		return "skirt";
 	}
 
@@ -332,14 +577,58 @@ public class ItemController {
 		else
 			selectcategory = dress.toUpperCase();
 		List<ItemVo> dressvo;
-
-		if (selectcategory.equals("DRESS")) {
+		List<ItemVo> result_dressvo = new ArrayList<>();
+		
+		if (selectcategory.equals("DRESS")) 
+		{
 			dressvo = itemservice.selectcategory(selectcategory);
-		} else {
+			for(int i=0; i<dressvo.size(); i++)
+			{
+				ItemVo itemvo  = dressvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				   result_dressvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_dressvo);
+			}
+		
+		
+		} 
+		else 
+		{
 			dressvo = itemservice.selectlittlecategory(selectcategory);
+			for(int i=0; i<dressvo.size(); i++)
+			{
+				ItemVo itemvo  = dressvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				   result_dressvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_dressvo);
+			}
+
 		}
-		model.addAttribute("SELECTCATEGORY", dressvo);
+
 		model.addAttribute("SELECTLITTLECATEGORY", selectcategory);
+
 		return "dress";
 	}
 
@@ -357,13 +646,56 @@ public class ItemController {
 		else
 			selectcategory = acc.toUpperCase();
 		List<ItemVo> accvo;
-
-		if (selectcategory.equals("ACC")) {
+		List<ItemVo> result_accvo = new ArrayList<>();
+		
+		if (selectcategory.equals("ACC")) 
+		{
 			accvo = itemservice.selectcategory(selectcategory);
-		} else {
+			for(int i=0; i<accvo.size(); i++)
+			{
+				ItemVo itemvo  = accvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				   result_accvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_accvo);
+			}
+		
+		
+		} 
+		else 
+		{
 			accvo = itemservice.selectlittlecategory(selectcategory);
+			for(int i=0; i<accvo.size(); i++)
+			{
+				ItemVo itemvo  = accvo.get(i);				
+				String path  = "C://android//item//"+itemvo.getImgname();				
+				
+				   
+				   InputStream in = new BufferedInputStream(new FileInputStream(path));
+				
+				   byte[] info =IOUtils.toByteArray(in);	
+				   
+				   String encodeBase64 = Base64Encoder.encode(info);
+
+				   itemvo.setImgname(encodeBase64);
+				  
+				   result_accvo.add(itemvo);
+			
+				model.addAttribute("SELECTCATEGORY", result_accvo);
+			}
+
 		}
-		model.addAttribute("SELECTCATEGORY", accvo);
+
 		model.addAttribute("SELECTLITTLECATEGORY", selectcategory);
 		return "acc";
 	}
@@ -424,16 +756,19 @@ public class ItemController {
 		
 		int countcodi = itemservice.countcodi();
 		model.addAttribute("COUNTCODI", countcodi);
+		
 		UserVo uvo =  (UserVo) session.getAttribute("login");
 		
 		String id=uvo.getId();
-	
 	 
 		Integer price = 0;
 		Integer allprice = 0;
 		Integer deliverycharge =1;
 		Integer mileage = 0;
+		
 		List<CartVo> shoppinglist = new ArrayList<>();
+		
+		
 		if(chk!=null){
 		
 		for(int i=0;i<chk.length;i++){
@@ -443,6 +778,7 @@ public class ItemController {
 			
 			allprice =allprice+price;
 			shoppinglist.add(ivo); 
+			
 			
 			deliverycharge=2500*(chk.length);
 		}

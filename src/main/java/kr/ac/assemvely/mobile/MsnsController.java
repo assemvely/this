@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,7 @@ import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.SearchVo;
 import kr.ac.assemvely.vo.SnsVo;
 import kr.ac.assemvely.vo.Sns_codiVo;
+import kr.ac.assemvely.vo.Sns_userVo;
 import kr.ac.assemvely.vo.SnslikeVo;
 import kr.ac.assemvely.vo.UserVo;
 
@@ -56,6 +58,9 @@ public class MsnsController {
 	UserService userservice;
 	@Inject
 	ItemService itemservice;
+	
+
+	List<CodiVo> codi = new ArrayList<>();
 //	@RequestMapping(value="/follower",method=RequestMethod.POST)//이거 팔로워
 //	public @ResponseBody List<UserVo> follower(HttpServletRequest request,HttpServletResponse response) throws Exception{
 //		request.setCharacterEncoding("UTF-8");
@@ -135,14 +140,14 @@ public class MsnsController {
 	}
 
 	
-	@RequestMapping(value="/listall")
+/*	@RequestMapping(value="/listall")
 	public @ResponseBody List<Sns_codiVo>listall(String id) throws Exception{
 		
 		
 		return service.sns_codi(id);
 	}
 	
-	
+	*/
 	
 	@RequestMapping(value="/read")
 	public @ResponseBody SnslikeVo read(LikeVo likevo)throws Exception{
@@ -161,7 +166,17 @@ public class MsnsController {
 	public @ResponseBody List<SnsVo> searchlist()throws Exception{
 		return service.searchlist();
 	}
-	
+	 @RequestMapping("/listall")
+		 public @ResponseBody Sns_userVo listall(String id) throws Exception {
+		
+		
+			 Sns_userVo snsuservo=new Sns_userVo();
+			 snsuservo.setFollowercounter(userservice.followingcounter(id));
+			 snsuservo.setFollowingcounter(userservice.followercounter(id));
+			 snsuservo.setSnscodivo(service.listall(id));
+			 snsuservo.setRelationvo(userservice.followerlist(id));
+		 return snsuservo;
+		 }
 
 	//코디 리스트 뿌리는 테스트용
 	@RequestMapping(value="/test")
@@ -169,10 +184,7 @@ public class MsnsController {
 	
 		//이미지 파일도 가져와야하기대문에 codivo에 imagename 추가함...
 		
-		System.out.println("들어오기는하냐ㅕ???");
-		
-		System.out.println("아뒤가"+id);
-		System.out.println("s날짜"+writedate);
+	 
 		
 		DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date=inputFormat.parse(writedate);
@@ -182,9 +194,7 @@ public class MsnsController {
 		codivo.setWritedate(date);	
 		List<CodiVo> codi=service.test(codivo);
 		
-		for(int i=0;i<codi.size();i++){
-			System.out.println(codi.get(i).getImgname());
-		}
+	 
 		
 		return service.test(codivo);
 		
@@ -206,6 +216,7 @@ public class MsnsController {
 		
 		return searchvo;
 	}
+	
 	@RequestMapping(value="/like")
 	public @ResponseBody LikeVo like(LikeVo likevo,HttpSession session)throws Exception{
 		
@@ -286,12 +297,7 @@ public class MsnsController {
 	@RequestMapping(value="codi_comment")
 	public @ResponseBody int codi_comment(String id,String codicomment,String codicapture) throws Exception{
 
-		
-		
-		System.out.println("들어나노냐냐냐냐냐냐냐");
-		System.out.println(id);
-		System.out.println(codicapture);
-		System.out.println(codicomment);
+ 
 		
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
@@ -306,7 +312,7 @@ public class MsnsController {
 		CodiVo2 codivo2=new CodiVo2();
 		
 		
-		System.out.println(codi.getWritedate());
+	 
 		codivo2.setWritedate(codi.getWritedate());
 		codivo2.setCodicomment(codicomment);
 		codivo2.setId(id);
@@ -333,7 +339,7 @@ public class MsnsController {
 	@RequestMapping(value = "/all")
 	public @ResponseBody List<ImageVo> all() throws Exception {
 
-		System.out.println("들어오나?");
+	 
 		return service.all();
 
 	}
@@ -341,52 +347,59 @@ public class MsnsController {
 	
 	
 	//안드로이드 개인 계정에서 코디한거 누르면 상품이랑 이런거 까지 전부다 나오는 것@@@
-	@RequestMapping(value="/codiall")
-	public @ResponseBody CodiAll codiall(String id,String writedate) throws Exception{
-		 
-		//DateFormat outputFormat=new SimpleDateFormat("yyMMddHHmmss");
-		DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		
-		Date date=inputFormat.parse(writedate);
- 
-		//String writedate1=outputFormat.format(date);
-		
-		
-		
-		
-	
-		//System.out.println("날짜"+writedate1);
-	 
-		CodiVo codivo=new CodiVo();
+	@RequestMapping(value = "/codiall")
+	public @ResponseBody CodiAll codiall(String id, String writedate,String likeid,String codibno) throws Exception {
+
+		System.out.println("날자ㅣ" + writedate);
+
+		// DateFormat outputFormat=new SimpleDateFormat("yyMMddHHmmss");
+		DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Date date = inputFormat.parse(writedate);
+		System.out.println("e데이트로바꾸니?" + date);
+		// String writedate1=outputFormat.format(date);
+
+		// System.out.println("날짜"+writedate1);
+		System.out.println("왜오지도 않냐?");
+		CodiVo codivo = new CodiVo();
 		codivo.setId(id);
-	 
-	
-		codivo.setWritedate(date);
-	
-		
-		
-		
-	
-		CodiAll codiall=new CodiAll();
-	 
-		codiall.setUservo(service.codi_usertb(id));
+		System.out.println("아뒷" + id);
+		Integer codinum=Integer.parseInt(codibno);
 		 
-	 
-		String capture=service.codi_coditb3(codivo).getCodicapture();
-		CodiVo2 codi=service.codi_coditb3(codivo);
+		codivo.setWritedate(date);
+		codivo.setCodibno(codinum);
+		CodiAll codiall = new CodiAll();
+		System.out.println("?");
+		codiall.setUservo(service.codi_usertb(id));
+		System.out.println("?>?");
+
+		System.out.println("???????" + codivo.getId());
+		System.out.println("?" + codivo.getWritedate());
+
+		String capture = service.codi_coditb3(codivo).getCodicapture();
+		String codicomment=service.codi_coditb3(codivo).getCodicomment();
+		Integer codilike=service.codi_coditb3(codivo).getCodilike();
+		
+		codiall.setCodilike(codilike);
+		System.out.println("///>");
+
 		codiall.setCodicapture(capture);
-		
-		codiall.setCodivo(codi);
-	 System.out.println("뭐가 나오긴하니..?"+codi.getBoardcode());
+		codiall.setCodicomment(codicomment);
+		 
+		System.out.println("?>>>>>");
 		codiall.setItemvo(service.codi_itemtb(codivo));
-		
-		codiall.setLikevo(service.mylike(id));
+		codiall.setLikevo(service.mylike(likeid));
+		System.out.println("유저정보" + codiall.getUservo().getId());
+		System.out.println("유저정보" + codiall.getUservo().getImgname());
+		System.out.println("z코디내용"+codiall.getCodicomment());
+		System.out.println("코디정보"+codiall.getCodicapture());
+		System.out.println("코디올" + codiall.getItemvo());
+		return codiall;
+	}
+
+	
 	
 	 
-		return codiall;
-		
-	}
 	
 	
 	
@@ -437,7 +450,13 @@ public class MsnsController {
 	}
 	
 	
-	
+	//search에서 sns,,codi 가져오는것
+	   @RequestMapping(value="/search_sns")
+	   public @ResponseBody List<Sns_codiVo> search_sns() throws Exception{
+	      
+	      return    service.search_sns();   
+	      
+	   }
 	
 	
 	
@@ -450,10 +469,7 @@ public class MsnsController {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
 
-	
-		
 		StringBuilder sb = new StringBuilder();
 		String line = null;
 
@@ -462,33 +478,62 @@ public class MsnsController {
 			sb.append(line);
 
 		}
-		
+
 		JSONObject jsonObj = new JSONObject(sb.toString());
 		JSONArray jarray = jsonObj.getJSONArray("codi");
 		
-		for(int i = 0; i < jarray.length(); i++){
-		
-		JSONObject obj=jarray.getJSONObject(i);
-		int clothcode=obj.getInt("clothcode");
-		int coordinate_x=obj.getInt("coordinate_x");
-		int coordinate_y=obj.getInt("coordinate_y");
-		int width=obj.getInt("width");
-		int height=obj.getInt("height");
-		String id=obj.getString("id");
-		String writedate=obj.getString("writedate");
-		
-		DateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		
-		Date date=inputFormat.parse(writedate);
-		
+		//추가한것
+	String id1=(String) jarray.getJSONObject(0).get("id");
+	String writedate1=(String) jarray.getJSONObject(0).get("writedate");
+	DateFormat inputFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	Date date1 = inputFormat1.parse(writedate1);
+	CodiVo codivo1=new CodiVo();
+	codivo1.setId(id1);
+	codivo1.setWritedate(date1);
+	List<CodiVo> ori_codilist=service.codi_select(codivo1);
 	
-		
-		
-		CodiVo codivo=new CodiVo(id,clothcode,date,coordinate_x,coordinate_y,width,height);
-				
-			service.codi_update(codivo);
+	
+	
+	List<CodiVo> up_codilist=new ArrayList<>();
+	
+	for (int i = 0; i < jarray.length(); i++) {
+
+			JSONObject obj = jarray.getJSONObject(i);
+			int clothcode = obj.getInt("clothcode");
+			
+			int coordinate_x = obj.getInt("coordinate_x");
+			int coordinate_y = obj.getInt("coordinate_y");
+			System.out.println("yyy"+coordinate_y);
+			int width = obj.getInt("width");
+			int height = obj.getInt("height");
+			String id = obj.getString("id");
+			
+			System.out.println("clothcde"+clothcode);
+			System.out.println("x"+coordinate_x);
+			
+			String writedate = obj.getString("writedate");
+			
+			
+
+			DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+			Date date = inputFormat.parse(writedate);
+
+			CodiVo codivo = new CodiVo(id, clothcode, date, coordinate_x, coordinate_y, width, height);
+			up_codilist.add(codivo);
+	
 		}
+	//기존 코디 지우기
+		service.codi_delete1(ori_codilist.get(0));
+		
+		for(int i=0;i<up_codilist.size();i++){
+			service.codi_updateinsert(up_codilist.get(i));
+		}
+			
+		
 	
 }
 	

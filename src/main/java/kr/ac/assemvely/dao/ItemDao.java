@@ -9,6 +9,7 @@ import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.PayVo;
+import kr.ac.assemvely.vo.Tempcodeandcolorcode;
 
 public interface ItemDao {
 
@@ -82,4 +83,17 @@ public List<ItemVo> newitem();
 
 	public void insertusernotify(NotifyVo vo)throws Exception;
 	public List<NotifyVo> getnotify(String id)throws Exception;
+	public void changeonoff(int notifybno)throws Exception;
+	
+	public List<ItemVo> select_bottom_withtempcode_and_colorcode (Tempcodeandcolorcode tempcodeandcolorcode) throws Exception;
+	
+	public List<ItemVo> select_outer_withtempcode_and_colorcode (Tempcodeandcolorcode tempcodeandcolorcode) throws Exception;
+	
+	public List<ItemVo> select_shoes_withtempcode_and_colorcode (Tempcodeandcolorcode tempcodeandcolorcode) throws Exception;
+	
+	public List<ItemVo> select_bag_withtempcode_and_colorcode (Tempcodeandcolorcode tempcodeandcolorcode) throws Exception;
+	
+	public String todayscomment (String colorcode) throws Exception;
+
+
 }

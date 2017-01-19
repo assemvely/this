@@ -223,8 +223,10 @@ input, textarea, keygen, select, button {
 
 
 
-						<form name="update" id="update" method="get"
+						<form name="update" id="update" method="post"
 							action="/customerboard/update">
+							
+						
 							<table class="tg" width="800px" height="200px">
 								<colgroup>
 									<col width="15%" />
@@ -233,22 +235,29 @@ input, textarea, keygen, select, button {
 									<col width="35%" />
 								</colgroup>
 								<tr>
+									<input type="hidden"  id="bno" name="bno" value="${boardVo.bno}" />
+									<input type="hidden"  id="title" name="title" value="${boardVo.title}" />
 									<th  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" class="tg-031e" scope="row">Bno</th>
-									<td  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" id="bno" name="bno">${boardVo.bno}</td>
+									<td  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" id="bno" name="bno" value="${boardVo.bno}">${boardVo.bno}</td>
 									<th  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" class="tg-031e" scope="row">Id</th>
 									<td  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;">${boardVo.id}</td>
 								</tr>
 
+								
+
 								<tr>
-									<th  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" class="tg-031e" scope="row">Title</th>
+									<th  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" class="tg-031e" scope="row"
+									id="title" name="title" value="${boardVo.title}"
+									>Title</th>
 									<td  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;"><input class="change" type="text" id="title" style="border-color:rgba(0,0,0,.075); width:250px;" value="${boardVo.title}"></td>
 									<th  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" class="tg-031e" scope="row">Writedate</th>
 									<td  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;">${boardVo.writedate}</td>
+									
 								</tr>
 
 								<tr>
 									<td  style="padding-left: 15px; border-top: 1px #d9534f solid;  border-bottom: 1px #d9534f solid;" colspan="4"><textarea style="border-color:rgba(0,0,0,.075);" align="center" value="${boardVo.content}" rows="20" cols="100"
-												title="content" id="content" class="change name="change"></textarea></td>
+											name="content"	title="content" id="content" class="change name="change"></textarea></td>
 								</tr>
 
 
@@ -261,9 +270,9 @@ input, textarea, keygen, select, button {
 
 
 
-							<button type="button" style="background-color: #d9534f; border: solid 1px #d9534f; color: #ffffff;"
-											class="btn btn-danger"
-								onClick="location.href='update?bno=${boardVo.bno}&title=${boardVo.title}&content=${boardVo.content}'">저장하기</button>
+							<button type="submit" 
+							style="background-color: #d9534f; border: solid 1px #d9534f; color: #ffffff;"
+											class="btn btn-danger"	>저장하기</button>
 
 							<button style="background-color: #d9534f; border: solid 1px #d9534f; color: #ffffff;"
 											class="btn btn-danger" type="button" onClick="location.href='listall'">목록</button></div>

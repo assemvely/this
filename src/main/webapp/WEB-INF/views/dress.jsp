@@ -137,7 +137,7 @@
 
 											<div class="thumbnail">
 												<a href="/item/readposting?clothcode=${dressvo.clothcode}">
-													<img src="/resources/itemimg/$dressvo.imgname} "
+													<img src="data:image/jpeg;base64,${dressvo.imgname} "
 													alt="No Image">
 												</a>
 												<div class="caption">

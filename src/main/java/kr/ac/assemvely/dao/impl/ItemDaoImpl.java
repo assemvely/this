@@ -15,6 +15,7 @@ import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.PayVo;
+import kr.ac.assemvely.vo.Tempcodeandcolorcode;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
@@ -243,4 +244,49 @@ public class ItemDaoImpl implements ItemDao {
 	public List<NotifyVo> getnotify(String id)throws Exception{
 		return SqlSession.selectList(namespace+".getnotify",id);
 	}
+	@Override
+	public void changeonoff(int notifybno)throws Exception{
+		SqlSession.update(namespace+".changeonoff",notifybno);
+	}
+	
+	@Override
+	public List<ItemVo> select_bottom_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return SqlSession.selectList(namespace+".select_bottom_withtempcode_and_colorcode", tempcodeandcolorcode);
+	}
+
+	@Override
+	public List<ItemVo> select_outer_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return SqlSession.selectList(namespace+".select_outer_withtempcode_and_colorcode", tempcodeandcolorcode);
+	}
+
+	@Override
+	public List<ItemVo> select_shoes_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return SqlSession.selectList(namespace+".select_shoes_withtempcode_and_colorcode", tempcodeandcolorcode);
+	}
+
+	@Override
+	public List<ItemVo> select_bag_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return SqlSession.selectList(namespace+".select_bag_withtempcode_and_colorcode", tempcodeandcolorcode);
+	}
+
+	@Override
+	public String todayscomment(String colorcode) throws Exception 
+	{
+		
+		return SqlSession.selectOne(namespace+".todayscomment", colorcode);
+	}
+
+
 }

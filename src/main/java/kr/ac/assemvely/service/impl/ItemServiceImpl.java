@@ -15,6 +15,7 @@ import kr.ac.assemvely.vo.ItemInfoVo;
 import kr.ac.assemvely.vo.ItemVo;
 import kr.ac.assemvely.vo.NotifyVo;
 import kr.ac.assemvely.vo.PayVo;
+import kr.ac.assemvely.vo.Tempcodeandcolorcode;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -243,4 +244,47 @@ public class ItemServiceImpl implements ItemService {
 	public List<NotifyVo> getnotify(String id)throws Exception{
 		return dao.getnotify(id);
 	}
+	@Override
+	public void changeonoff(int notifybno)throws Exception{
+		dao.changeonoff(notifybno);
+	}
+	
+	@Override
+	public List<ItemVo> select_bottom_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return dao.select_bottom_withtempcode_and_colorcode(tempcodeandcolorcode);
+	}
+
+	@Override
+	public List<ItemVo> select_outer_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return dao.select_outer_withtempcode_and_colorcode(tempcodeandcolorcode);
+	}
+
+	@Override
+	public List<ItemVo> select_shoes_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return dao.select_shoes_withtempcode_and_colorcode(tempcodeandcolorcode);
+	}
+
+	@Override
+	public List<ItemVo> select_bag_withtempcode_and_colorcode(Tempcodeandcolorcode tempcodeandcolorcode)
+			throws Exception 
+	{
+		
+		return dao.select_bag_withtempcode_and_colorcode(tempcodeandcolorcode);
+	}
+
+	@Override
+	public String todayscomment(String colorcode) throws Exception 
+	{
+		return dao.todayscomment(colorcode);
+	}
+
 }

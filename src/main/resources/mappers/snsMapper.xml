@@ -13,9 +13,9 @@ select * from snstb
  
  
  
-<select id="listall" resultType="kr.ac.assemvely.vo.SnsVo"> 
+<select id="listall" resultType="kr.ac.assemvely.vo.Sns_codiVo"> 
 <![CDATA[
-select usertb.id,usertb.filename,snstb.snsbno,snstb.snsimg,snstb.snscontent,snstb.writedate, from snstb,usertb where snstb.id=usertb.id and usertb.id=#{id}
+select * from sns_codi2 where id=#{id}
 ]]>
 
 </select>
@@ -149,14 +149,15 @@ delete from coditb3 where id=#{id} and writedate=#{writedate}
 select imgname,id from usertb where id=#{id}
 </select>
 
-<select id="codi_coditb3" resultType="kr.ac.assemvely.vo.CodiVo2">
-select * from coditb3 where id=#{id} and writedate=#{writedate}
 
+<!-- select * from coditb3 where id=#{id} and writedate=#{writedate} -->
+<select id="codi_coditb3" resultType="kr.ac.assemvely.vo.CodiVo2">
+select * from coditb3 where codibno=#{codibno}
 
 </select>
 
 <select id="codi_itemtb" resultType="kr.ac.assemvely.vo.ItemVo">
-select * from itemtb where clothcode in (select clothcode from coditb where id=#{id} and writedate=#{writedate})
+select * from itemtb where clothcode in (select clothcode from coditb where id=#{id})
 
 </select>
 <select id="codi_codibno" resultType="kr.ac.assemvely.vo.CodiVo">
@@ -239,5 +240,25 @@ select * from snstb where snsbno=#{snsbno}
 </select>
  
 
+<insert id="codi_updateinsert">
+
+insert into coditb(clothcode,coordinate_x,coordinate_y,width,height,id,writedate) values(#{clothcode},#{coordinate_x},#{coordinate_y},#{width},#{height},#{id},#{writedate})
+
+</insert>
+
+ 
+<delete id="update_delete">
+
+delete from coditb where id=#{id} and writedate=#{writedate} and clothcode=#{clothcode}
+</delete>
+ 
+<select id="codi_select" resultType="kr.ac.assemvely.vo.CodiVo">
+
+select * from coditb where id=#{id} and writedate=#{writedate}
+</select>
+<select id="search_sns" resultType="kr.ac.assemvely.vo.Sns_codiVo">
+
+select * from search_sns
+</select>
  
 </mapper>

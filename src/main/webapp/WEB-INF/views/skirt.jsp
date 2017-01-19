@@ -133,7 +133,7 @@
 
 							<div class="thumbnail">
 								<a href="/item/readposting?clothcode=${skirtvo.clothcode}">
-								<img src="/resources/itemimg/${skirtvo.imgname} " alt="No Image">
+								<img src="data:image/jpeg;base64,${skirtvo.imgname} " alt="No Image">
 								</a>
 								<div class="caption">
 								<a href="/user/mypage?id=${skirtvo.id}">

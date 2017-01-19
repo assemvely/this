@@ -143,8 +143,7 @@
 
 											<div class="thumbnail">
 												<a href="/item/readposting?clothcode=${accvo.clothcode}">
-													<img src="/resources/itemimg/$accvo.imgname} "
-													alt="No Image">
+													<img src="data:image/jpeg;base64,${accvo.imgname} "													alt="No Image">
 												</a>
 												<div class="caption">
 													<a href="/user/mypage?id=${accvo.id}">

@@ -15,7 +15,7 @@ import kr.ac.assemvely.vo.UserVo;
 
 public interface SnsDao {
 	public List<Sns_codiVo> list(String id) throws Exception;
-	public List<SnsVo> listall(String id) throws Exception;
+	public List<Sns_codiVo> listall(String id) throws Exception;
 	public List<Sns_codiVo> read(int snsbno)throws Exception;
 	public List<SnsVo> searchlist()throws Exception;
 	public void insertlike(LikeVo likevo)throws Exception;
@@ -43,7 +43,16 @@ public interface SnsDao {
 //	public SnsVo s_select(Integer snsbno) throws Exception;
 public void codi_insert(CodiVo codivo) throws Exception;
 	
-	
+
+//코디 수정했다가 다시 저장하는 것
+public int codi_updateinsert(CodiVo codivo) throws Exception;
+
+//코디수정위햐추가
+	public void update_delete(CodiVo codivo) throws Exception;
+
+
+//코디 수정하기 위해 추가한것
+public List<CodiVo> codi_select(CodiVo codivo)throws Exception;
 	
 	
 	//코디삭제
@@ -87,5 +96,5 @@ public void codi_insert(CodiVo codivo) throws Exception;
 	public int s_delete(Integer snsbno) throws Exception;
 	public int s_update(SnsVo snsvo) throws Exception;
 	public SnsVo s_select(Integer snsbno) throws Exception;
-	
+	public List<Sns_codiVo> search_sns() throws Exception;
 }

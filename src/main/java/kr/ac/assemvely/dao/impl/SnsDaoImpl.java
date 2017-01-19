@@ -69,7 +69,7 @@ public class SnsDaoImpl implements SnsDao {
 	}
 
 	@Override
-	public List<SnsVo> listall(String id) throws Exception {
+	public List<Sns_codiVo> listall(String id) throws Exception {
 		// TODO Auto-generated method stub
 		
 		
@@ -216,13 +216,14 @@ public class SnsDaoImpl implements SnsDao {
 	public CodiVo2 codi_coditb3(CodiVo codivo) throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println("직전"+codivo.getWritedate());
+	 System.out.println("여기 매퍼직전인데 오지?"+codivo.getId()+codivo.getWritedate());
 		return session.selectOne(namespace+".codi_coditb3",codivo);
 	}
 
 	@Override
 	public List<ItemVo> codi_itemtb(CodiVo codivo) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("직전"+codivo.getId()+codivo.getWritedate());
 		return session.selectList(namespace+".codi_itemtb",codivo);
 	}
 
@@ -280,6 +281,30 @@ public class SnsDaoImpl implements SnsDao {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".s_select",snsbno);
 		
+	}
+	
+
+	@Override
+	public List<CodiVo> codi_select(CodiVo codivo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".codi_select",codivo);
+	}
+
+	@Override
+	public void update_delete(CodiVo codivo) throws Exception {
+		// TODO Auto-generated method stub
+		session.delete(namespace+".update_delete",codivo);
+	}
+
+
+	@Override
+	public int codi_updateinsert(CodiVo codivo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.insert(namespace+".codi_updateinsert",codivo);
+	}
+	@Override
+	public List<Sns_codiVo> search_sns() throws Exception{
+		return session.selectList(namespace+".search_sns");
 	}
 	
 }

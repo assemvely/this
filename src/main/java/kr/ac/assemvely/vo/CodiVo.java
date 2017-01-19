@@ -1,8 +1,12 @@
 package kr.ac.assemvely.vo;
 
 import java.util.Date;
-//이미지 파일도 가져와야하기대문에 codivo에 imagename 추가함...
+//�씠誘몄� �뙆�씪�룄 媛��졇���빞�븯湲곕�臾몄뿉 codivo�뿉 imagename 異붽��븿...
 
+/**
+ * @author BIT
+ *
+ */
 public class CodiVo {
 	public Date getWritedate() {
 		return writedate;
@@ -140,6 +144,40 @@ public class CodiVo {
 
 
 
+	/**
+	 * @return the codibno
+	 */
+	public int getCodibno() {
+		return codibno;
+	}
+
+
+	/**
+	 * @param codibno the codibno to set
+	 */
+	public void setCodibno(int codibno) {
+		this.codibno = codibno;
+	}
+
+
+
+	/**
+	 * @return the ratiomagnify
+	 */
+	public Double getRatiomagnify() {
+		return ratiomagnify;
+	}
+
+
+	/**
+	 * @param ratiomagnify the ratiomagnify to set
+	 */
+	public void setRatiomagnify(Double ratiomagnify) {
+		this.ratiomagnify = ratiomagnify;
+	}
+
+
+
 	private Date writedate;
 	private int arrayindex;
 	private int clothcode;
@@ -150,9 +188,9 @@ public class CodiVo {
 	private int angle;
 	private String id;
 	private String imagepath;
-
+	private int codibno;
 	private String imgname;
-
+	   private Double ratiomagnify;
 	public CodiVo(int clothcode, int coordinate_x, int coordinate_y, int width, int height,String id) {
 		super();
 	

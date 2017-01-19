@@ -14,7 +14,7 @@ public interface CommentDao {
 	
 	//코디 댓글보기
 	public List<CommentVo> codi_list(CommentVo commentvo) throws Exception;
-		
+	public void insertcomment(CommentVo commentvo) throws Exception;
 	}
 
 

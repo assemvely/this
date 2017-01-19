@@ -28,7 +28,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public int c_insert(CommentVo commentvo) throws Exception {
 		// TODO Auto-generated method stub
-		return session.insert(namespace+".c_insert",commentvo);
+		return session.insert(namespace+".snscomment_insert",commentvo);
 	}
 
 	@Override
@@ -50,5 +50,13 @@ public class CommentDaoImpl implements CommentDao {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".codi_list",commentvo);
 	}
+	
+
+	@Override
+	public void insertcomment(CommentVo commentvo) throws Exception {
+		session.insert(namespace+".snscomment_insert",commentvo);
+		
+	}
+
 
 }

@@ -63,7 +63,7 @@ public class SnsServiceImpl implements SnsService{
 	}
 
 	@Override
-	public List<SnsVo> listall(String id) throws Exception {
+	public List<Sns_codiVo> listall(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listall(id);
 	}
@@ -261,5 +261,25 @@ public class SnsServiceImpl implements SnsService{
 	public void codilikeminus(LikeVo likevo)throws Exception{
 		dao.codilikeminus(likevo);
 	}
-	 
+	
+	@Override
+	public List<CodiVo> codi_select(CodiVo codivo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.codi_select(codivo);
+	}
+	@Override
+	public int codi_updateinsert(CodiVo codivo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.codi_updateinsert(codivo);
+	}
+
+	@Override
+	public void update_delete(CodiVo codivo) throws Exception {
+		// TODO Auto-generated method stub
+		dao.update_delete(codivo);
+	}
+	public List<Sns_codiVo> search_sns() throws Exception{
+		return dao.search_sns();
+	}
+
 }

@@ -103,9 +103,21 @@ public class CommentVo {
 	  private String filelength;
 	  private String filename;
 	  private String address;
-	  
+	  private String codi_id;
 	
 	
+	/**
+	 * @return the codi_id
+	 */
+	public String getCodi_id() {
+		return codi_id;
+	}
+	/**
+	 * @param codi_id the codi_id to set
+	 */
+	public void setCodi_id(String codi_id) {
+		this.codi_id = codi_id;
+	}
 	public String getId() {
 		return id;
 	}

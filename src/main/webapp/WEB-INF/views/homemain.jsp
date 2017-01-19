@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
-<%@ include file="example2.jinc"%>
+<%@ include file="firststyle.jinc"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta charset="utf-8">
@@ -75,7 +75,7 @@ font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'App
 	
 }
 </style>
-
+</head>
 <script type="text/javascript">
 	/* 맨위로 올라가는 화살표  */
 	$(document).ready(function() {
@@ -92,9 +92,16 @@ font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'App
 			}, 400);
 			return false;
 		});
+		$('#messagebtn').on('show.bs.dropdown',function(){
+	 
+			getnotify();
+			// changeonoff();
+		});
+		
 	});
 	
-	function onChangeSelect() {
+
+function onChangeSelect() {
 
 		var selected = $("#selectlittlecategory").val();
 
@@ -104,26 +111,51 @@ font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum, 'App
 			document.getElementById("Form3").submit();
 			form.Form3.submit();
 		}
-	}
-	$(document).ready(function() {
-	})
-	$(document).on('click','#messagebtn',function(){
-		$.ajax({
+}
+ 
+function getnotify(){
+  		$.ajax({
 			contentType:'application/json',
-			type:'get'
-			url:'all/notify',
-			
-			success:function(result){
-				alert("룰루");
-			}
-		});
-		
+ 			type:'GET',
+			url:'/all/notify',
+			 
+			success:function(data){
+				
+				var str="";
+				$(data).each(function(){
+					if(this.onoff==0){
+					str+="<div style='background-color:#ffffed';><li class='divider'  >"+"<li style='margin-bottom:5px;'>"+this.comment+"</li>"+"</li>"
+					+"<input type='hidden' id='notifybno' value='"+this.notifybno+"'/>"+"</div>";
+					}else{
+						str+="<li class='divider'>"+"<li>"+this.comment+"</li>"+"<input type='hidden' id='notifybno' value='"+this.notifybno+"'/>"+"</li>";
+					}
+				});
+				
+				 $("#notifycomment").html(str);
+		}
 	});
+}  
+/*    function changeonoff(){
+	 ajax({
+		 contentType:'application/json',
+		  url:'/all/changeonoff',
+		  type:'GET',
+		  data:'notifybno='+$('#notifybno').val(),
+		 success:function(result){
+			 alert('됏다!');
+		 }
+		 
+	 });
+ }  
+	  */
+
+	 
+ 
 </script>
-</head>
+
 <body>
 	<%@ include file="secondstyle.jinc"%>
-	<%@ include file="example.jinc"%>
+	<%@ include file="header.jinc"%>
 	<div>
 		<div
 			style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">

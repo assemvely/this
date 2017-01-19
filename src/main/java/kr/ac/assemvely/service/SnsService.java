@@ -17,7 +17,7 @@ import kr.ac.assemvely.vo.UserVo;
 public interface SnsService {
 	
 	public List<Sns_codiVo> list(String id) throws Exception;
-	public List<SnsVo> listall(String id) throws Exception;
+	public List<Sns_codiVo> listall(String id) throws Exception;
 	public List<Sns_codiVo> read(int snsbno)throws Exception;
 	public List<SnsVo> searchlist()throws Exception;
 	public void insertlike(LikeVo likevo)throws Exception;
@@ -66,6 +66,8 @@ public interface SnsService {
 		//코디 테스트용
 		public List<CodiVo> test(CodiVo codivo) throws Exception;
 		
+		//코디 수정위해 추가
+		public void update_delete(CodiVo codivo) throws Exception;
 		
 		//코디 카테고리별 뽑아오는 것
 		public List<ImageVo> codi_cloth(String category) throws Exception;
@@ -74,6 +76,10 @@ public interface SnsService {
 		//코디연습하는것
 		public List<ImageVo> all() throws Exception;
 		
+		//코디 수정하기 위해 추가한것
+		public List<CodiVo> codi_select(CodiVo codivo)throws Exception;
+		//코디 수정했다가 다시 저장하는 것
+		public int codi_updateinsert(CodiVo codivo) throws Exception;
 		
 //	public List<mobilevo> profile(String id) throws Exception;
 //	public UserVo mypage(String id) throws Exception;
@@ -96,5 +102,6 @@ public interface SnsService {
 		public int s_delete(Integer snsbno) throws Exception;
 		public int s_update(SnsVo snsvo) throws Exception;
 		public SnsVo s_select(Integer snsbno) throws Exception;
+		public List<Sns_codiVo> search_sns() throws Exception;
 
 }

@@ -1,6 +1,6 @@
 <%@ page pageEncoding="utf-8"%>
 <style>
-/*웹폰트적용함 */
+/*�쎒�룿�듃�쟻�슜�븿 */
 @font-face {
 	font-family: 'FontAwesome';
 	src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
@@ -35,7 +35,7 @@
 	clip: auto
 }
 
-/* footer style적용 시작 */
+/* footer style�쟻�슜 �떆�옉 */
 #myFooter {
 	/* border-top: 1px solid #d9534f; */
 	box-shadow: 0 6px 7px -8px rgba(0, 0, 0, .2);
@@ -166,7 +166,7 @@ body {
 	-webkit-flex-direction: column;
 	height: 100%;
 	width: 100%;
-	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum,
+	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '留묒� 怨좊뵓', Dotum,
 		'Apple SD Gothic Neo', Sans-serif;
 	padding-top: 40px;
 }
@@ -178,14 +178,14 @@ body {
 }
 
 #myFooter {
-	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '맑은 고딕', Dotum,
+	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', '留묒� 怨좊뵓', Dotum,
 		'Apple SD Gothic Neo', Sans-serif;
 	flex: 0 0 auto;
 	-webkit-flex: 0 0 auto;
 	width: 100%;
 }
-/* footer style적용 끝 */
-a.jcm-top { /* 맨위로 가기버튼  */
+/* footer style�쟻�슜 �걹 */
+a.jcm-top { /* 留⑥쐞濡� 媛�湲곕쾭�듉  */
 	position: fixed;
 	right: 35px;
 	bottom: 75px;

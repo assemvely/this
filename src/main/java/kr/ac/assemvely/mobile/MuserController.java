@@ -102,33 +102,49 @@ public class MuserController {
 	   }
 	
 	
-
-		@RequestMapping(value="/following", method=RequestMethod.GET)
-		public @ResponseBody RelationVo following(@RequestParam("id")String followingid, HttpSession session) throws Exception
+ 
+		@RequestMapping(value="/following", method=RequestMethod.POST)
+		public String following(String id,String sessionid) throws Exception
 		{ 
 			
 		
-			RelationVo relationvo=new RelationVo();
+			String followingid=id;
+			String followerid=sessionid;
+			
 			RelationVo rvo = new RelationVo();
 			
-			UserVo vo = (UserVo) session.getAttribute("login");
-			String followerid = vo.getId();
+			 
 			//---------------여기 알람 인설트
 			NotifyVo notifyvo=new NotifyVo();
 			
 			notifyvo.setId(followingid);
 			notifyvo.setSendid(followerid);
-			notifyvo.setBno(0);
-			notifyvo.setBoard("f");
+		 
 			notifyvo.setNotifycode("follow");
-			itemservice.insertboardnotify(notifyvo);
+			itemservice.insertusernotify(notifyvo);
 			//--------------------------
-			
+			System.out.println("안나와닌~~~");
 			rvo.setFollowerid(followerid);
 			rvo.setFollowingid(followingid);
 			service.following(rvo);
-			return relationvo;
-			
+			 System.out.println("하삐비비ㅣㅃ"+followerid);
+			return id;
+		}
+		
+		@RequestMapping(value="/unfollowed")
+		public String unfollowing(String id,String sessionid)throws Exception
+		{
+		 
+				
+			String followingid=id;
+			String followerid=sessionid;
+		RelationVo relation=new RelationVo();
+		relation.setFollowerid(followerid);
+		relation.setFollowingid(followingid);
+			service.unfollowed(relation);
+			System.out.println("걸그룹노래짱"+followingid);
+			return id;
+		 
 		}
 
 }
